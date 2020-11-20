@@ -1,0 +1,15 @@
+main.container {
+    padding-bottom: 50px;
+}
+.margin-bot-20 {
+    margin-bottom: 20px;
+}
+.img-btns {
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+}
+.table td, .table th{
+    vertical-align: middle;
+    text-align: center;
+}

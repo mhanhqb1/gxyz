@@ -1,6 +1,3 @@
-<?php
-$topImage = 'imgs/1.jpg';
-?>
 @extends('layout.main')
 
 @section('content')
