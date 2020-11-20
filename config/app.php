@@ -228,5 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    
+    'flickr_key' => env('FLICKR_KEY')
 
 ];
