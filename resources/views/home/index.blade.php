@@ -12,11 +12,7 @@ $topImage = 'imgs/1.jpg';
         <div class="row mb-2">
             <?php if (!empty($images)): ?>
             <?php foreach ($images as $img): ?>
-            <div class="col">
-                <div class="card box-shadow">
-                    <img class="g-image" src="{{ $img->url }}" alt="SBGC image">
-                </div>
-            </div>
+                @include('layout.image', ['img' => $img])
             <?php endforeach; ?>
             <?php endif; ?>
         </div>
