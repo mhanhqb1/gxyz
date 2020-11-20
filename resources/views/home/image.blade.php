@@ -7,7 +7,7 @@ $topImage = 'imgs/1.jpg';
 <div class="row">
     <div class="col blog-main">
         <h3 class="pb-3 mb-4 font-italic border-bottom">
-            Top images
+            Images
         </h3>
         <div class="row mb-2">
             <?php if (!empty($images)): ?>

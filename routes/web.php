@@ -15,4 +15,9 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/images', [HomeController::class, 'images'])->name('home.images');
+//Route::get('/videos', [HomeController::class, 'index'])->name('home.index');
+//Route::get('/movies', [HomeController::class, 'index'])->name('home.index');
+Route::get('/18images', [HomeController::class, 'images18'])->name('home.images18');
+//Route::get('/18movies', [HomeController::class, 'index'])->name('home.index');
 Route::get('/flickrCrawler', [HomeController::class, 'flickrCrawler'])->name('home.flickr_crawler');

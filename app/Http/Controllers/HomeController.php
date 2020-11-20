@@ -12,11 +12,34 @@ class HomeController extends Controller
      */
     public static function index()
     {
-//        Image::flickr_firt_crawler();
+        $images = Image::get_list([
+            'status' => 0,
+            'is_hot' => 1
+        ]);
+        return view('home.index', ['images' => $images]);
+    }
+    
+    /**
+     * Get list images
+     */
+    public static function images()
+    {
         $images = Image::get_list([
             'status' => 0
         ]);
-        return view('home.index', ['images' => $images]);
+        return view('home.image', ['images' => $images]);
+    }
+    
+    /**
+     * Get list 18 +images
+     */
+    public static function images18()
+    {
+        $images = Image::get_list([
+            'status' => 0,
+            'is_18' => 1
+        ]);
+        return view('home.image', ['images' => $images]);
     }
     
     /**
