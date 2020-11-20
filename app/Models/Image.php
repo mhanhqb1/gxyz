@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\MasterSource;
 
 class Image extends Model {
 
@@ -57,17 +58,64 @@ class Image extends Model {
     }
     
     public static function flickr_firt_crawler() {
-        for ($i = 1; $i < 5000; $i++) {
-            $data = self::flickr_crawler([
-                'page' => $i,
-//                'user_id' => '27453474@N02',
-                'group_id' => '2707037@N25',
-                'sort' => 'date-posted-asc',
-                'is_first' => 0
-            ]);
-            if (empty($data)) {
-                break;
+        $today = date('Y-m-d', time());
+        $sources = MasterSource::get_list([
+            'type' => MasterSource::$type['image'],
+            'source_type' => MasterSource::$sourceType['flickr'],
+            'is_first' => 1
+        ]);
+        if (!$sources->isEmpty()) {
+            foreach ($sources as $s) {
+                $params = [
+                    'sort' => 'date-posted-asc',
+                    'is_first' => 0
+                ];
+                $sParams = explode(',', $s->source_params);
+                foreach ($sParams as $sp) {
+                    $_tmp = explode('_:_', $sp);
+                    $params[$_tmp[0]] = $_tmp[1];
+                }
+                for ($i = 1; $i < 100; $i++) {
+                    $params['page'] = $i;
+                    $data = self::flickr_crawler($params);
+                    if (empty($data)) {
+                        break;
+                    }
+                }
             }
+            $s->crawl_at = $today;
+            $s->save();
+        }
+        
+    }
+    
+    public static function flickr_daily_crawler() {
+        $today = date('Y-m-d', time());
+        $sources = MasterSource::get_list([
+            'limit' => 10,
+            'type' => MasterSource::$type['image'],
+            'source_type' => MasterSource::$sourceType['flickr']
+        ]);
+        if (!$sources->isEmpty()) {
+            foreach ($sources as $s) {
+                $params = [
+                    'is_first' => 0
+                ];
+                $sParams = explode(',', $s->source_params);
+                foreach ($sParams as $sp) {
+                    $_tmp = explode('_:_', $sp);
+                    $params[$_tmp[0]] = $_tmp[1];
+                }
+                for ($i = 1; $i < 100; $i++) {
+                    $params['page'] = $i;
+                    $data = self::flickr_crawler($params);
+                    if (empty($data)) {
+                        break;
+                    }
+                }
+            }
+            $s->crawl_at = $today;
+            $s->save();
         }
     }
 

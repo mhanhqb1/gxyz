@@ -51,4 +51,13 @@ class HomeController extends Controller
         Image::flickr_firt_crawler();
         die('1');
     }
+    /**
+     * flickrCrawler
+     */
+    public static function flickrDailyCrawler()
+    {
+        set_time_limit(0);
+        Image::flickr_daily_crawler();
+        die('1');
+    }
 }
