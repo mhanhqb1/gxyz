@@ -54,13 +54,15 @@ $topImage = 'images/1.jpg';
                         Top images
                     </h3>
                     <div class="row mb-2">
-                        <?php for ($i=1; $i <= 8; $i++): ?>
+                        <?php if (!empty($images)): ?>
+                        <?php foreach ($images as $img): ?>
                         <div class="col">
                             <div class="card box-shadow">
-                                <img class="g-image" src="images/{{ $i }}.jpg" alt="Card image cap">
+                                <img class="g-image" src="{{ $img->url }}" alt="Card image cap">
                             </div>
                         </div>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
 

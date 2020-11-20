@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,9 @@ class HomeController extends Controller
      */
     public static function index()
     {
-        return view('home.index');
+        $images = Image::get_list([
+            'status' => 1
+        ]);
+        return view('home.index', ['images' => $images]);
     }
 }
