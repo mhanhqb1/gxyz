@@ -15,6 +15,7 @@ class AdminController extends Controller
     public static function checkImages(Request $request)
     {
         $params = $request->all();
+        $params['limit'] = 999;
         $images = Image::get_list($params);
         return view('admin.image', ['images' => $images, 'params' => $params]);
     }
