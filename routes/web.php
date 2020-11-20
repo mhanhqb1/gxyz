@@ -15,3 +15,4 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/flickrCrawler', [HomeController::class, 'flickrCrawler'])->name('home.flickr_crawler');

@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public static function flickrCrawler()
     {
+        set_time_limit(0);
         Image::flickr_firt_crawler();
         die('1');
     }

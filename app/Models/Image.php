@@ -35,6 +35,7 @@ class Image extends Model {
         # Init
         $limit = !empty($params['limit']) ? $params['limit'] : 16;
         $page = !empty($params['page']) ? $params['page'] : 1;
+        $offset = ($page - 1)*$limit;
 
         # Get data
         $data = self::orderBy('id', 'desc');
@@ -43,8 +44,15 @@ class Image extends Model {
         if (isset($params['status']) && $params['status'] != '') {
             $data = $data->where('status', $params['status']);
         }
+        if (isset($params['is_hot']) && $params['is_hot'] != '') {
+            $data = $data->where('is_hot', $params['is_hot']);
+        }
+        if (isset($params['is_18']) && $params['is_18'] != '') {
+            $data = $data->where('is_18', $params['is_18']);
+        }
 
-        $data = $data->get();
+        # Return data
+        $data = $data->offset($offset)->limit($limit)->get();
         return $data;
     }
     
@@ -52,9 +60,10 @@ class Image extends Model {
         for ($i = 1; $i < 5000; $i++) {
             $data = self::flickr_crawler([
                 'page' => $i,
-                'user_id' => '27453474@N02',
+//                'user_id' => '27453474@N02',
+                'group_id' => '2707037@N25',
                 'sort' => 'date-posted-asc',
-                'is_first' => 1
+                'is_first' => 0
             ]);
             if (empty($data)) {
                 break;
@@ -68,12 +77,14 @@ class Image extends Model {
         $page = !empty($params['page']) ? $params['page'] : 1;
         $sort = !empty($params['sort']) ? $params['sort'] : 'date-posted-desc';
         $userId = !empty($params['user_id']) ? $params['user_id'] : '';
+        $groupId = !empty($params['group_id']) ? $params['group_id'] : '';
         $apiKey = config('app.flickr_key');
         $apiUrl = 'https://api.flickr.com/services/rest/';
-        $params = array(
+        $apiParams = array(
             'api_key' => $apiKey,
             'method' => 'flickr.photos.search',
             'user_id' => $userId, //'27453474@N02',
+            'group_id' => $groupId,
             'format' => 'php_serial',
             'page' => $page,
             'sort' => $sort
@@ -81,7 +92,7 @@ class Image extends Model {
 
         $encoded_params = array();
 
-        foreach ($params as $k => $v) {
+        foreach ($apiParams as $k => $v) {
             $encoded_params[] = urlencode($k) . '=' . urlencode($v);
         }
 
