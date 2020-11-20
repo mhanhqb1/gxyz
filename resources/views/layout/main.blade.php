@@ -17,6 +17,15 @@ $topImage = 'imgs/1.jpg';
 
         <!-- Custom styles for this template -->
         <link href="css/custom.css" rel="stylesheet">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTT9NZ1FJK"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-QTT9NZ1FJK');
+        </script>
     </head>
 
     <body>
