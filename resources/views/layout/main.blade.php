@@ -1,5 +1,6 @@
 <?php
-$topImage = url('/').'/imgs/1.jpg';
+$topImage = !empty($pageImage) ? $pageImage : url('/').'/imgs/1.jpg';
+$jumbotronImage = url('/').'/imgs/1.jpg';
 $_siteName = 'SexyGirlCollection.Com';
 $_siteTitle = !empty($pageTitle) ? $pageTitle : 'Sexy Girl Collection';
 $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
@@ -26,7 +27,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- Custom styles for this template -->
-        <link href="css/custom.css?{{ time() }}" rel="stylesheet">
+        <link href="{{ asset('/css/custom.css').'?'.time() }}" rel="stylesheet">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTT9NZ1FJK"></script>
         <script>
@@ -61,7 +62,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
                 </nav>
             </div>
 
-            <div class="jumbotron p-3 p-md-5 text-white rounded" style="background-image: url('{{ $topImage }}');">
+            <div class="jumbotron p-3 p-md-5 text-white rounded" style="background-image: url('{{ $jumbotronImage }}');">
                 <div class="col-md-6 px-0">
                     <h1 class="display-4 font-italic">Sexy <br/>Beautiful <br/>Girl <br/>Collection</h1>
                 </div>

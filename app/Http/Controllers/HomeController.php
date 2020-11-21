@@ -31,6 +31,21 @@ class HomeController extends Controller
     }
     
     /**
+     * Get image detail
+     */
+    public static function imageDetail($id)
+    {
+        $pageTitle = 'SBGC - Images '.$id;
+        $image = Image::find($id);
+        if (empty($image)) {
+            $images = Image::orderBy('id', 'desc')->where('status', 1)->paginate($limit);
+            return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
+        }
+        $pageImage = $image->url;
+        return view('home.image_detail', ['image' => $image, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
+    }
+    
+    /**
      * Get list 18 +images
      */
     public static function images18()

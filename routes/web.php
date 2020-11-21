@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/images', [HomeController::class, 'images'])->name('home.images');
+Route::get('/image/{id}', [HomeController::class, 'imageDetail'])->name('home.imageDetail');
 Route::get('/videos', [HomeController::class, 'index'])->name('home.videos');
 Route::get('/movies', [HomeController::class, 'index'])->name('home.movies');
 Route::get('/18images', [HomeController::class, 'images18'])->name('home.images18');
