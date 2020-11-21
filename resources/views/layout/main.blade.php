@@ -1,7 +1,7 @@
 <?php
 $topImage = url('/').'/imgs/1.jpg';
 $_siteName = 'SexyGirlCollection.Com';
-$_siteTitle = 'Sexy Girl Collection';
+$_siteTitle = !empty($pageTitle) ? $pageTitle : 'Sexy Girl Collection';
 $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 ?>
 <!DOCTYPE html>

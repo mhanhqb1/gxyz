@@ -26,7 +26,8 @@ class HomeController extends Controller
     {
         $limit = 16;
         $images = Image::orderBy('id', 'desc')->where('status', 1)->paginate($limit);
-        return view('home.image', ['images' => $images]);
+        $pageTitle = 'SBGC - Total Images';
+        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
     }
     
     /**
@@ -36,7 +37,8 @@ class HomeController extends Controller
     {
         $limit = 16;
         $images = Image::orderBy('id', 'desc')->where('status', 1)->where('is_18', 1)->paginate($limit);
-        return view('home.image', ['images' => $images]);
+        $pageTitle = 'SBGC - 18+ Images';
+        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
     }
     
     /**
