@@ -13,6 +13,11 @@
             <?php endforeach; ?>
             <?php endif; ?>
         </div>
+        <div class="row">
+            <div class="col home-btn">
+                <a href="{{ url('/images') }}" class="btn btn-outline-primary">View more</a>
+            </div>
+        </div>
     </div>
 
 </div><!-- /.row -->

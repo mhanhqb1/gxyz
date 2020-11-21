@@ -24,9 +24,8 @@ class HomeController extends Controller
      */
     public static function images()
     {
-        $images = Image::get_list([
-            'status' => 1
-        ]);
+        $limit = 16;
+        $images = Image::orderBy('id', 'desc')->where('status', 1)->paginate($limit);
         return view('home.image', ['images' => $images]);
     }
     
@@ -35,10 +34,8 @@ class HomeController extends Controller
      */
     public static function images18()
     {
-        $images = Image::get_list([
-            'status' => 1,
-            'is_18' => 1
-        ]);
+        $limit = 16;
+        $images = Image::orderBy('id', 'desc')->where('status', 1)->where('is_18', 1)->paginate($limit);
         return view('home.image', ['images' => $images]);
     }
     

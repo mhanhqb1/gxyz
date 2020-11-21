@@ -13,6 +13,11 @@
             <?php endforeach; ?>
             <?php endif; ?>
         </div>
+        <div class="row">
+            <div class="col">
+                {{ $images->links() }}
+            </div>
+        </div>
     </div>
 
 </div><!-- /.row -->

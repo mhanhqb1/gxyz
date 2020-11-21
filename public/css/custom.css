@@ -140,3 +140,8 @@ h1, h2, h3, h4, h5, h6 {
     height: 250px;
     cursor: pointer;
 }
+.home-btn a {
+    display: block;
+    margin: 10px auto 20px;
+    width: fit-content;
+}
