@@ -2,15 +2,15 @@
 $topImage = url('/').'/imgs/1.jpg';
 $_siteName = 'SexyGirlCollection.Com';
 $_siteTitle = 'Sexy Girl Collection';
-$_siteDescription = '';
+$_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="description" content="$_siteDescription">
+        <meta name="author" content="{{ $_siteName }}">
 
         <title>{{ $_siteTitle }}</title>
 
