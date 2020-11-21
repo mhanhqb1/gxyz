@@ -25,7 +25,7 @@ class HomeController extends Controller
     public static function images()
     {
         $limit = 16;
-        $images = Image::orderBy('id', 'desc')->where('status', 1)->paginate($limit);
+        $images = Image::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Images';
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
     }
@@ -38,7 +38,7 @@ class HomeController extends Controller
         $pageTitle = 'SBGC - Images '.$id;
         $image = Image::find($id);
         if (empty($image)) {
-            $images = Image::orderBy('id', 'desc')->where('status', 1)->paginate($limit);
+            $images = Image::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
             return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
         }
         $pageImage = $image->url;
