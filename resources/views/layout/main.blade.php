@@ -1,5 +1,8 @@
 <?php
-$topImage = 'imgs/1.jpg';
+$topImage = url('/').'/imgs/1.jpg';
+$_siteName = 'SexyGirlCollection.Com';
+$_siteTitle = 'Sexy Girl Collection';
+$_siteDescription = '';
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -9,11 +12,18 @@ $topImage = 'imgs/1.jpg';
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Cover Template for Bootstrap</title>
+        <title>{{ $_siteTitle }}</title>
 
+        <meta property="og:site_name" content="{{ $_siteName }}">
+        <meta property="og:image" content="{{ $topImage }}">
+        <meta property="og:description" content="{{ $_siteDescription }}">
+        <meta property="og:url" content="{{ url()->full() }}">
+        <meta property="og:title" content="{{ $_siteTitle }}">
+        <meta property="og:type" content="article">
+        <meta name="twitter:title" content="{{ $_siteTitle }}">
+        <meta name="twitter:description" content="{{ $_siteDescription }}">
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 
         <!-- Custom styles for this template -->
         <link href="css/custom.css" rel="stylesheet">
@@ -61,7 +71,7 @@ $topImage = 'imgs/1.jpg';
         </main><!-- /.container -->
 
         <footer class="blog-footer">
-            <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            <p>© 2020 <a href="{{ url('') }}">SexyGirlCollection.Com</a>. All right reserved.</p>
             <p>
                 <a href="#">Back to top</a>
             </p>
