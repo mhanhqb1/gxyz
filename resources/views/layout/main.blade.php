@@ -37,6 +37,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 
           gtag('config', 'G-QTT9NZ1FJK');
         </script>
+        <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub=771288&format=300x250&ga=a"></script>
     </head>
 
     <body>
@@ -70,6 +71,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         </div>
 
         <main role="main" class="container">
+            <noscript><a href="https://yllix.com/publishers/771288" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/300x250.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
             @yield('content')
         </main><!-- /.container -->
 
