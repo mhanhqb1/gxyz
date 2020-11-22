@@ -43,7 +43,7 @@ class HomeController extends Controller
     public static function videos()
     {
         $limit = 16;
-        $data = YoutubeChannelVideo::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 0)->paginate($limit);
+        $data = YoutubeChannelVideo::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Videos';
         return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle]);
     }

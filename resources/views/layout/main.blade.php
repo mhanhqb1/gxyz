@@ -57,8 +57,8 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
                     <a class="p-2 text-muted text-center" href="{{ url('/images') }}">Images</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/videos') }}">Videos</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/movies') }}">Movies</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/18images') }}">18+ Images</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/18movies') }}">18+ Movies</a>
+<!--                    <a class="p-2 text-muted text-center" href="{{ url('/18images') }}">18+ Images</a>
+                    <a class="p-2 text-muted text-center" href="{{ url('/18movies') }}">18+ Movies</a>-->
                 </nav>
             </div>
 

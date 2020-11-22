@@ -31,6 +31,8 @@ Route::get('/youtubeCrawler', [HomeController::class, 'youtubeCrawler'])->name('
 
 Route::get('/checkImages', [AdminController::class, 'checkImages'])->name('admin.checkImages');
 Route::post('/ajaxUpdateImages', [AdminController::class, 'ajaxUpdateImages'])->name('admin.ajaxUpdateImages');
+Route::get('/checkVideos', [AdminController::class, 'checkVideos'])->name('admin.checkVideos');
+Route::post('/ajaxUpdateVideos', [AdminController::class, 'ajaxUpdateVideos'])->name('admin.ajaxUpdateVideos');
 
 
 //Clear Cache facade value:
