@@ -37,7 +37,8 @@ class MasterSource extends Model {
         'flickr' => 'flickr',
         'instagram' => 'instagram',
         'youtube' => 'youtube',
-        'facebook' => 'facebook'
+        'facebook' => 'facebook',
+        'youtube_playlist' => 'youtube_playlist'
     ];
     
     public static function get_list($params){

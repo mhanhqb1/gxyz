@@ -82,6 +82,38 @@ class YoutubeChannel extends Model {
     }
     
     /*
+     * Youtube playlist crawler
+     */
+    public static function youtube_playlist_crawler($limit = null){
+        # Init
+        $today = date('Y-m-d', time());
+        
+        # Get list ID
+        $channelIds = MasterSource::where(function($query) use ($today){
+            $query->where('crawl_at', null);
+            $query->orWhere('crawl_at', '<', $today);
+        })->where('type', MasterSource::$type['video'])
+                ->where('source_type', MasterSource::$sourceType['youtube_playlist']);
+        if (!empty($limit)) {
+            $channelIds = $channelIds->limit($limit);
+        }
+        $channelIds = $channelIds->get();
+        if (!$channelIds->isEmpty()) {
+            foreach ($channelIds as $c) {
+                $playlistId = $c->source_params;
+                # Get channel videos
+                $videos = self::get_playlist_videos($playlistId);
+                foreach ($videos as $video) {
+                    YoutubeChannelVideo::updateOrCreate(['youtube_id' => $video['youtube_id']], $video);
+                }
+                # Update flag
+                $c->crawl_at = $today;
+                $c->save();
+            }
+        }
+    }
+    
+    /*
      * Get channel info
      */
     public static function get_channel_info($channelId) {
@@ -108,6 +140,38 @@ class YoutubeChannel extends Model {
                 'is_hidden_subscriber' => !empty($statistics['hiddenSubscriberCount']) ? 1 : 0,
                 'related_channels' => !empty($res['items'][0]['brandingSettings']['channel']['featuredChannelsUrls']) ? $res['items'][0]['brandingSettings']['channel']['featuredChannelsUrls'] : [],
             ];
+        }
+        
+        return $data;
+    }
+    
+    /*
+     * Get playlist videos
+     */
+    public static function get_playlist_videos($playlistId, $data = [], $nextToken = Null) {
+        # Init
+        $apiKey = config('services.google')['youtube_api_key'];
+        $apiUrl = self::$youtubeApi."playlistItems?part=snippet,id&playlistId={$playlistId}&key={$apiKey}&order=date&maxResults=50";
+        if (!empty($nextToken)) {
+            $apiUrl .= "&pageToken={$nextToken}";
+        }
+        
+        $res = self::call_api($apiUrl);
+        if (!empty($res['items'])) {
+            foreach ($res['items'] as $v) {
+                $snippet = $v['snippet'];
+                $data[] = [
+                    'youtube_channel_id' => $snippet['channelId'],
+                    'youtube_id' => $v['id'],
+                    'title' => $snippet['title'],
+                    'description' => $snippet['description'],
+                    'published_at' => date('Y-m-d H:i:s', strtotime($snippet['publishedAt'])),
+                    'image' => $snippet['thumbnails']['high']['url']
+                ];
+            }
+            if (!empty($res['nextPageToken'])) {
+                $data = self::get_playlist_videos($playlistId, $data, $res['nextPageToken']);
+            }
         }
         
         return $data;
