@@ -37,6 +37,7 @@
                 <button class="btn btn-info img-btn-check" data-param="is_hot" data-val="0">Hot-</button>
                 <button class="btn btn-warning img-btn-check" data-param="is_18" data-val="1">18+</button>
                 <button class="btn btn-warning img-btn-check" data-param="is_18" data-val="0">18-</button>
+                <button class="btn btn-danger img-btn-check" data-param="status" data-val="-1">Delete</button>
             </div>
         </div>
         <table id="dataTable" class="table table-striped table-bordered" style="width:100%">

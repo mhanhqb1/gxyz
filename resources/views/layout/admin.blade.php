@@ -45,7 +45,7 @@ $topImage = 'imgs/1.jpg';
                     <a class="p-2 text-muted text-center" href="{{ url('/checkImages') }}">CheckImages</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/s-migrate') }}">Migrate</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/s-config-cache') }}">Clear cache</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('//s-optimize') }}">Optimize</a>
+                    <a class="p-2 text-muted text-center" href="{{ url('/s-optimize') }}">Optimize</a>
                 </nav>
             </div>
         </div>
