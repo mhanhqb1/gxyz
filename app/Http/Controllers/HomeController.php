@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use App\Models\YoutubeChannel;
+use App\Models\YoutubeChannelVideo;
 
 class HomeController extends Controller
 {
@@ -16,7 +18,12 @@ class HomeController extends Controller
             'status' => 1,
             'is_hot' => 1
         ]);
-        return view('home.index', ['images' => $images]);
+        $videos = YoutubeChannelVideo::get_list([
+            'status' => 1,
+            'is_hot' => 1,
+            'limit' => 16
+        ]);
+        return view('home.index', ['images' => $images, 'videos' => $videos]);
     }
     
     /**
@@ -28,6 +35,17 @@ class HomeController extends Controller
         $images = Image::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Images';
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
+    }
+    
+    /**
+     * Get list videos
+     */
+    public static function videos()
+    {
+        $limit = 16;
+        $data = YoutubeChannelVideo::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 0)->paginate($limit);
+        $pageTitle = 'SBGC - Total Videos';
+        return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle]);
     }
     
     /**
@@ -43,6 +61,22 @@ class HomeController extends Controller
         }
         $pageImage = $image->url;
         return view('home.image_detail', ['image' => $image, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
+    }
+    
+    /**
+     * Get video detail
+     */
+    public static function videoDetail($id)
+    {
+        $pageTitle = 'SBGC - Video '.$id;
+        $video = YoutubeChannelVideo::find($id);
+        if (empty($video)) {
+            $data = YoutubeChannelVideo::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
+            return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle]);
+        }
+        $pageTitle = 'SBGC - '.$video->title;
+        $pageImage = $video->image;
+        return view('home.video_detail', ['video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
     
     /**
@@ -72,6 +106,15 @@ class HomeController extends Controller
     {
         set_time_limit(0);
         Image::flickr_daily_crawler();
+        die('1');
+    }
+    /**
+     * Youtube crawler
+     */
+    public static function youtubeCrawler()
+    {
+        set_time_limit(0);
+        YoutubeChannel::youtube_channel_crawler(5);
         die('1');
     }
 }

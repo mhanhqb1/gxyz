@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col blog-main">
         <h3 class="pb-3 mb-4 font-italic border-bottom">
-            Images {{ $id }}
+            Image {{ $id }}
         </h3>
         <div class="row mb-2">
             @include('layout.image', ['img' => $image])
