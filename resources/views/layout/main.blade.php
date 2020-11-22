@@ -31,13 +31,13 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         
         <?php if (!empty(config('services.google')['ga_key'])): ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google')['ga_key']) }}"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google')['ga_key'] }}"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', '{{ config('services.google')['ga_key']) }}');
+          gtag('config', "<?php echo config('services.google')['ga_key']; ?>");
         </script>
         <?php endif; ?>
     </head>
