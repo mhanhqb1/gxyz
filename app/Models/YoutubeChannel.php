@@ -162,7 +162,7 @@ class YoutubeChannel extends Model {
                 $snippet = $v['snippet'];
                 $data[] = [
                     'youtube_channel_id' => $snippet['channelId'],
-                    'youtube_id' => $v['id'],
+                    'youtube_id' => $snippet['resourceId']['videoId'],
                     'title' => $snippet['title'],
                     'description' => $snippet['description'],
                     'published_at' => date('Y-m-d H:i:s', strtotime($snippet['publishedAt'])),
