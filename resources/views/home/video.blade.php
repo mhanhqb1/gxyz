@@ -14,8 +14,8 @@
             <?php endif; ?>
         </div>
         <div class="row">
-            <div class="col">
-                {{ $data->links() }}
+            <div class="col home-btn">
+                <a href="{{ url('/videos').'?page='.($params['page'] + 1) }}" class="btn btn-outline-primary">View more</a>
             </div>
         </div>
     </div>

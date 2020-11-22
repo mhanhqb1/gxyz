@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\YoutubeChannel;
@@ -29,23 +31,31 @@ class HomeController extends Controller
     /**
      * Get list images
      */
-    public static function images()
+    public static function images(Request $request)
     {
+        $params = $request->all();
+        if (empty($params['page'])) {
+            $params['page'] = 1;
+        }
         $limit = 16;
         $images = Image::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Images';
-        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
+        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
     
     /**
      * Get list videos
      */
-    public static function videos()
+    public static function videos(Request $request)
     {
+        $params = $request->all();
+        if (empty($params['page'])) {
+            $params['page'] = 1;
+        }
         $limit = 16;
         $data = YoutubeChannelVideo::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Videos';
-        return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle]);
+        return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
     
     /**
