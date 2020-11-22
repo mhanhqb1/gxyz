@@ -28,6 +28,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 
         <!-- Custom styles for this template -->
         <link href="{{ asset('/css/custom.css').'?'.time() }}" rel="stylesheet">
+        
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTT9NZ1FJK"></script>
         <script>
@@ -37,12 +38,15 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 
           gtag('config', 'G-QTT9NZ1FJK');
         </script>
-        <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub=771288&format=300x250&ga=a"></script>
     </head>
 
     <body>
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=245530479242476&autoLogAppEvents=1" nonce="tRcnz9VF"></script>
+        <?php if (!empty(config('app.ads_yllix'))): ?>
+        <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&format={{ config('app.ads_yllix')['format'] }}&ga=a"></script>
+        <noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
+        <?php endif; ?>
         <div class="container">
             <header class="blog-header py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
@@ -71,7 +75,6 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         </div>
 
         <main role="main" class="container">
-            <noscript><a href="https://yllix.com/publishers/771288" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/300x250.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
             @yield('content')
         </main><!-- /.container -->
 

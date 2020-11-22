@@ -229,6 +229,10 @@ return [
 
     ],
     
-    'flickr_key' => env('FLICKR_KEY')
+    'flickr_key' => env('FLICKR_KEY'),
+    'ads_yllix' => [
+        'pub_id' => env('YLLIX_PUB_ID'),
+        'format' => env('YLLIX_FORMAT')
+    ]
 
 ];
