@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\YoutubeChannelVideo;
+use App\Models\MasterSource;
 
 use Illuminate\Http\Request;
 
@@ -30,6 +31,39 @@ class AdminController extends Controller
         $params['limit'] = 999;
         $videos = YoutubeChannelVideo::get_list($params);
         return view('admin.video', ['videos' => $videos, 'params' => $params]);
+    }
+    
+    /**
+     * Add source
+     */
+    public static function addSource()
+    {
+        $types = MasterSource::$type;
+        $sourceTypes = MasterSource::$sourceType;
+        return view('admin.add_source', ['types' => $types, 'sourceTypes' => $sourceTypes]);
+    }
+    
+    /**
+     * Update image
+     */
+    public static function saveSource(Request $request)
+    {
+        $params = $request->all();
+        $type = !empty($params['type']) ? $params['type'] : '';
+        $sourceType = !empty($params['source_type']) ? $params['source_type'] : '';
+        $name = !empty($params['name']) ? $params['name'] : '';
+        $sourceParams = !empty($params['source_params']) ? $params['source_params'] : '';
+        
+        $masterSource = new MasterSource();
+        $masterSource->type = $type;
+        $masterSource->source_type = $sourceType;
+        $masterSource->source_params = $sourceParams;
+        $masterSource->name = $name;
+        $masterSource->save();
+        
+        $types = MasterSource::$type;
+        $sourceTypes = MasterSource::$sourceType;
+        return view('admin.add_source', ['types' => $types, 'sourceTypes' => $sourceTypes]);
     }
     
     /**
