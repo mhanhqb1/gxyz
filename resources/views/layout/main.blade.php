@@ -29,15 +29,17 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         <!-- Custom styles for this template -->
         <link href="{{ asset('/css/custom.css').'?'.time() }}" rel="stylesheet">
         
+        <?php if (!empty(config('services.google')['ga_key'])): ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTT9NZ1FJK"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google')['ga_key']) }}"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'G-QTT9NZ1FJK');
+          gtag('config', '{{ config('services.google')['ga_key']) }}');
         </script>
+        <?php endif; ?>
     </head>
 
     <body>
