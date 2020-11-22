@@ -113,9 +113,9 @@ class Image extends Model {
                         break;
                     }
                 }
+                $s->crawl_at = $today;
+                $s->save();
             }
-            $s->crawl_at = $today;
-            $s->save();
         }
     }
 
