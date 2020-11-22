@@ -64,7 +64,7 @@
                                 <input type="checkbox" class="form-check-input img-check" name="imgCheck[]" value="{{ $img->id }}" id="checkId-{{ $img->id }}">
                             </div>
                         </td>
-                        <td><img src="{{ $img->url }}" width="200px" for="checkId-{{ $img->id }}"/></td>
+                        <td><label for="checkId-{{ $img->id }}"><img src="{{ $img->url }}" width="200px"/></label></td>
                         <td>{{ $img->id }}</td>
                         <td>{{ $img->is_hot }}</td>
                         <td>{{ $img->is_18 }}</td>
