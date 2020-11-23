@@ -83,6 +83,11 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         </div>
 
         <main role="main" class="container">
+            <?php if (!empty(config('app.ads_ezoic'))): ?>
+            <!-- Ezoic - Ads 1 - native_mid -->
+            <div id="ezoic-pub-ad-placeholder-101"> </div>
+            <!-- End Ezoic - Ads 1 - native_mid -->
+            <?php endif; ?>
             @yield('content')
         </main><!-- /.container -->
 
