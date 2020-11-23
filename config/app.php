@@ -233,6 +233,7 @@ return [
     'ads_yllix' => [
         'pub_id' => env('YLLIX_PUB_ID'),
         'format' => env('YLLIX_FORMAT')
-    ]
+    ],
+    'ads_ezoic' => env('EZOIC_ID')
 
 ];
