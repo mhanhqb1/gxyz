@@ -96,6 +96,12 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
             @yield('content')
         </main><!-- /.container -->
 
+        <?php if (!empty(config('app.ads_ezoic'))): ?>
+            <!-- Ezoic - bottom_of_page - bottom_of_page -->
+            <div id="ezoic-pub-ad-placeholder-103"> </div>
+            <!-- End Ezoic - bottom_of_page - bottom_of_page -->
+        <?php endif; ?>
+
         <footer class="blog-footer">
             <p>© 2020 <a href="{{ url('') }}">SexyGirlCollection.Com</a>. All right reserved.</p>
             <p>
