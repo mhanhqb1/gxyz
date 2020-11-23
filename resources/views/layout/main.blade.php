@@ -8,12 +8,6 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <?php if (!empty(config('app.ads_ezoic'))): ?>
-        <!-- Ezoic Code -->
-	<script>var ezoicId = {{ config('app.ads_ezoic') }};</script>
-	<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
-        <!-- Ezoic Code -->
-        <?php endif; ?>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="$_siteDescription">
@@ -51,10 +45,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
     <body>
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=245530479242476&autoLogAppEvents=1" nonce="tRcnz9VF"></script>
-        <?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
-        <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&format={{ config('app.ads_yllix')['format'] }}&ga=a"></script>
-        <noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
-        <?php endif; ?>
+        
         <div class="container">
             <header class="blog-header py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
@@ -83,18 +74,25 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         </div>
 
         <main role="main" class="container">
+            <?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
+                <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&format={{ config('app.ads_yllix')['format'] }}&ga=a"></script>
+                <noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
+            <?php endif; ?>
             @yield('content')
+            <?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
+                <noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
+            <?php endif; ?>
         </main><!-- /.container -->
-
+        
         <footer class="blog-footer">
             <p>© 2020 <a href="{{ url('') }}">SexyGirlCollection.Com</a>. All right reserved.</p>
             <p>
                 <a href="#">Back to top</a>
             </p>
-            <div class="adsHelp">
+<!--            <div class="adsHelp">
                 <span>Please help me subscribe and click ads on the top</span>
                 <img src="{{ asset('imgs/thanks.gif') }}"/>
-            </div>
+            </div>-->
         </footer>
 
         <!-- Bootstrap core JavaScript
@@ -105,6 +103,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         <script src="{{ asset('/js/bootstrap4.js') }}"></script>
         
         <?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
+        <script type="text/javascript" src="https://buleor.com/pun.php?section=General&pt=6&pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
         <script src="https://cdn-server.top/p/wl.js?pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
         <?php endif;?>
     </body>
