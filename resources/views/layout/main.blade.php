@@ -79,7 +79,6 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
                 <noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
             <?php endif; ?>
             @yield('content')
-            <script src="https://static.adxadserv.com/js/adb.js" type="text/javascript" data-adxad-place="5fbb98a861d6e24e6414e453" async></script><div id="5fbb98a861d6e24e6414e453" data-width="468" data-height="60" data-output="html"></div>
         </main><!-- /.container -->
         
         <footer class="blog-footer">
