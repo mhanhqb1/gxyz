@@ -132,6 +132,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     background-color: #f9f9f9;
     border-top: .05rem solid #e5e5e5;
+    position: relative;
 }
 .blog-footer p:last-child {
     margin-bottom: 0;
@@ -183,4 +184,20 @@ h1, h2, h3, h4, h5, h6 {
     top: 10px;
     text-align: center;
     color: white;
+}
+.adsHelp {
+    position: fixed;
+    bottom: 0;
+    width: 50%;
+    right: 0;
+    color: black;
+    font-weight: bold;
+    background: rgba(255,255,255,0.5);
+    max-width: 150px;
+}
+.adsHelp span {
+    
+}
+.adsHelp img {
+    width: 70%;
 }

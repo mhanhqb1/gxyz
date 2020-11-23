@@ -55,11 +55,6 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&format={{ config('app.ads_yllix')['format'] }}&ga=a"></script>
         <noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
         <?php endif; ?>
-        <?php if (!empty(config('app.ads_ezoic'))): ?>
-            <!-- Ezoic - Ads 1 - native_mid -->
-            <div id="ezoic-pub-ad-placeholder-102"> </div>
-            <!-- End Ezoic - Ads 1 - native_mid -->
-        <?php endif; ?>
         <div class="container">
             <header class="blog-header py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
@@ -88,27 +83,19 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         </div>
 
         <main role="main" class="container">
-            <?php if (!empty(config('app.ads_ezoic'))): ?>
-            <!-- Ezoic - Ads 1 - native_mid -->
-            <div id="ezoic-pub-ad-placeholder-101"> </div>
-            <!-- End Ezoic - Ads 1 - native_mid -->
-        <?php endif; ?>
             @yield('content')
         </main><!-- /.container -->
-
-        <?php if (!empty(config('app.ads_ezoic'))): ?>
-            <!-- Ezoic - bottom_of_page - bottom_of_page -->
-            <div id="ezoic-pub-ad-placeholder-103"> </div>
-            <!-- End Ezoic - bottom_of_page - bottom_of_page -->
-        <?php endif; ?>
 
         <footer class="blog-footer">
             <p>© 2020 <a href="{{ url('') }}">SexyGirlCollection.Com</a>. All right reserved.</p>
             <p>
                 <a href="#">Back to top</a>
             </p>
+            <div class="adsHelp">
+                <span>Please help me subscribe and click ads on the top</span>
+                <img src="{{ asset('imgs/thanks.gif') }}"/>
+            </div>
         </footer>
-
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
