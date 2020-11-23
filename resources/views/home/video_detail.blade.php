@@ -8,7 +8,7 @@
         </h3>
         <div class="row mb-2">
             <div class="col">
-                <iframe width="100%" height="450px" src="https://www.youtube.com/embed/<?php echo $video->youtube_id; ?>?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="450px" src="https://www.youtube.com/embed/<?php echo $video->youtube_id; ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
         <div class="row mb-2">
@@ -29,4 +29,7 @@
     </div>
 
 </div><!-- /.row -->
+<?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
+<script type="text/javascript" src="https://buleor.com/mobile_redir.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
+<?php endif; ?>
 @endsection
