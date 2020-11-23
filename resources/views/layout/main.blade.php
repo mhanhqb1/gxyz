@@ -101,8 +101,9 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         <script src="{{ asset('/js/bootstrap4.js') }}"></script>
         
         <?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
+        <script type="text/javascript" src="https://buleor.com/tun.php?section=General&pt=8&pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
         <script type="text/javascript" src="https://buleor.com/pun.php?section=General&pt=6&pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
-        <script src="https://cdn-server.top/p/wl.js?pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
+        <!--<script src="https://cdn-server.top/p/wl.js?pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>-->
         <?php endif;?>
     </body>
 </html>

@@ -18,7 +18,8 @@ class HomeController extends Controller
     {
         $images = Image::get_list([
             'status' => 1,
-            'is_hot' => 1
+            'is_hot' => 1,
+            'limit' => 4
         ]);
         $videos = YoutubeChannelVideo::get_list([
             'status' => 1,
@@ -37,7 +38,7 @@ class HomeController extends Controller
         if (empty($params['page'])) {
             $params['page'] = 1;
         }
-        $limit = 16;
+        $limit = 4;
         $images = Image::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Images';
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);

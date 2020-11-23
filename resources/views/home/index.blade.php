@@ -20,7 +20,7 @@
         </div>
     </div>
 </div><!-- /.row -->
-<div class="row">
+<!--<div class="row">
     <div class="col blog-main">
         <h3 class="pb-3 mb-4 font-italic border-bottom">
             Top Videos
@@ -38,5 +38,5 @@
             </div>
         </div>
     </div>
-</div><!-- /.row -->
+</div> /.row -->
 @endsection
