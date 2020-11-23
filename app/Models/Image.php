@@ -39,7 +39,11 @@ class Image extends Model {
         $offset = ($page - 1)*$limit;
 
         # Get data
-        $data = self::orderBy('id', 'desc');
+        if (!empty($params['is_random'])) {
+            $data = self::inRandomOrder();
+        } else {
+            $data = self::orderBy('id', 'desc');
+        }
 
         # Filter
         if (isset($params['status']) && $params['status'] != '') {
