@@ -8,9 +8,9 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <?php if (!empty(config('ads.ezoic'))): ?>
+        <?php if (!empty(config('app.ads_ezoic'))): ?>
         <!-- Ezoic Code -->
-	<script>var ezoicId = {{ config('ads.ezoic') }};</script>
+	<script>var ezoicId = {{ config('app.ads_ezoic') }};</script>
 	<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
         <!-- Ezoic Code -->
         <?php endif; ?>
