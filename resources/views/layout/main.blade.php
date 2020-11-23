@@ -55,6 +55,11 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
         <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&format={{ config('app.ads_yllix')['format'] }}&ga=a"></script>
         <noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
         <?php endif; ?>
+        <?php if (!empty(config('app.ads_ezoic'))): ?>
+            <!-- Ezoic - Ads 1 - native_mid -->
+            <div id="ezoic-pub-ad-placeholder-102"> </div>
+            <!-- End Ezoic - Ads 1 - native_mid -->
+        <?php endif; ?>
         <div class="container">
             <header class="blog-header py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
@@ -87,7 +92,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
             <!-- Ezoic - Ads 1 - native_mid -->
             <div id="ezoic-pub-ad-placeholder-101"> </div>
             <!-- End Ezoic - Ads 1 - native_mid -->
-            <?php endif; ?>
+        <?php endif; ?>
             @yield('content')
         </main><!-- /.container -->
 
