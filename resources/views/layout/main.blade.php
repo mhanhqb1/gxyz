@@ -1,6 +1,6 @@
 <?php
-$topImage = !empty($pageImage) ? $pageImage : url('/').'/imgs/1.jpg';
-$jumbotronImage = url('/').'/imgs/1.jpg';
+$topImage = !empty($pageImage) ? $pageImage : url('/') . '/imgs/1.jpg';
+$jumbotronImage = url('/') . '/imgs/1.jpg';
 $_siteName = 'SexyGirlCollection.Com';
 $_siteTitle = !empty($pageTitle) ? $pageTitle : 'Sexy Girl Collection';
 $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
@@ -28,77 +28,114 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
 
         <!-- Custom styles for this template -->
         <link href="{{ asset('/css/custom.css').'?'.time() }}" rel="stylesheet">
-        
+
         <?php if (!empty(config('services.google')['ga_key'])): ?>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google')['ga_key'] }}"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google')['ga_key'] }}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+                gtag('js', new Date());
 
-          gtag('config', "<?php echo config('services.google')['ga_key']; ?>");
-        </script>
+                gtag('config', "<?php echo config('services.google')['ga_key']; ?>");
+            </script>
         <?php endif; ?>
-    </head>
 
-    <body>
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=245530479242476&autoLogAppEvents=1" nonce="tRcnz9VF"></script>
-        
-        <div class="container">
-            <header class="blog-header py-3">
-                <div class="row flex-nowrap justify-content-between align-items-center">
-                    <div class="col text-center text-bold">
-                        <a class="blog-header-logo text-dark" href="{{ url('/') }}">SBGC</a>
-                    </div>
+        <?php if (!empty(config('services.facebook')['pixel)id'])): ?>
+            <!-- Facebook Pixel Code -->
+            <script>
+                !function (f, b, e, v, n, t, s)
+                {
+                    if (f.fbq)
+                        return;
+                    n = f.fbq = function () {
+                        n.callMethod ?
+                                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    };
+                    if (!f._fbq)
+                        f._fbq = n;
+                    n.push = n;
+                    n.loaded = !0;
+                    n.version = '2.0';
+                    n.queue = [];
+                    t = b.createElement(e);
+                    t.async = !0;
+                    t.src = v;
+                    s = b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t, s)
+                }(window, document, 'script',
+                        'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', "{{ config('services.facebook')['pixel)id'] }}");
+                fbq('track', 'PageView');
+            </script>
+            <noscript>
+            <img height="1" width="1" 
+                 src="https://www.facebook.com/tr?id={{ config('services.facebook')['pixel)id'] }}&ev=PageView
+                 &noscript=1"/>
+            </noscript>
+            <!-- End Facebook Pixel Code -->
+        <?php endif; ?>
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=245530479242476&autoLogAppEvents=1" nonce="tRcnz9VF"></script>
+
+    <div class="container">
+        <header class="blog-header py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col text-center text-bold">
+                    <a class="blog-header-logo text-dark" href="{{ url('/') }}">SBGC</a>
                 </div>
-            </header>
-
-            <div class="nav-scroller py-1 mb-2">
-                <nav class="nav d-flex justify-content-between">
-                    <a class="p-2 text-muted text-center" href="{{ url('/') }}">Home</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/images') }}">Images</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/videos') }}">Videos</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/movies') }}">Movies</a>
-<!--                    <a class="p-2 text-muted text-center" href="{{ url('/18images') }}">18+ Images</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/18movies') }}">18+ Movies</a>-->
-                </nav>
             </div>
+        </header>
 
-            <div class="jumbotron p-3 p-md-5 text-white rounded" style="background-image: url('{{ $jumbotronImage }}');">
-                <div class="col-md-6 px-0">
-                    <h1 class="display-4 font-italic">Sexy <br/>Beautiful <br/>Girl <br/>Collection</h1>
-                </div>
-            </div>
+        <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-between">
+                <a class="p-2 text-muted text-center" href="{{ url('/') }}">Home</a>
+                <a class="p-2 text-muted text-center" href="{{ url('/images') }}">Images</a>
+                <a class="p-2 text-muted text-center" href="{{ url('/videos') }}">Videos</a>
+                <a class="p-2 text-muted text-center" href="{{ url('/movies') }}">Movies</a>
+                <!--                    <a class="p-2 text-muted text-center" href="{{ url('/18images') }}">18+ Images</a>
+                                    <a class="p-2 text-muted text-center" href="{{ url('/18movies') }}">18+ Movies</a>-->
+            </nav>
         </div>
 
-        <main role="main" class="container">
-            @yield('content')
-        </main><!-- /.container -->
-        
-        <footer class="blog-footer">
-            <p>© 2020 <a href="{{ url('') }}">SexyGirlCollection.Com</a>. All right reserved.</p>
-            <p>
-                <a href="#">Back to top</a>
-            </p>
-<!--            <div class="adsHelp">
-                <span>Please help me subscribe and click ads on the top</span>
-                <img src="{{ asset('imgs/thanks.gif') }}"/>
-            </div>-->
-        </footer>
+        <div class="jumbotron p-3 p-md-5 text-white rounded" style="background-image: url('{{ $jumbotronImage }}');">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 font-italic">Sexy <br/>Beautiful <br/>Girl <br/>Collection</h1>
+            </div>
+        </div>
+    </div>
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        <?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
+    <main role="main" class="container">
+        @yield('content')
+    </main><!-- /.container -->
+
+    <footer class="blog-footer">
+        <p>© 2020 <a href="{{ url('') }}">SexyGirlCollection.Com</a>. All right reserved.</p>
+        <p>
+            <a href="#">Back to top</a>
+        </p>
+        <!--            <div class="adsHelp">
+                        <span>Please help me subscribe and click ads on the top</span>
+                        <img src="{{ asset('imgs/thanks.gif') }}"/>
+                    </div>-->
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
         <script type="text/javascript" src="https://buleor.com/tun.php?section=General&pt=8&pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
         <script type="text/javascript" src="https://buleor.com/pun.php?section=General&pt=6&pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>
         <!--<script src="https://cdn-server.top/p/wl.js?pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>-->
-        <?php endif;?>
-    </body>
+    <?php endif; ?>
+</body>
 </html>

@@ -33,6 +33,10 @@ return [
     'google' => [
         'youtube_api_key' => env('GOOGLE_YOUTUBE_API_KEY'),
         'ga_key' => env('GOOGLE_GA_KEY')
+    ],
+    
+    'facebook' => [
+        'pixel_id' => env('FACEBOOK_PIXEL_ID')
     ]
 
 ];
