@@ -41,7 +41,7 @@ class HomeController extends Controller
         }
         $limit = 4;
         $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
-        $pageTitle = 'SBGC - Total Images';
+        $pageTitle = 'Sexy Girl - '.$params['page'];
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
     

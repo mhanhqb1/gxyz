@@ -6,6 +6,11 @@
         <h3 class="pb-3 mb-4 font-italic border-bottom">
             Image {{ $id }}
         </h3>
+        <div class="row">
+            <div class="col">
+                @include('layout.ads')
+            </div>
+        </div>
         <div class="row mb-2">
             @include('layout.image', ['img' => $image])
         </div>
