@@ -6,14 +6,14 @@
         <h3 class="pb-3 mb-4 font-italic border-bottom">
             Images
         </h3>
-        <div class="row">
-            <div class="col">
-                @include('layout.ads')
-            </div>
-        </div>
         <div class="row mb-2">
             <?php if (!empty($images)): ?>
-            <?php foreach ($images as $img): ?>
+            <?php foreach ($images as $k => $img): ?>
+                <?php if ($k == 2): ?>
+                <div class="col">
+                    @include('layout.ads')
+                </div>
+                <?php endif; ?>
                 @include('layout.image', ['img' => $img])
             <?php endforeach; ?>
             <?php endif; ?>
