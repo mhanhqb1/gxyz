@@ -103,11 +103,11 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
             </nav>
         </div>
 
-        <div class="jumbotron p-3 p-md-5 text-white rounded" style="background-image: url('{{ $jumbotronImage }}');">
+<!--        <div class="jumbotron p-3 p-md-5 text-white rounded" style="background-image: url('{{ $jumbotronImage }}');">
             <div class="col-md-6 px-0">
                 <h1 class="display-4 font-italic">Sexy <br/>Beautiful <br/>Girl <br/>Collection</h1>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <main role="main" class="container">
