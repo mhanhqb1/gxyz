@@ -19,7 +19,7 @@ class HomeController extends Controller
         $images = Image::get_list([
             'status' => 1,
             'is_hot' => 1,
-            'limit' => 4,
+            'limit' => 16,
             'is_random' => 1
         ]);
         $videos = YoutubeChannelVideo::get_list([
@@ -39,7 +39,7 @@ class HomeController extends Controller
         if (empty($params['page'])) {
             $params['page'] = 1;
         }
-        $limit = 4;
+        $limit = 16;
         $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
         $pageTitle = 'Sexy Girl - '.$params['page'];
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
