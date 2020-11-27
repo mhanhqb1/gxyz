@@ -12,12 +12,10 @@
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col">
-                <div class="card box-shadow">
-                    <img class="g-image" src="{{ $image->url }}" alt="Sexy girl {{ $id }}">
-                    <div class="fb-like" data-href="{{ route('home.imageDetail', ['id' => $id]) }}" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
-                </div>
-            </div>
+            <div class="col" style="position: relative">
+                <img class="img-fluid" src="{{ $image->url }}" alt="Sexy girl {{ $id }}">
+                <div class="fb-like" data-href="{{ route('home.imageDetail', ['id' => $id]) }}" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
+             </div>
         </div>
         <div class="row">
             <h3 class="pb-3 mb-4 font-italic border-bottom">
