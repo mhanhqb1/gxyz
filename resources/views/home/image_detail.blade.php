@@ -21,6 +21,8 @@
             <h3 class="pb-3 mb-4 font-italic border-bottom">
                 Related Images
             </h3>
+        </div>
+        <div class="row">
             <?php foreach ($related as $v): ?>
             @include('layout.image', ['img' => $v])
             <?php endforeach; ?>
