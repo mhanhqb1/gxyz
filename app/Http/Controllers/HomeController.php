@@ -67,12 +67,20 @@ class HomeController extends Controller
     {
         $pageTitle = 'SBGC - Images '.$id;
         $image = Image::find($id);
+        $limit = 8;
         if (empty($image)) {
-            $images = Image::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
+            $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
             return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
         }
         $pageImage = $image->url;
-        return view('home.image_detail', ['image' => $image, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
+        $related = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->where('id', '!=', $id)->limit($limit)->get();
+        return view('home.image_detail', [
+            'image' => $image, 
+            'pageTitle' => $pageTitle, 
+            'id' => $id, 
+            'pageImage' => $pageImage,
+            'related' => $related
+        ]);
     }
     
     /**

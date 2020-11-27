@@ -137,9 +137,13 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
     margin-bottom: 0;
 }
-.g-image {
-    /*height: 250px;*/
+.col-image .card,
+.col-video .card {
+    height: 250px;
     cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .g-youtube {
     position: absolute;
