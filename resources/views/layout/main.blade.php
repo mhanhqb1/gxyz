@@ -111,6 +111,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
     </div>
 
     <main role="main" class="container">
+        @include('layout.ads_top')
         @yield('content')
     </main><!-- /.container -->
 
