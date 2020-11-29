@@ -6,14 +6,14 @@
         <div class="row mb-2">
             <?php if (!empty($images)): ?>
             <?php foreach ($images as $k => $img): ?>
-                <?php if ($k == 2): ?>
-                <div class="col">
-                    @include('layout.ads')
-                </div>
-                <?php endif; ?>
                 @include('layout.image', ['img' => $img])
             <?php endforeach; ?>
             <?php endif; ?>
+        </div>
+        <div class="row">
+            <div class="col">
+                @include('layout.ads_adsterra')
+            </div>
         </div>
         <div class="row">
             <div class="col home-btn">
