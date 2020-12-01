@@ -1,12 +1,4 @@
-<script type="text/javascript">
-	atOptions = {
-		'key' : '8be6b932bcd4165e7e86133464c5876f',
-		'format' : 'iframe',
-		'height' : 250,
-		'width' : 300,
-		'params' : {}
-	};
-	document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.displaycontentprofit.com/8be6b932bcd4165e7e86133464c5876f/invoke.js"></scr' + 'ipt>');
-</script>
-
-<script src="https://static.adxadserv.com/js/adb.js" type="text/javascript" data-adxad-place="5fc49c3961d6e2490d181e52" async></script><div id="5fc49c3961d6e2490d181e52" data-width="300" data-height="250" data-output="html"></div>
+<?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
+    <script type="text/javascript" src="https://sailif.com/bnr.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&format={{ config('app.ads_yllix')['format'] }}&ga=a"></script>
+    <div style="display: block; margin: 10px auto; text-align: center;"><noscript><a href="https://yllix.com/publishers/{{ config('app.ads_yllix')['pub_id'] }}" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/{{ config('app.ads_yllix')['format'] }}.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript></div>
+<?php endif; ?>
