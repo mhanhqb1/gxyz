@@ -55,7 +55,7 @@ class HomeController extends Controller
             $params['page'] = 1;
         }
         $limit = 16;
-        $data = YoutubeChannelVideo::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
+        $data = YoutubeChannelVideo::inRandomOrder()->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Videos';
         return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
@@ -91,7 +91,7 @@ class HomeController extends Controller
         $pageTitle = 'SBGC - Video '.$id;
         $video = YoutubeChannelVideo::find($id);
         if (empty($video)) {
-            $data = YoutubeChannelVideo::orderBy('is_hot', 'desc')->orderBy('id', 'desc')->where('status', 1)->paginate($limit);
+            $data = YoutubeChannelVideo::inRandomOrder()->where('status', 1)->paginate($limit);
             return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle]);
         }
         $pageTitle = 'SBGC - '.$video->title;
