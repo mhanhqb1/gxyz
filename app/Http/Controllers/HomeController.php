@@ -73,7 +73,12 @@ class HomeController extends Controller
             return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
         }
         $pageImage = $image->url;
-        $related = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->where('id', '!=', $id)->limit($limit)->get();
+        if (!empty($image->is_18)) {
+            $related = Image::inRandomOrder()->where('status', 1)->where('is_18', 1)->where('id', '!=', $id)->limit($limit)->get();
+        } else {
+            $related = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->where('id', '!=', $id)->limit($limit)->get();
+        }
+        
         return view('home.image_detail', [
             'image' => $image, 
             'pageTitle' => $pageTitle, 
