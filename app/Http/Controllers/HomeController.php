@@ -41,7 +41,7 @@ class HomeController extends Controller
         }
         $limit = 16;
         $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
-        $pageTitle = 'Sexy Girl - '.$params['page'];
+        $pageTitle = 'Sexy Girl Collection - '.$params['page'];
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
     
@@ -104,10 +104,14 @@ class HomeController extends Controller
      */
     public static function images18()
     {
+        $params = $request->all();
+        if (empty($params['page'])) {
+            $params['page'] = 1;
+        }
         $limit = 16;
-        $images = Image::orderBy('id', 'desc')->where('status', 1)->where('is_18', 1)->paginate($limit);
-        $pageTitle = 'SBGC - 18+ Images';
-        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
+        $images = Image::inRandomOrder()->where('status', 1)->where('is_18', 1)->limit($limit)->get();
+        $pageTitle = 'Sexy Girl Collection 18+ - '.$params['page'];
+        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
     
     /**

@@ -43,7 +43,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
             </script>
         <?php endif; ?>
 
-        <?php if (!empty(config('services.facebook')['pixel)id'])): ?>
+        <?php if (!empty(config('services.facebook')['pixel_id'])): ?>
             <!-- Facebook Pixel Code -->
             <script>
                 !function (f, b, e, v, n, t, s)
