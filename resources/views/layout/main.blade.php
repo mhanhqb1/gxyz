@@ -67,12 +67,12 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
                     s.parentNode.insertBefore(t, s)
                 }(window, document, 'script',
                         'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', "{{ config('services.facebook')['pixel)id'] }}");
+                fbq('init', "{{ config('services.facebook')['pixel_id'] }}");
                 fbq('track', 'PageView');
             </script>
             <noscript>
             <img height="1" width="1" 
-                 src="https://www.facebook.com/tr?id={{ config('services.facebook')['pixel)id'] }}&ev=PageView
+                 src="https://www.facebook.com/tr?id={{ config('services.facebook')['pixel_id'] }}&ev=PageView
                  &noscript=1"/>
             </noscript>
             <!-- End Facebook Pixel Code -->
