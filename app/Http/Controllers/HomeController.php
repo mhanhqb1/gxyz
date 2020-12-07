@@ -102,7 +102,7 @@ class HomeController extends Controller
     /**
      * Get list 18 +images
      */
-    public static function images18()
+    public static function images18(Request $request)
     {
         $params = $request->all();
         if (empty($params['page'])) {
