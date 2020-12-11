@@ -2,19 +2,22 @@
 $topImage = !empty($pageImage) ? $pageImage : url('/') . '/imgs/1.jpg';
 $jumbotronImage = url('/') . '/imgs/1.jpg';
 $_siteName = 'SexyGirlCollection.Com';
-$_siteTitle = !empty($pageTitle) ? $pageTitle : 'Sexy Girl Collection';
-$_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
+$_siteTitle = !empty($pageTitle) ? $pageTitle : 'Sexy Girl Collection - Hot girls, Sexy girls, Girls in bikini';
+$_siteDescription = 'See the best looking girl pics, hot girls, cute girls, bikini girls, college girls, hot celebrities and more!';
+$_currentUrl = url()->current();
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="$_siteDescription">
+        <meta name="description" content="{{ $_siteDescription }}">
         <meta name="author" content="{{ $_siteName }}">
 
         <title>{{ $_siteTitle }}</title>
 
+        <link rel="image_src" href="{{ $topImage }}" />
+        <link rel="canonical" href="{{ $_currentUrl }}" />
         <meta property="og:site_name" content="{{ $_siteName }}">
         <meta property="og:image" content="{{ $topImage }}">
         <meta property="og:description" content="{{ $_siteDescription }}">
@@ -71,9 +74,7 @@ $_siteDescription = 'Sexy Girl, Hot Girl, Cute Girl, Beautiful Girl';
                 fbq('track', 'PageView');
             </script>
             <noscript>
-            <img height="1" width="1" 
-                 src="https://www.facebook.com/tr?id={{ config('services.facebook')['pixel_id'] }}&ev=PageView
-                 &noscript=1"/>
+                <img height="1" width="1" src="https://www.facebook.com/tr?id={{ config('services.facebook')['pixel_id'] }}&ev=PageView&noscript=1"/>
             </noscript>
             <!-- End Facebook Pixel Code -->
         <?php endif; ?>
