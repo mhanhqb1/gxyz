@@ -13,6 +13,8 @@ $_currentUrl = url()->current();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="{{ $_siteDescription }}">
         <meta name="author" content="{{ $_siteName }}">
+        
+        <meta name="propeller" content="6942b47ba624c761d4a15a2c07405ad4">
 
         <title>{{ $_siteTitle }}</title>
 
