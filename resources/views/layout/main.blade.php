@@ -9,6 +9,7 @@ $_currentUrl = url()->current();
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <meta name="clckd" content="cce8e6015f45ff1763849c7c4689b6d1" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="{{ $_siteDescription }}">
