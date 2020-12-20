@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use App\Models\Idol;
 use App\Models\YoutubeChannel;
 use App\Models\YoutubeChannelVideo;
 
@@ -16,7 +17,7 @@ class HomeController extends Controller
      */
     public static function index()
     {
-        $images = Image::get_list([
+        $idols = Idol::get_list([
             'status' => 1,
             'is_hot' => 1,
             'limit' => 16,
@@ -27,7 +28,7 @@ class HomeController extends Controller
             'is_hot' => 1,
             'limit' => 16
         ]);
-        return view('home.index', ['images' => $images, 'videos' => $videos]);
+        return view('home.index', ['idols' => $idols, 'videos' => $videos]);
     }
     
     /**
@@ -67,17 +68,17 @@ class HomeController extends Controller
     {
         $pageTitle = 'SBGC - Images '.$id;
         $image = Image::find($id);
-        $limit = 8;
+        $limit = 50;
         if (empty($image)) {
             $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
             return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
         }
         $pageImage = $image->url;
-        if (!empty($image->is_18)) {
-            $related = Image::inRandomOrder()->where('status', 1)->where('is_18', 1)->where('id', '!=', $id)->limit($limit)->get();
-        } else {
-            $related = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->where('id', '!=', $id)->limit($limit)->get();
+        $related = Image::inRandomOrder()->where('status', 1)->where('id', '!=', $id);
+        if (!empty($image->model_id)) {
+            $related = $related->where('model_id', $image->model_id);
         }
+        $related = $related->get();
         
         return view('home.image_detail', [
             'image' => $image, 
@@ -85,6 +86,27 @@ class HomeController extends Controller
             'id' => $id, 
             'pageImage' => $pageImage,
             'related' => $related
+        ]);
+    }
+    
+    /**
+     * Get image detail
+     */
+    public static function idolDetail($id)
+    {
+        $pageTitle = 'SBGC - Idol '.$id;
+        $idol = Idol::find($id);
+        $pageImage = $idol->image;
+        $related = Image::inRandomOrder()->where('model_id', $id)->where('status', 1)->get();
+        $relatedIdols = Idol::inRandomOrder()->where('id', '!=', $id)->limit(4)->get();
+        
+        return view('home.idol_detail', [
+            'idol' => $idol, 
+            'pageTitle' => $pageTitle, 
+            'id' => $id, 
+            'pageImage' => $pageImage,
+            'related' => $related,
+            'relatedIdols' => $relatedIdols
         ]);
     }
     
@@ -114,7 +136,7 @@ class HomeController extends Controller
             $params['page'] = 1;
         }
         $limit = 16;
-        $images = Image::inRandomOrder()->where('status', 1)->where('is_18', 1)->limit($limit)->get();
+        $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
         $pageTitle = 'Sexy Girl Collection 18+ - '.$params['page'];
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }

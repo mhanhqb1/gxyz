@@ -145,6 +145,9 @@ h1, h2, h3, h4, h5, h6 {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.col-image-small .card {
+    height: 150px;
+}
 .g-youtube {
     position: absolute;
     top: 50%;

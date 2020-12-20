@@ -4,9 +4,9 @@
 <div class="row">
     <div class="col blog-main">
         <div class="row mb-2">
-            <?php if (!empty($images)): ?>
-            <?php foreach ($images as $k => $img): ?>
-                @include('layout.image', ['img' => $img])
+            <?php if (!empty($idols)): ?>
+            <?php foreach ($idols as $k => $img): ?>
+                @include('layout.image_idol', ['img' => $img])
             <?php endforeach; ?>
             <?php endif; ?>
         </div>

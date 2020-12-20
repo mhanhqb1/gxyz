@@ -21,7 +21,8 @@ class Image extends Model {
         'is_hot',
         'is_18',
         'status',
-        'source_id'
+        'source_id',
+        'model_id'
     ];
 
     /**
