@@ -216,3 +216,7 @@ h1, h2, h3, h4, h5, h6 {
 .img-fluid {
     width: 100%;
 }
+#adsModal .modal-dialog{
+    width: 90%;
+    max-width: 1024px;
+}
