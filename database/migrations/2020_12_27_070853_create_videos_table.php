@@ -20,7 +20,7 @@ class CreateVideosTable extends Migration
             $table->string('image', 255);
             $table->string('stream_url', 2000)->nullable();
             $table->string('source_id', 255);
-            $table->date('crawl_at')->nullable();
+            $table->integer('crawl_at')->nullable();
             $table->boolean('is_hot')->default(0);
             $table->boolean('is_18')->default(0);
             $table->boolean('status')->default(0);

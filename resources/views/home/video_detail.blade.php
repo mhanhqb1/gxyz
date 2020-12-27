@@ -7,8 +7,15 @@
             {{ $video->title }}
         </h3>
         <div class="row mb-2">
-            <div class="col">
-                <iframe width="100%" height="450px" src="https://www.youtube.com/embed/<?php echo $video->youtube_id; ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="col video-stream-player">
+                <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+                <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+                <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+                <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+                    <video id="my-video-player" class="video-js vjs-default-skin vjs-fluid" style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden"></video>
+                </div>
+
+                <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
             </div>
         </div>
         <div class="row">
@@ -34,4 +41,34 @@
     </div>
 
 </div><!-- /.row -->
+<script>
+    $(document).ready(function(){
+        var videoId = "{{ $video->source_id }}";
+        $.ajax({
+            url: "{{ route('home.getVideoStream') }}",
+            method: 'POST',
+            data: {
+                video_id: {{ $video->id }},
+                _token: "{{ csrf_token() }}"
+            }
+        }).done(function (response) {
+            var res = JSON.parse(response);
+            if (res.status == "OK") {
+                var videoPlayer = videojs('my-video-player', {
+                    autoplay: false,
+                    controls: true,
+                    preload: 'auto',
+                    poster: '{{ $video->image }}',
+                    sources: [{
+                        type: "video/mp4",
+                        src: res.data
+                    }]
+                });
+            } else {
+                alert('Video not found');
+            }
+        });
+        
+    });
+</script>
 @endsection
