@@ -34,7 +34,4 @@
     </div>
 
 </div><!-- /.row -->
-<?php if (!empty(config('app.ads_yllix')['pub_id'])): ?>
-<!--<script type="text/javascript" src="https://buleor.com/mobile_redir.php?section=General&pub={{ config('app.ads_yllix')['pub_id'] }}&ga=a"></script>-->
-<?php endif; ?>
 @endsection
