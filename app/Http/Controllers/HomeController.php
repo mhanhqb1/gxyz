@@ -9,6 +9,7 @@ use App\Models\Image;
 use App\Models\Idol;
 use App\Models\YoutubeChannel;
 use App\Models\YoutubeChannelVideo;
+use App\Models\Video;
 
 class HomeController extends Controller
 {
@@ -23,10 +24,9 @@ class HomeController extends Controller
             'limit' => 16,
             'is_random' => 1
         ]);
-        $videos = YoutubeChannelVideo::get_list([
+        $videos = Video::get_list([
             'status' => 1,
-            'is_hot' => 1,
-            'limit' => 16
+            'is_random' => 1
         ]);
         return view('home.index', ['idols' => $idols, 'videos' => $videos]);
     }
@@ -56,7 +56,7 @@ class HomeController extends Controller
             $params['page'] = 1;
         }
         $limit = 16;
-        $data = YoutubeChannelVideo::inRandomOrder()->where('status', 1)->paginate($limit);
+        $data = Video::inRandomOrder()->where('status', 1)->paginate($limit);
         $pageTitle = 'SBGC - Total Videos';
         return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
@@ -116,9 +116,9 @@ class HomeController extends Controller
     public static function videoDetail($id)
     {
         $pageTitle = 'SBGC - Video '.$id;
-        $video = YoutubeChannelVideo::find($id);
+        $video = Video::find($id);
         if (empty($video)) {
-            $data = YoutubeChannelVideo::inRandomOrder()->where('status', 1)->paginate($limit);
+            $data = Video::inRandomOrder()->where('status', 1)->paginate($limit);
             return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle]);
         }
         $pageTitle = 'SBGC - '.$video->title;

@@ -144,9 +144,13 @@ h1, h2, h3, h4, h5, h6 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    height: fit-content;
 }
 .col-image-small .card {
     height: 150px;
+}
+.col-video {
+    margin-bottom: 20px;
 }
 .g-youtube {
     position: absolute;
