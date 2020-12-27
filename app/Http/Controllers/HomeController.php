@@ -165,6 +165,7 @@ class HomeController extends Controller
     public static function youtubeCrawler()
     {
         set_time_limit(0);
+        Video::video_crawler();
         YoutubeChannel::youtube_channel_crawler(5);
         YoutubeChannel::youtube_playlist_crawler(5);
         die('1');
