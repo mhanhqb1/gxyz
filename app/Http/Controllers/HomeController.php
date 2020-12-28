@@ -38,12 +38,13 @@ class HomeController extends Controller {
             'status' => 'OK',
             'data' => ''
         );
+        $videoExpired = 5*60*60;
         $apiGetStream = "https://floating-everglades-87112.herokuapp.com/";
         $params = $request->all();
         $videoId = !empty($request->video_id) ? $request->video_id : '';
         $video = Video::find($videoId);
         if (!empty($video)) {
-            if (!empty($video->stream_url)) {
+            if (!empty($video->stream_url) && ($video->crawl_at + $videoExpired) > time()) {
                 $result['data'] = $video->stream_url;
             } else {
                 $apiGetStream = $apiGetStream . $video->source_id . '/';
