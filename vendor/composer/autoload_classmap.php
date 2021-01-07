@@ -24,6 +24,7 @@ return array(
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\MasterSource' => $baseDir . '/app/Models/MasterSource.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\Video' => $baseDir . '/app/Models/Video.php',
     'App\\Models\\YoutubeChannel' => $baseDir . '/app/Models/YoutubeChannel.php',
     'App\\Models\\YoutubeChannelVideo' => $baseDir . '/app/Models/YoutubeChannelVideo.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

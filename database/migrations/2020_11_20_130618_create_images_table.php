@@ -23,7 +23,8 @@ class CreateImagesTable extends Migration
             $table->boolean('is_hot')->default(0);
             $table->boolean('is_18')->default(0);
             $table->boolean('status')->default(0);
-            $table->string('source_id', 50);
+            $table->string('source_id', 255);
+            $table->integer('model_id')->nullable();
             $table->timestamps();
             $table->unique(['source_id'], 'source_id_unique');
         });
