@@ -9,7 +9,7 @@ $_currentUrl = url()->current();
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta name="clckd" content="cce8e6015f45ff1763849c7c4689b6d1" />
+        <meta name="clckd" content="b7feb3c65979373def2c5484a13a6669" />
         <script data-cfasync="false" type="text/javascript" src="//nicksstevmark.com/bultykh/ipp24/7/bazinga/1805702" async></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
