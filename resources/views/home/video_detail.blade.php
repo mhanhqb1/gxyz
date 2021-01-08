@@ -15,16 +15,16 @@
                     <video id="my-video-player" class="video-js vjs-default-skin vjs-fluid"></video>
                 </div>
                 <script>
-                    window["248541naxhcu093105btzawb"] = {
-                      zoneId: 1807350,
+                    window["889189xkexov838039qxeung"] = {
+                      zoneId: 1809600,
                       domain: "//nuevonoelmid.com",
                       options: {
                         insteadOfSelectors: ["#my-video-player"],
                         insteadOfPlayers: ["other"]
                       }
                     }
-                </script>
-        <script src="https://nuevonoelmid.com/zbs.kek.js"></script>
+                  </script>
+                  <script src="https://nuevonoelmid.com/zbs.kek.js"></script>
                 <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
             </div>
         </div>
