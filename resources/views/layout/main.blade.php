@@ -9,8 +9,6 @@ $_currentUrl = url()->current();
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta name="clckd" content="a22dbaebc3b613fde1e5da5eec00e00e" />
-        <script data-cfasync="false" type="text/javascript" src="//nicksstevmark.com/bultykh/ipp24/7/bazinga/1805702" async></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="{{ $_siteDescription }}">
