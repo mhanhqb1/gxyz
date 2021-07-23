@@ -1,6 +1,22 @@
 @extends('layout.main')
 
 @section('content')
+<style>
+#aaaa {
+    position:relative;
+    padding-bottom:56.25%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+}
+#aaaa iframe, #aaaa object, #aaaa embed {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+</style>
 <div class="row">
     <div class="col blog-main">
         <h3 class="pb-3 mb-4 font-italic border-bottom">
@@ -75,7 +91,7 @@
                     }]
                 });
             } else {
-                let html = '<iframe width="1438" height="640" src="https://www.youtube.com/embed/{{ $video->source_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                let html = '<iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $video->source_id }}" frameborder="0" allowfullscreen></iframe>';
                 $('#aaaa').html(html);
             }
         });
