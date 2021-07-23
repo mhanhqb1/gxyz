@@ -11,10 +11,10 @@
                 <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
                 <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
                 <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
-                <div>
+                <div id='aaaa'>
                     <video id="my-video-player" class="video-js vjs-default-skin vjs-fluid"></video>
                 </div>
-                <script>
+                <!-- <script>
                     window["889189xkexov838039qxeung"] = {
                       zoneId: 1809600,
                       domain: "//nuevonoelmid.com",
@@ -24,7 +24,7 @@
                       }
                     }
                   </script>
-                  <script src="https://nuevonoelmid.com/zbs.kek.js"></script>
+                  <script src="https://nuevonoelmid.com/zbs.kek.js"></script> -->
                 <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
             </div>
         </div>
@@ -75,10 +75,11 @@
                     }]
                 });
             } else {
-                alert('Video not found');
+                let html = '<iframe width="1438" height="640" src="https://www.youtube.com/embed/{{ $video->source_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                $('#aaaa').html(html);
             }
         });
-        
+
     });
 </script>
 @endsection
