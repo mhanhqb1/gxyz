@@ -23,12 +23,13 @@ Route::get('/videos', [HomeController::class, 'videos'])->name('home.videos');
 Route::get('/video/{id}', [HomeController::class, 'videoDetail'])->name('home.videoDetail');
 Route::get('/movies', [HomeController::class, 'index'])->name('home.movies');
 Route::get('/18images', [HomeController::class, 'images18'])->name('home.images18');
-Route::get('/18movies', [HomeController::class, 'index'])->name('home.18movies');
+Route::get('/18videos', [HomeController::class, 'videos18'])->name('home.18videos');
 Route::post('/getVideoStream', [HomeController::class, 'getVideoStream'])->name('home.getVideoStream');
 
 Route::get('/flickrCrawler', [HomeController::class, 'flickrCrawler'])->name('home.flickr_crawler');
 Route::get('/flickrDailyCrawler', [HomeController::class, 'flickrDailyCrawler'])->name('home.flickrDailyCrawler');
 Route::get('/youtubeCrawler', [HomeController::class, 'youtubeCrawler'])->name('home.youtubeCrawler');
+Route::get('/twitterCrawler', [HomeController::class, 'twitterCrawler'])->name('home.twitterCrawler');
 
 
 Route::get('/checkImages', [AdminController::class, 'checkImages'])->name('admin.checkImages');

@@ -17,6 +17,8 @@
     height:100%;
 }
 </style>
+<script src="https://content.jwplatform.com/libraries/Jq6HIbgz.js"></script>
+<link href="{{ asset('css/player.css') }}" rel="stylesheet"/>
 <div class="row">
     <div class="col blog-main">
         <h3 class="pb-3 mb-4 font-italic border-bottom">
@@ -80,15 +82,38 @@
         }).done(function (response) {
             var res = JSON.parse(response);
             if (res.status == "OK") {
-                var videoPlayer = videojs('my-video-player', {
-                    autoplay: false,
-                    controls: true,
-                    preload: 'auto',
-                    poster: '{{ $video->image }}',
-                    sources: [{
-                        type: "video/mp4",
-                        src: res.data
-                    }]
+                // var videoPlayer = videojs('my-video-player', {
+                //     autoplay: false,
+                //     controls: true,
+                //     preload: 'auto',
+                //     poster: '{{ $video->image }}',
+                //     sources: [{
+                //         type: "video/mp4",
+                //         src: res.data
+                //     }]
+                // });
+                const playerInstance = jwplayer("my-video-player").setup({
+                    playlist: [{
+                        title: '{{ $video->title }}',
+                        sources: [
+                            {
+                                "file": res.data,
+                                "type": "video/mp4"
+                            }
+                        ],
+                        image: '{{ $video->image }}'
+                    }],
+                    logo: {
+                        file: "",
+                        "link": "{{ route('home.index') }}",
+                        "hide": "false",
+                        "position": "top-right"
+                    },
+                    // "advertising": {
+                    //     "client": "vast",
+                    //     "schedule": ['.$ads.']
+                    //     }
+                    // }
                 });
             } else {
                 let html = '<iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $video->source_id }}" frameborder="0" allowfullscreen></iframe>';

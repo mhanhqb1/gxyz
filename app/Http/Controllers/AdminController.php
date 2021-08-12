@@ -79,18 +79,13 @@ class AdminController extends Controller
         $params = $request->all();
         $ids = !empty($params['ids']) ? explode(',', $params['ids']) : [];
         $field = !empty($params['field']) ? $params['field'] : '';
-        $val = !empty($params['val']) ? $params['val'] : '';
+        $val = !empty($params['val']) ? $params['val'] : 0;
 
-        if (!empty($ids) && !empty($field) && !empty($val)) {
-            foreach ($ids as $id) {
-                $image = Image::find($id);
-                if (!empty($image)) {
-                    $image->$field = $val;
-                    if ($field != 'status' && $val == 1) {
-                        $image->status = 1;
-                    }
-                    $image->save();
-                }
+        if (!empty($ids) && !empty($field) && isset($val)) {
+            if ($field == 'status' && $val == '-1') {
+                Image::whereIn('id', $ids)->delete();
+            } else {
+                Image::whereIn('id', $ids)->update([ $field => $val ]);
             }
         }
 

@@ -38,7 +38,7 @@ class HomeController extends Controller {
             'status' => 'OK',
             'data' => ''
         );
-        $videoExpired = 5*60*60;
+        $videoExpired = time() + 5*60*60;//fix tam
         $apiGetStream = "https://floating-everglades-87112.herokuapp.com/";
         $params = $request->all();
         $videoId = !empty($request->video_id) ? $request->video_id : '';
@@ -97,8 +97,22 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $data = Video::inRandomOrder()->where('status', 1)->paginate($limit);
+        $data = Video::inRandomOrder()->where('status', 1)->where('is_18', 0)->paginate($limit);
         $pageTitle = 'SBGC - Total Videos';
+        return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
+    }
+
+    /**
+     * Get list videos
+     */
+    public static function videos18(Request $request) {
+        $params = $request->all();
+        if (empty($params['page'])) {
+            $params['page'] = 1;
+        }
+        $limit = 16;
+        $data = Video::inRandomOrder()->where('status', 1)->where('is_18', 1)->paginate($limit);
+        $pageTitle = 'SBGC - Total Videos 18+';
         return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
@@ -202,8 +216,19 @@ class HomeController extends Controller {
     public static function youtubeCrawler() {
         set_time_limit(0);
         Video::video_crawler();
-        YoutubeChannel::youtube_channel_crawler(5);
-        YoutubeChannel::youtube_playlist_crawler(5);
+        // YoutubeChannel::youtube_channel_crawler(5);
+        // YoutubeChannel::youtube_playlist_crawler(5);
+        die('1');
+    }
+
+    /**
+     * Youtube crawler
+     */
+    public static function twitterCrawler() {
+        set_time_limit(0);
+        Video::twitter_crawler();
+        // YoutubeChannel::youtube_channel_crawler(5);
+        // YoutubeChannel::youtube_playlist_crawler(5);
         die('1');
     }
 

@@ -228,12 +228,18 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-    
+
     'flickr_key' => env('FLICKR_KEY'),
     'ads_yllix' => [
         'pub_id' => env('YLLIX_PUB_ID'),
         'format' => env('YLLIX_FORMAT')
     ],
-    'ads_ezoic' => env('EZOIC_ID')
+    'ads_ezoic' => env('EZOIC_ID'),
+
+    'twitter_api_key' => env("TWITTER_API_KEY"),
+    'twitter_api_secret_key' => env("TWITTER_API_SECRET_KEY"),
+    'twitter_access_token' => env("TWITTER_ACCESS_TOKEN"),
+    'twitter_access_token_secret' => env("TWITTER_ACCESS_TOKEN_SECRET"),
+    'twitter_bearer_token' => env("TWITTER_BEARER_TOKEN"),
 
 ];

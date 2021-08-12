@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Abraham\TwitterOAuth\TwitterOAuth;
+use App\Models\Image;
 
 class Video extends Model {
 
@@ -70,6 +72,64 @@ class Video extends Model {
                     'source_id' => $v['source_id']
                 ], $v);
             }
+        }
+    }
+
+    public static function twitter_crawler(){
+        $consumer_key = config('app.twitter_api_key');
+        $consumer_secret = config('app.twitter_api_secret_key');
+        $access_token = config('app.twitter_access_token');
+        $access_token_secret = config('app.twitter_access_token_secret');
+        $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+        $idols = [
+            'phuongslut_2k3',
+            'HoagNgoAnThuyen',
+            'thaonhi_2901',
+            'viiiillll0',
+            'SexualPostDaiIy',
+            'SexualDaiIy'
+        ];
+        foreach ($idols as $twId) {
+            $since_id = 1;
+            $content = $twitter->get("statuses/user_timeline", [
+                "screen_name" => $twId,
+                "since_id" => $since_id ? $since_id: 1 ,
+                "count"=> 200,
+                'tweet_mode'=>'extended'
+            ]);
+            foreach ($content as $key => $items) {
+                if (!empty($content[$key]->extended_entities->media)) {
+                    foreach ($content[$key]->extended_entities->media as $item) {
+                        if (!empty($item->video_info)) {
+                            foreach ($item->video_info->variants as $_v) {
+                                if ($_v->content_type == 'video/mp4') {
+                                    Video::updateOrCreate([
+                                        'source_id' => 'tw::'.$twId.'-'.$items->id
+                                    ], [
+                                        'title' => $items->id,
+                                        'image' => $item->media_url_https,
+                                        'stream_url' => $_v->url,
+                                        'source_id' => 'tw::'.$twId.'-'.$items->id,
+                                        'status' => 0
+                                    ]);
+                                    break;
+                                }
+                            }
+                        } else {
+                            Image::updateOrCreate([
+                                'source_id' => 'tw::'.$twId.'-'.$items->id
+                            ], [
+                                'url' => $item->media_url_https,
+                                'source_id' => 'tw::'.$twId.'-'.$items->id,
+                                'status' => 0
+                            ]);
+                        }
+                    }
+                }
+            }
+            echo '<pre>';
+            print_r($content);
+            die();
         }
     }
 
