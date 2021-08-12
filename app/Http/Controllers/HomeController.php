@@ -24,7 +24,8 @@ class HomeController extends Controller {
         ]);
         $videos = Video::get_list([
                     'status' => 1,
-                    'is_random' => 1
+                    'is_random' => 1,
+                    'is_hot' => 1
         ]);
         return view('home.index', ['idols' => $idols, 'videos' => $videos]);
     }
