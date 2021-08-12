@@ -4,11 +4,11 @@ $(document).ready(function () {
             {"orderable": false, "targets": 0}
         ]
     });
-    
+
     $("#checkAll").click(function(){
         $('input:checkbox').not(this).prop('checked', this.checked);
     });
-    
+
     $('.img-btn-check').on('click', function(){
         var param = $(this).attr('data-param');
         var val = $(this).attr('data-val');
@@ -29,7 +29,7 @@ $(document).ready(function () {
             window.location.reload();
         });
     });
-    
+
     $('.video-btn-check').on('click', function(){
         var param = $(this).attr('data-param');
         var val = $(this).attr('data-val');

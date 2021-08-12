@@ -30,9 +30,9 @@ class Video extends Model {
      */
     protected $hidden = [];
     public $timestamps = true;
-    
+
     public static $youtubeApi = 'https://www.googleapis.com/youtube/v3/';
-    
+
     public static function get_list($params) {
         # Init
         $limit = !empty($params['limit']) ? $params['limit'] : 16;
@@ -61,7 +61,7 @@ class Video extends Model {
         $data = $data->offset($offset)->limit($limit)->get();
         return $data;
     }
-    
+
     public static function video_crawler(){
         $data = self::get_channel_videos();
         if (!empty($data)) {
@@ -72,20 +72,20 @@ class Video extends Model {
             }
         }
     }
-    
+
     /*
      * Youtube channel crawler
      */
     public static function get_channel_videos($data = [], $nextToken = Null, $skip = False) {
         # Init
-        $keyword = 'korean%20bj';
+        $keyword = 'sexygirls69.xyz';
         $today = date('Y-m-d', time());
         $apiKey = config('services.google')['youtube_api_key'];
         $apiUrl = self::$youtubeApi."search?part=snippet,id&q={$keyword}&key={$apiKey}&order=date&maxResults=50";
         if (!empty($nextToken)) {
             $apiUrl .= "&pageToken={$nextToken}";
         }
-        
+
         $res = self::call_api($apiUrl);
         if (!empty($res['items'])) {
             foreach ($res['items'] as $v) {
@@ -99,16 +99,16 @@ class Video extends Model {
                         'status' => 1
                     ];
                 }
-                
+
             }
             if (!empty($res['nextPageToken']) && $skip == False) {
                 $data = self::get_channel_videos($data, $res['nextPageToken']);
             }
         }
-        
+
         return $data;
     }
-        
+
     /*
      * Call Api
      */
