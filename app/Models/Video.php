@@ -127,9 +127,6 @@ class Video extends Model {
                     }
                 }
             }
-            echo '<pre>';
-            print_r($content);
-            die();
         }
     }
 
