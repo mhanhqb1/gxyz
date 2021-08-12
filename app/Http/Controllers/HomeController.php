@@ -188,7 +188,7 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
+        $images = Image::inRandomOrder()->where('status', 1)->where('is_18', 1)->limit($limit)->get();
         $pageTitle = 'Sexy Girl Collection 18+ - ' . $params['page'];
         return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
