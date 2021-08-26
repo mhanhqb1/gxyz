@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+:root {
+    --black: #333;
+    --black2: #333;
+    --white: #fff;
+    --white2: #fff;
+    --blue: #4d5bf9;
+}
+
+.container {
+    position: relative;
+    width: 100%;;
+}
+.nav {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    border-right: 1px solid rgba(0,0,0,0.05);
+    background: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: width .5s;
+}
+.nav.active {
+    width: 0;
+}
+.nav ul {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0px 20px 20px;
+}
+.nav ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    padding: 10px;
+}
+.nav ul li.active {
+    background: var(--white);
+    border-radius: 15px 0 0 15px;
+}
+.nav ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    white-space: normal;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 500;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+}
+.nav ul li a .nav-list_icon {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+.nav ul li.active a {
+    color: var(--black);
+    opacity: 1;
+}
+.nav ul li a:hover {
+    opacity: 1;
+}
+.main {
+    position: absolute;
+    width: calc(100% - 300px);
+    background: var(--white);
+    min-height: 100vh;
+    left: 300px;
+    transition: width 0.5s, left 0.5s;
+}
+.main.active {
+    width: 100%;
+    left: 0;
+}
+.topbar {
+    position: fixed;
+    width: calc(100% - 300px);
+    background: var(--white2);
+    left: 300px;
+    top: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    height: 60px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    transition: width 0.5s, left 0.5s;
+}
+.topbar.active {
+    width: 100%;
+    left: 0;
+}
+.topbar .logo {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--black);
+    font-size: 1.4em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.topbar .toggle {
+    position: relative;
+    cursor: pointer;
+    font-size: 2em;
+    color: var(--black);
+}
+
+
+@media (max-width: 992px) {
+    .nav {
+        left: -100%;
+    }
+    .nav.active {
+        left: 0;
+        width: 100%;
+    }
+    .main, .topbar {
+        width: 100%;
+        left: 0;
+    }
+    .main.active {
+        left: 100%;
+    }
+}

@@ -27,7 +27,7 @@ class HomeController extends Controller {
                     'is_random' => 1,
                     'is_hot' => 1
         ]);
-        return view('home.index', ['idols' => $idols, 'videos' => $videos]);
+        return view('home.new_index', ['idols' => $idols, 'videos' => $videos]);
     }
 
     /**
