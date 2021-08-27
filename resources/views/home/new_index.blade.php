@@ -92,29 +92,68 @@ $_currentUrl = url()->current();
             <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
         </div>
         <div class="main">
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
-            aaaa<br/>
+            <section class="top-posts">
+                <div class="top-posts_left">
+                    <article class="card">
+                        <a href="#">
+                            <img src="/imgs/1.jpg"/>
+                            <div class="card-info">
+                                <h3>Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng</h3>
+                                <span>
+                                    <ion-icon name="flame-outline"></ion-icon>
+                                    Hot Images
+                                </span>
+                                <span>
+                                    <ion-icon name="flame-outline"></ion-icon>
+                                    Aug 21 2021
+                                </span>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <div class="top-posts_right">
+                    <?php  for( $i = 0; $i < 4; $i++): ?>
+                        <article class="card">
+                            <a href="#" title="Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng">
+                                <img src="/imgs/1.jpg" alt=""/>
+                                <div class="card-info">
+                                    <h3>Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng</h3>
+                                    <span>
+                                        <ion-icon name="flame-outline"></ion-icon>
+                                        Hot Images
+                                    </span>
+                                    <span>
+                                        <ion-icon name="flame-outline"></ion-icon>
+                                        Aug 21 2021
+                                    </span>
+                                </div>
+                            </a>
+                        </article>
+                    <?php endfor; ?>
+                </div>
+            </section>
 
+            <h2>Latest post</h2>
+            <section class="lastest-posts">
+                <?php  for( $i = 0; $i < 16; $i++): ?>
+                    <article class="card">
+                        <a href="#" title="Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng">
+                            <img src="/imgs/1.jpg" alt=""/>
+                            <div class="card-info">
+                                <h3>Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng</h3>
+                                <span>
+                                    <ion-icon name="flame-outline"></ion-icon>
+                                    Hot Images
+                                </span>
+                                <span>
+                                    <ion-icon name="flame-outline"></ion-icon>
+                                    Aug 21 2021
+                                </span>
+                            </div>
+                        </a>
+                    </article>
+                <?php endfor; ?>
+            </section>
         </div>
     </div>
 

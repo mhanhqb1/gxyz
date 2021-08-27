@@ -9,6 +9,7 @@
     --black2: #666;
     --white: #fff;
     --white2: #fff;
+    --white3: #fafafa;
     --blue: #4d5bf9;
     --pink: #f8478d;
     --pink2: #fedeeb;
@@ -124,6 +125,80 @@
     color: var(--black);
 }
 
+.top-posts {
+    width: 100%;
+    display: flex;
+    padding-bottom: 24px;
+}
+.top-posts_left {
+    width: 50%;
+}
+.top-posts_right {
+    width: 50%;
+}
+.card {
+    width: 100%;
+    position: relative;
+    padding: 10px;
+}
+.top-posts_right .card {
+    width: 50%;
+    float: left;
+}
+.card > a {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 90%;
+    display: block;
+}
+.top-posts_right .card > a {
+    padding-top: calc(90%);
+}
+.card img {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    object-fit: cover;
+}
+.card .card-info {
+    position: absolute;
+    z-index: 9;
+    bottom: 0;
+    padding: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    background: var(--white3);
+    color: var(--pink);
+    border-radius: 10px;
+}
+.card .card-info h3 {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    font-size: 1em;
+}
+.top-posts_left .card .card-info h3 {
+    font-size: 1.4em;
+}
+.card .card-info span {
+    font-size: 0.7em;
+}
+
+.lastest-posts {
+    display: block;
+    width: 100%;
+}
+.lastest-posts .card {
+    width: 25%;
+    float: left;
+}
+
 
 @media (max-width: 992px) {
     .nav {
@@ -139,5 +214,16 @@
     }
     .main.active {
         left: 100%;
+    }
+
+    .top-posts {
+        flex-direction: column;
+    }
+    .top-posts_left, .top-posts_right {
+        flex: 100%;
+        width: 100%;
+    }
+    .lastest-posts .card {
+        width: 50%;
     }
 }
