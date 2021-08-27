@@ -51,14 +51,70 @@ $_currentUrl = url()->current();
                         <span class="nav-list_title">Hot Images</span>
                     </a>
                 </li>
+                <li class="nav-list">
+                    <a href="#">
+                        <span class="nav-list_icon">
+                            <ion-icon name="image-outline"></ion-icon>
+                        </span>
+                        <span class="nav-list_title">Sexy Images</span>
+                    </a>
+                </li>
+                <li class="nav-list">
+                    <a href="#">
+                        <span class="nav-list_icon">
+                            <ion-icon name="caret-forward-circle-outline"></ion-icon>
+                        </span>
+                        <span class="nav-list_title">Hot Videos</span>
+                    </a>
+                </li>
+                <li class="nav-list">
+                    <a href="#">
+                        <span class="nav-list_icon">
+                            <ion-icon name="videocam-outline"></ion-icon>
+                        </span>
+                        <span class="nav-list_title">Sexy Videos</span>
+                    </a>
+                </li>
+                <li class="nav-list">
+                    <a href="#">
+                        <span class="nav-list_icon">
+                            <ion-icon name="happy-outline"></ion-icon>
+                        </span>
+                        <span class="nav-list_title">Funny Videos</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <div class="topbar">
-            <a href="" class="logo">AAA</a>
+            <a href="{{ url('') }}" class="logo">
+                {{ $_siteName }}
+            </a>
             <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
         </div>
         <div class="main">
-            aaaa
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+            aaaa<br/>
+
         </div>
     </div>
 
