@@ -36,7 +36,7 @@
     <a href="{{ route('home.18videos') }}" title="View more">View more</a>
 </div>
 <section class="lastest-posts">
-    <?php foreach ($idols as $k => $v) : ?>
+    <?php foreach ($videos as $k => $v) : ?>
         @include('layout.card_item', ['item' => $v, 'is_video' => 1])
     <?php endforeach; ?>
 </section>
