@@ -132,6 +132,8 @@ class HomeController extends Controller {
         $related = Image::inRandomOrder()->where('status', 1)->where('id', '!=', $id);
         if (!empty($image->model_id)) {
             $related = $related->where('model_id', $image->model_id);
+        } else {
+            $related = $related->limit($limit);
         }
         $related = $related->get();
 
