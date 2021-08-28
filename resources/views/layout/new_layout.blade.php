@@ -4,7 +4,7 @@ $jumbotronImage = url('/') . '/imgs/1.jpg';
 $_siteName = 'SexyGirls69.xyz';
 $_siteTitle = !empty($pageTitle) ? $pageTitle : 'Sexy Girl Collection - Hot girls, Sexy girls, Girls in bikini';
 $_siteDescription = 'See the best looking girl pics, sexy girl, hot girls, cute girls, bikini girls, college girls, hot celebrities and more!';
-$_siteKeywords = 'sexy girl, hot girl, bikini girl, hot girl sexy video, hot sexy girl, sexy girl xxx'
+$_siteKeywords = 'sexy girl, hot girl, bikini girl, hot girl sexy video, hot sexy girl, sexy girl xxx';
 $_currentUrl = url()->current();
 $routeName = \Request::route()->getName();
 ?>
@@ -15,7 +15,7 @@ $routeName = \Request::route()->getName();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{{ $_siteDescription }}">
-    <meta name="keywords" content="{{ $_siteDescription }}">
+    <meta name="keywords" content="{{ $_siteKeywords }}">
     <meta name="author" content="{{ $_siteName }}">
 
     <title>{{ $_siteTitle }}</title>
