@@ -31,129 +31,98 @@ $_currentUrl = url()->current();
     <!-- Custom styles for this template -->
     <link href="{{ asset('/css/new_style.css').'?'.time() }}" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
-        <nav class="nav">
-            <ul>
-                <li class="nav-list active">
-                    <a href="#">
-                        <span class="nav-list_icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="nav-list_title">Home</span>
-                    </a>
-                </li>
-                <li class="nav-list">
-                    <a href="#">
-                        <span class="nav-list_icon">
-                            <ion-icon name="flame-outline"></ion-icon>
-                        </span>
-                        <span class="nav-list_title">Hot Images</span>
-                    </a>
-                </li>
-                <li class="nav-list">
-                    <a href="#">
-                        <span class="nav-list_icon">
-                            <ion-icon name="image-outline"></ion-icon>
-                        </span>
-                        <span class="nav-list_title">Sexy Images</span>
-                    </a>
-                </li>
-                <li class="nav-list">
-                    <a href="#">
-                        <span class="nav-list_icon">
-                            <ion-icon name="caret-forward-circle-outline"></ion-icon>
-                        </span>
-                        <span class="nav-list_title">Hot Videos</span>
-                    </a>
-                </li>
-                <li class="nav-list">
-                    <a href="#">
-                        <span class="nav-list_icon">
-                            <ion-icon name="videocam-outline"></ion-icon>
-                        </span>
-                        <span class="nav-list_title">Sexy Videos</span>
-                    </a>
-                </li>
-                <li class="nav-list">
-                    <a href="#">
-                        <span class="nav-list_icon">
-                            <ion-icon name="happy-outline"></ion-icon>
-                        </span>
-                        <span class="nav-list_title">Funny Videos</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="topbar">
-            <a href="{{ url('') }}" class="logo">
-                {{ $_siteName }}
-            </a>
-            <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-        </div>
+        <header>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-list active">
+                        <a href="{{ route('home.index') }}" title="{{ $_siteName }}">
+                            <span class="nav-list_icon">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                            <span class="nav-list_title">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-list">
+                        <a href="{{ route('home.images') }}">
+                            <span class="nav-list_icon">
+                                <ion-icon name="flame-outline"></ion-icon>
+                            </span>
+                            <span class="nav-list_title">Hot Images</span>
+                        </a>
+                    </li>
+                    <li class="nav-list">
+                        <a href="{{ route('home.images18') }}">
+                            <span class="nav-list_icon">
+                                <ion-icon name="image-outline"></ion-icon>
+                            </span>
+                            <span class="nav-list_title">Sexy Images</span>
+                        </a>
+                    </li>
+                    <li class="nav-list">
+                        <a href="{{ route('home.videos') }}">
+                            <span class="nav-list_icon">
+                                <ion-icon name="caret-forward-circle-outline"></ion-icon>
+                            </span>
+                            <span class="nav-list_title">Hot Videos</span>
+                        </a>
+                    </li>
+                    <li class="nav-list">
+                        <a href="{{ route('home.18videos') }}">
+                            <span class="nav-list_icon">
+                                <ion-icon name="videocam-outline"></ion-icon>
+                            </span>
+                            <span class="nav-list_title">Sexy Videos</span>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-list">
+                        <a href="#">
+                            <span class="nav-list_icon">
+                                <ion-icon name="happy-outline"></ion-icon>
+                            </span>
+                            <span class="nav-list_title">Funny Videos</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </nav>
+            <div class="topbar">
+                <a href="{{ url('') }}" class="logo">
+                    {{ $_siteName }}
+                </a>
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+            </div>
+        </header>
         <div class="main">
             <section class="top-posts">
                 <div class="top-posts_left">
-                    <article class="card">
-                        <a href="#">
-                            <img src="/imgs/1.jpg"/>
-                            <div class="card-info">
-                                <h3>Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng</h3>
-                                <span>
-                                    <ion-icon name="flame-outline"></ion-icon>
-                                    Hot Images
-                                </span>
-                                <span>
-                                    <ion-icon name="flame-outline"></ion-icon>
-                                    Aug 21 2021
-                                </span>
-                            </div>
-                        </a>
-                    </article>
+                    @include('layout.card_item', ['item' => $idols[0]])
                 </div>
                 <div class="top-posts_right">
-                    <?php  for( $i = 0; $i < 4; $i++): ?>
-                        <article class="card">
-                            <a href="#" title="Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng">
-                                <img src="/imgs/1.jpg" alt=""/>
-                                <div class="card-info">
-                                    <h3>Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng</h3>
-                                    <span>
-                                        <ion-icon name="flame-outline"></ion-icon>
-                                        Hot Images
-                                    </span>
-                                    <span>
-                                        <ion-icon name="flame-outline"></ion-icon>
-                                        Aug 21 2021
-                                    </span>
-                                </div>
-                            </a>
-                        </article>
-                    <?php endfor; ?>
+                    <?php foreach ($idols as $k => $v) : ?>
+                        <?php if ($k > 3) {
+                            break;
+                        } ?>
+                        @include('layout.card_item', ['item' => $v])
+                    <?php endforeach; ?>
                 </div>
             </section>
 
-            <h2>Latest post</h2>
+            <div class="section-title">
+                <h2>Latest post</h2>
+                <a href="#" title="View more">View more</a>
+            </div>
             <section class="lastest-posts">
-                <?php  for( $i = 0; $i < 16; $i++): ?>
-                    <article class="card">
-                        <a href="#" title="Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng">
-                            <img src="/imgs/1.jpg" alt=""/>
-                            <div class="card-info">
-                                <h3>Hot girl 2k3 Sài Thành Thanh Tâm xinh đẹp,  thân hình nóng bỏng</h3>
-                                <span>
-                                    <ion-icon name="flame-outline"></ion-icon>
-                                    Hot Images
-                                </span>
-                                <span>
-                                    <ion-icon name="flame-outline"></ion-icon>
-                                    Aug 21 2021
-                                </span>
-                            </div>
-                        </a>
-                    </article>
-                <?php endfor; ?>
+                <?php foreach ($idols as $k => $v) : ?>
+                    @include('layout.card_item', ['item' => $v])
+                <?php endforeach; ?>
             </section>
+            <footer class="footer">
+                <p>© 2020 <a href="{{ url('') }}" title="{{ $_siteName }}">{{ $_siteName }}</a>. All right reserved.</p>
+            </footer>
         </div>
     </div>
 
