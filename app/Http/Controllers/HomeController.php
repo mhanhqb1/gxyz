@@ -21,10 +21,9 @@ class HomeController extends Controller {
             'is_18' => 1,
             'limit' => 16,
         ]);
-        $videos = Video::get_list([
-            'status' => 1,
-            'is_18' => 1
-        ]);
+        $limit = 16;
+        $offset = 0;
+        $videos = Video::where('status', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         return view('home.new_index', ['idols' => $images, 'videos' => $videos]);
     }
 
