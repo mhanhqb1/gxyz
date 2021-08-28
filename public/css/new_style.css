@@ -199,6 +199,9 @@
     padding: 0 24px;
     padding-top: 24px;
 }
+.section-title h1 {
+    font-size: 1.5em;
+}
 .lastest-posts {
     display: block;
     width: 100%;
@@ -240,6 +243,27 @@ footer a {
     font-size: 1.2em;
     font-weight: 500;
     color: var(--white);
+}
+.g-youtube {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    display: block;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.g-youtube:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url(../imgs/youtube_play.png);
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-position: center;
+    display: block;
 }
 
 @media (max-width: 992px) {

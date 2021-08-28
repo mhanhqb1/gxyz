@@ -61,7 +61,7 @@ class Image extends Model {
         $data = $data->offset($offset)->limit($limit)->get();
         return $data;
     }
-    
+
     public static function flickr_firt_crawler() {
         $today = date('Y-m-d', time());
         $sources = MasterSource::get_list([
@@ -91,9 +91,9 @@ class Image extends Model {
             $s->crawl_at = $today;
             $s->save();
         }
-        
+
     }
-    
+
     public static function flickr_daily_crawler() {
         $today = date('Y-m-d', time());
         $sources = MasterSource::get_list([

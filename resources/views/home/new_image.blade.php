@@ -5,13 +5,13 @@
     <h1>{{ $pageTitle }}</h1>
 </div>
 <section class="lastest-posts">
-    <?php foreach ($data as $k => $v) : ?>
+    <?php foreach ($images as $k => $v) : ?>
         @include('layout.card_item', ['item' => $v])
     <?php endforeach; ?>
 </section>
 <div class="pagination">
     <div class="col home-btn">
-        <a href="{{ route('home.videos').'?page='.($params['page'] + 1) }}" class="btn btn-viewmore">View more</a>
+        <a href="{{ route('home.images').'?page='.($params['page'] + 1) }}" class="btn btn-viewmore">View more</a>
     </div>
 </div>
 @endsection

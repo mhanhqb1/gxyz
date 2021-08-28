@@ -22,41 +22,22 @@
 
 <div class="section-title">
     <h2>Hot Images</h2>
-    <a href="{{ route('home.images') }}" title="View more">View more</a>
-</div>
-<section class="lastest-posts">
-    <?php foreach ($idols as $k => $v) : ?>
-        @include('layout.card_item', ['item' => $v])
-    <?php endforeach; ?>
-</section>
-
-<div class="section-title">
-    <h2>Sexy Images</h2>
     <a href="{{ route('home.images18') }}" title="View more">View more</a>
 </div>
 <section class="lastest-posts">
     <?php foreach ($idols as $k => $v) : ?>
+        <?php if ($k <= 3) { continue; } ?>
         @include('layout.card_item', ['item' => $v])
     <?php endforeach; ?>
 </section>
 
 <div class="section-title">
     <h2>Top Videos</h2>
-    <a href="{{ route('home.videos') }}" title="View more">View more</a>
-</div>
-<section class="lastest-posts">
-    <?php foreach ($idols as $k => $v) : ?>
-        @include('layout.card_item', ['item' => $v])
-    <?php endforeach; ?>
-</section>
-
-<div class="section-title">
-    <h2>Sexy Videos</h2>
     <a href="{{ route('home.18videos') }}" title="View more">View more</a>
 </div>
 <section class="lastest-posts">
     <?php foreach ($idols as $k => $v) : ?>
-        @include('layout.card_item', ['item' => $v])
+        @include('layout.card_item', ['item' => $v, 'is_video' => 1])
     <?php endforeach; ?>
 </section>
 @endsection

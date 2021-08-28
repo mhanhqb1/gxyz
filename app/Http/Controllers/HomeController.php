@@ -16,18 +16,16 @@ class HomeController extends Controller {
      * Homepage
      */
     public static function index() {
-        $idols = Idol::get_list([
-                    'status' => 1,
-                    'is_hot' => 1,
-                    'limit' => 16,
-                    'is_random' => 1
+        $images = Image::get_list([
+            'status' => 1,
+            // 'is_18' => 1,
+            'limit' => 16,
         ]);
         $videos = Video::get_list([
-                    'status' => 1,
-                    'is_random' => 1,
-                    'is_hot' => 1
+            'status' => 1,
+            'is_18' => 1
         ]);
-        return view('home.new_index', ['idols' => $idols, 'videos' => $videos]);
+        return view('home.new_index', ['idols' => $images, 'videos' => $videos]);
     }
 
     /**
@@ -84,9 +82,9 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
-        $pageTitle = 'Sexy Girl Collection - ' . $params['page'];
-        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
+        $images = Idol::inRandomOrder()->limit($limit)->get();
+        $pageTitle = 'Hot Girl Images - Page ' . $params['page'];
+        return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
     /**
@@ -99,7 +97,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $data = Video::inRandomOrder()->where('status', 1)->where('is_18', 0)->paginate($limit);
-        $pageTitle = 'SBGC - Total Videos';
+        $pageTitle = 'Hot Girl Videos - Page '.$params['page'];
         return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
@@ -113,8 +111,8 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $data = Video::inRandomOrder()->where('status', 1)->where('is_18', 1)->paginate($limit);
-        $pageTitle = 'SBGC - Total Videos 18+';
-        return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
+        $pageTitle = 'Sexy Girl Videos - Page '.$params['page'];
+        return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
     /**
@@ -188,9 +186,9 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $images = Image::inRandomOrder()->where('status', 1)->where('is_18', 1)->limit($limit)->get();
-        $pageTitle = 'Sexy Girl Collection 18+ - ' . $params['page'];
-        return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
+        $images = Idol::inRandomOrder()->limit($limit)->get();
+        $pageTitle = 'Sexy Girl Videos - Page ' . $params['page'];
+        return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
     /**
