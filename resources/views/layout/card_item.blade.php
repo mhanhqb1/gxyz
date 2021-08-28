@@ -1,6 +1,6 @@
 <article class="card">
     <a href="#">
-        <img src="{{ $item->image }}" alt="{{ $item->name }}" title="{{ $item->name }}"/>
+        <img src="/imgs/1.jpg" alt="{{ $item->name }}" title="{{ $item->name }}"/>
         <div class="card-info">
             <h3>{{ $item->name }}</h3>
             <span>

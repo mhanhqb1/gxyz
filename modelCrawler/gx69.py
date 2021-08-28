@@ -3,13 +3,14 @@ import time
 from datetime import datetime
 from database import MySQLRepository
 from bs4 import BeautifulSoup
+from googletrans import Translator, constants
 
-mysql = MySQLRepository('sbgc')
+#mysql = MySQLRepository('sbgc')
 
 def get_detail():
 	today = datetime.today().strftime('%Y-%m-%d')
 	sql = ("""
-	    SELECT 
+	    SELECT
 		    *
 		FROM
 		    models
@@ -39,7 +40,7 @@ def get_detail():
 				url[0].attrs['href']
 			))
 		sql = ("""
-			INSERT INTO 
+			INSERT INTO
 				images(
 					url,
 					model_id,
@@ -54,8 +55,8 @@ def get_detail():
 				%s,
 				%s
 			)
-			ON 
-				DUPLICATE KEY 
+			ON
+				DUPLICATE KEY
 			UPDATE
 				model_id = VALUES(model_id),
 				is_hot = VALUES(is_hot),
@@ -108,7 +109,7 @@ def main():
 					cover[0].attrs['src'].replace(xiurenCover, "")
 				))
 			sql = ("""
-				INSERT INTO 
+				INSERT INTO
 					models(
 						source_url,
 						name,
@@ -119,8 +120,8 @@ def main():
 					%s,
 					%s
 				)
-				ON 
-					DUPLICATE KEY 
+				ON
+					DUPLICATE KEY
 				UPDATE
 					name = VALUES(name),
 					image = VALUES(image)
@@ -130,6 +131,33 @@ def main():
 			except Exception as e:
 				print(e)
 
+def convertTitle():
+    # Init
+    totalPages = 2#377
+    count = 1
+    url = "http://www.xiuren.org/page-1.html"
+    payload={}
+    headers = {
+        'Accept': '*/*',
+        #'Accept-Encoding': 'gzip, deflate, br',
+        'User-Agent': 'PostmanRuntime/7.26.8'
+    }
+    translator = Translator()
+    for i in range(totalPages):
+        i += 1
+        url = "http://www.xiuren.org/page-"+str(i)+".html"
+        response = requests.request("GET", url, headers=headers, data=payload)
+        # response.encoding = 'gbk'
+        soup = BeautifulSoup(response.text, 'html.parser')
+        rows = soup.select('div#main .loop .content')
+        if (rows != []):
+            for r in rows:
+                url = r.select('a')
+                name = url[0].attrs['title']
+                translation = translator.translate('骨感高挑妖艳外围女郎姗姗就打奥特曼宾馆激情全裸人体艺术大尺度美图 25P')
+                print(translation.text)
+
 if __name__ == "__main__":
-	main()
-	get_detail()
+	#main()
+	#get_detail()
+    convertTitle()

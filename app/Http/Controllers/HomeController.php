@@ -100,7 +100,7 @@ class HomeController extends Controller {
         $limit = 16;
         $data = Video::inRandomOrder()->where('status', 1)->where('is_18', 0)->paginate($limit);
         $pageTitle = 'SBGC - Total Videos';
-        return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
+        return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
     /**
