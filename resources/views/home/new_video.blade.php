@@ -6,7 +6,7 @@
 </div>
 <section class="lastest-posts">
     <?php foreach ($data as $k => $v) : ?>
-        @include('layout.card_item', ['item' => $v])
+        @include('layout.card_item', ['item' => $v, 'is_video' => 1])
     <?php endforeach; ?>
 </section>
 <div class="pagination">

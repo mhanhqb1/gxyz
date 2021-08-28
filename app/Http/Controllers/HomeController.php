@@ -18,7 +18,7 @@ class HomeController extends Controller {
     public static function index() {
         $images = Image::get_list([
             'status' => 1,
-            // 'is_18' => 1,
+            'is_18' => 1,
             'limit' => 16,
         ]);
         $videos = Video::get_list([
@@ -82,7 +82,8 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $images = Idol::inRandomOrder()->limit($limit)->get();
+        $offset = ($params['page'] - 1)*$limit;
+        $images = Image::limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
         $pageTitle = 'Hot Girl Images - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
@@ -110,7 +111,8 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $data = Video::inRandomOrder()->where('status', 1)->where('is_18', 1)->paginate($limit);
+        $offset = ($params['page'] - 1)*$limit;
+        $data = Video::where('status', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Sexy Girl Videos - Page '.$params['page'];
         return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
@@ -124,7 +126,7 @@ class HomeController extends Controller {
         $limit = 50;
         if (empty($image)) {
             $images = Image::inRandomOrder()->where('status', 1)->where('is_hot', 1)->limit($limit)->get();
-            return view('home.image', ['images' => $images, 'pageTitle' => $pageTitle]);
+            return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle]);
         }
         $pageImage = $image->url;
         $related = Image::inRandomOrder()->where('status', 1)->where('id', '!=', $id);
@@ -186,7 +188,8 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $images = Idol::inRandomOrder()->limit($limit)->get();
+        $offset = ($params['page'] - 1)*$limit;
+        $images = Image::where('is_18', 1)->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
         $pageTitle = 'Sexy Girl Videos - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
