@@ -36,12 +36,15 @@ class AdminController extends Controller
     /**
      * Add source
      */
-    public static function addSource()
+    public static function addSource(Request $request)
     {
         $types = MasterSource::$type;
         $sourceTypes = MasterSource::$sourceType;
         $loops = MasterSource::$loop;
-        return view('admin.add_source', ['types' => $types, 'sourceTypes' => $sourceTypes, 'loops' => $loops]);
+        $params = $request->all();
+        $params['limit'] = 999;
+        $data = MasterSource::get_list($params);
+        return view('admin.add_source', ['params' => $params, 'data' => $data, 'types' => $types, 'sourceTypes' => $sourceTypes, 'loops' => $loops]);
     }
 
     /**
@@ -114,6 +117,33 @@ class AdminController extends Controller
                 Video::whereIn('id', $ids)->delete();
             } else {
                 Video::whereIn('id', $ids)->update([ $field => $val ]);
+            }
+        }
+
+        echo json_encode($result);
+        die();
+    }
+
+    /**
+     * Update image
+     */
+    public static function ajaxUpdateSources(Request $request)
+    {
+        # Init
+        $result = [
+            'status' => 'OK',
+            'message' => ''
+        ];
+        $params = $request->all();
+        $ids = !empty($params['ids']) ? explode(',', $params['ids']) : [];
+        $field = !empty($params['field']) ? $params['field'] : '';
+        $val = !empty($params['val']) ? $params['val'] : 0;
+
+        if (!empty($ids) && !empty($field) && isset($val)) {
+            if ($field == 'status' && $val == '-1') {
+                MasterSource::whereIn('id', $ids)->delete();
+            } else {
+                MasterSource::whereIn('id', $ids)->update([ $field => $val ]);
             }
         }
 

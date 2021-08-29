@@ -30,7 +30,6 @@ class CreatePostsTable extends Migration
             $table->string('stream_url')->nullable();
             $table->date('crawl_at')->nullable();
             $table->timestamps();
-            $table->unique(['source_id', 'source_type'], 'source_unique');
         });
     }
 

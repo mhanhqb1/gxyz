@@ -38,6 +38,7 @@ Route::get('/checkVideos', [AdminController::class, 'checkVideos'])->name('admin
 Route::post('/ajaxUpdateVideos', [AdminController::class, 'ajaxUpdateVideos'])->name('admin.ajaxUpdateVideos');
 Route::get('/addSource', [AdminController::class, 'addSource'])->name('admin.addSource');
 Route::post('/saveSource', [AdminController::class, 'saveSource'])->name('admin.saveSource');
+Route::post('/ajaxUpdateSources', [AdminController::class, 'ajaxUpdateSources'])->name('admin.ajaxUpdateSources');
 
 
 //Clear Cache facade value:

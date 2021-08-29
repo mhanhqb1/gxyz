@@ -20,7 +20,8 @@ class MasterSource extends Model {
         'source_params',
         'crawl_at',
         'status',
-        'loop'
+        'loop',
+        'is_owner'
     ];
 
     /**
@@ -47,6 +48,7 @@ class MasterSource extends Model {
         'facebook' => 'facebook',
         'youtube_playlist' => 'youtube_playlist',
         'youtube_video' => 'youtube_video',
+        'youtube_key' => 'youtube_key',
         'twitter' => 'twitter'
     ];
 
