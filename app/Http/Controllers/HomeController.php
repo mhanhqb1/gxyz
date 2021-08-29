@@ -178,7 +178,7 @@ class HomeController extends Controller {
         }
         $pageTitle = 'Sexy Girl Video - ' . $video->title;
         $pageImage = $video->image;
-        $related = Video::where('status', 1)->where('is_18', 1)->limit($limit)->get();
+        $related = Video::inRandomOrder()->where('status', 1)->where('is_18', 1)->limit($limit)->get();
         return view('home.new_video_detail', ['related' => $related,'video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
 
