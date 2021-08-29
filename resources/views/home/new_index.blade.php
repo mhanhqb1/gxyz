@@ -40,4 +40,14 @@
         @include('layout.card_item', ['item' => $v, 'is_video' => 1])
     <?php endforeach; ?>
 </section>
+
+<div class="section-title">
+    <h2>Sexy Videos</h2>
+    <a href="{{ route('home.18videos') }}" title="View more">View more</a>
+</div>
+<section class="lastest-posts">
+    <?php foreach ($video18 as $k => $v) : ?>
+        @include('layout.card_item', ['item' => $v, 'is_video' => 1])
+    <?php endforeach; ?>
+</section>
 @endsection

@@ -24,7 +24,11 @@
         <nav class="breadcrumb">
             <a href="{{ route('home.index') }}" title="SexyGirls69.xyz">Home page</a>
             <span>></span>
-            <a href="{{ route('home.18videos') }}" title="SexyGirls69.xyz">Sexy girl videos</a>
+            <?php if (!empty($video->is_18)): ?>
+                <a href="{{ route('home.18videos') }}" title="Sexy girl videos">Sexy girl videos</a>
+            <?php else: ?>
+                <a href="{{ route('home.videos') }}" title="Hot girl videos">Hot girl videos</a>
+            <?php endif; ?>
         </nav>
         <h1 class="post-title">
             {{ $video->title }}

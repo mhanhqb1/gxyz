@@ -11,7 +11,7 @@
 </section>
 <div class="pagination">
     <div class="col home-btn">
-        <a href="{{ route('home.videos').'?page='.($params['page'] + 1) }}" class="btn btn-viewmore">View more</a>
+        <a href="{{ route($route).'?page='.($params['page'] + 1) }}" class="btn btn-viewmore">View more</a>
     </div>
 </div>
 @endsection

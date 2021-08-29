@@ -65,7 +65,7 @@
                             </div>
                         </td>
                         <td><label for="checkId-{{ $video->id }}"><img src="{{ $video->image }}" width="200px"/></label></td>
-                        <td><a href="{{ route('home.videoDetail', ['id' => $video->id]) }}" target="_blank">{{ $video->title }}</a></td>
+                        <td><a href="{{ route('home.videoDetail', ['id' => $video->id, 'slug' => 'sexy-girl-video']) }}" target="_blank">{{ $video->title }}</a></td>
                         <td>{{ $video->is_hot }}</td>
                         <td>{{ $video->is_18 }}</td>
                         <td>{{ $video->status }}</td>

@@ -5,12 +5,12 @@ $title = !empty($item->name) ? $item->name : 'Sexy Girl '.$item->id;
 if (!empty($is_video)) {
     $image = $item->image;
     $title = !empty($item->title) ? $item->title : 'Sexy Girl Video '.$item->id;
-    $url = route('home.videoDetail', ['id' => $item->id]);
+    $url = route('home.videoDetail', ['id' => $item->id, 'slug' => !empty($item->slug) ? $item->slug : 'sexy-girl-'.$item->id]);
 }
 ?>
 
 <article class="card">
-    <a href="{{ $url }}">
+    <a href="{{ $url }}" title="{{ $title }}">
         @if (!empty($is_video))
         <div class="g-youtube"></div>
         @endif

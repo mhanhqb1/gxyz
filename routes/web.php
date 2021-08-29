@@ -20,7 +20,7 @@ Route::get('/hot-girl-images', [HomeController::class, 'images'])->name('home.im
 Route::get('/sexy-girl-image/{id}', [HomeController::class, 'imageDetail'])->name('home.imageDetail');
 Route::get('/idol/{id}', [HomeController::class, 'idolDetail'])->name('home.idolDetail');
 Route::get('/hot-girl-videos', [HomeController::class, 'videos'])->name('home.videos');
-Route::get('/sexy-girl-video/{id}', [HomeController::class, 'videoDetail'])->name('home.videoDetail');
+Route::get('/video/{slug}/{id}', [HomeController::class, 'videoDetail'])->name('home.videoDetail');
 Route::get('/movies', [HomeController::class, 'index'])->name('home.movies');
 Route::get('/sexy-girl-images', [HomeController::class, 'images18'])->name('home.images18');
 Route::get('/sexy-girl-videos', [HomeController::class, 'videos18'])->name('home.18videos');

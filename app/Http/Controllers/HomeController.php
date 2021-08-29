@@ -22,10 +22,11 @@ class HomeController extends Controller {
             'is_18' => 1,
             'limit' => 16,
         ]);
-        $limit = 16;
+        $limit = 8;
         $offset = 0;
         $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
-        return view('home.new_index', ['idols' => $images, 'videos' => $videos]);
+        $video18 = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
+        return view('home.new_index', ['idols' => $images, 'videos' => $videos, 'video18' => $video18]);
     }
 
     /**
@@ -102,7 +103,8 @@ class HomeController extends Controller {
         $offset = ($params['page'] - 1)*$limit;
         $data = Post::where('type', 1)->where('status', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Hot Girl Videos - Page '.$params['page'];
-        return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
+        $route = 'home.videos';
+        return view('home.new_video', ['route' => $route, 'data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
     /**
@@ -115,9 +117,10 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $data = Video::where('status', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
+        $data = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Sexy Girl Videos - Page '.$params['page'];
-        return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
+        $route = 'home.18videos';
+        return view('home.new_video', ['route' => $route, 'data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
     /**
@@ -172,7 +175,7 @@ class HomeController extends Controller {
     /**
      * Get video detail
      */
-    public static function videoDetail($id) {
+    public static function videoDetail($slug, $id) {
         $pageTitle = 'Sexy Girl Video ' . $id;
         $video = Post::find($id);
         $limit = 16;
