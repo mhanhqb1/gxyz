@@ -9,6 +9,7 @@ use App\Models\Idol;
 use App\Models\YoutubeChannel;
 use App\Models\YoutubeChannelVideo;
 use App\Models\Video;
+use App\Models\Post;
 
 class HomeController extends Controller {
 
@@ -220,7 +221,8 @@ class HomeController extends Controller {
      */
     public static function youtubeCrawler() {
         set_time_limit(0);
-        Video::video_crawler();
+        Post::dailyCrawler();
+        die();
         // YoutubeChannel::youtube_channel_crawler(5);
         // YoutubeChannel::youtube_playlist_crawler(5);
         die('1');

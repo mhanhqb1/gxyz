@@ -37,16 +37,16 @@ class YoutubeChannel extends Model {
      */
     protected $hidden = [];
     public $timestamps = true;
-    
+
     public static $youtubeApi = 'https://www.googleapis.com/youtube/v3/';
-    
+
     /*
      * Youtube channel crawler
      */
     public static function youtube_channel_crawler($limit = null){
         # Init
         $today = date('Y-m-d', time());
-        
+
         # Get list ID
         $channelIds = MasterSource::where(function($query) use ($today){
             $query->where('crawl_at', null);
@@ -66,28 +66,28 @@ class YoutubeChannel extends Model {
                     $self = self::updateOrCreate([
                         'youtube_id' => $cYoutubeId
                     ], $infos);
-                    
+
                     # Get channel videos
                     $videos = self::get_channel_videos($self);
                     foreach ($videos as $video) {
                         YoutubeChannelVideo::updateOrCreate(['youtube_id' => $video['youtube_id']], $video);
                     }
                 }
-                
+
                 # Update flag
                 $c->crawl_at = $today;
                 $c->save();
             }
         }
     }
-    
+
     /*
      * Youtube playlist crawler
      */
     public static function youtube_playlist_crawler($limit = null){
         # Init
         $today = date('Y-m-d', time());
-        
+
         # Get list ID
         $channelIds = MasterSource::where(function($query) use ($today){
             $query->where('crawl_at', null);
@@ -112,7 +112,7 @@ class YoutubeChannel extends Model {
             }
         }
     }
-    
+
     /*
      * Get channel info
      */
@@ -122,7 +122,7 @@ class YoutubeChannel extends Model {
         $apiKey = config('services.google')['youtube_api_key'];
         $part = 'snippet,statistics,brandingSettings';
         $apiUrl = self::$youtubeApi."channels?part={$part}&id={$channelId}&key={$apiKey}";
-        
+
         $res = self::call_api($apiUrl);
         if (!empty($res['items'])) {
             $snippet = $res['items'][0]['snippet'];
@@ -141,10 +141,10 @@ class YoutubeChannel extends Model {
                 'related_channels' => !empty($res['items'][0]['brandingSettings']['channel']['featuredChannelsUrls']) ? $res['items'][0]['brandingSettings']['channel']['featuredChannelsUrls'] : [],
             ];
         }
-        
+
         return $data;
     }
-    
+
     /*
      * Get playlist videos
      */
@@ -155,7 +155,7 @@ class YoutubeChannel extends Model {
         if (!empty($nextToken)) {
             $apiUrl .= "&pageToken={$nextToken}";
         }
-        
+
         $res = self::call_api($apiUrl);
         if (!empty($res['items'])) {
             foreach ($res['items'] as $v) {
@@ -173,10 +173,10 @@ class YoutubeChannel extends Model {
                 $data = self::get_playlist_videos($playlistId, $data, $res['nextPageToken']);
             }
         }
-        
+
         return $data;
     }
-    
+
     /*
      * Get channel videos
      */
@@ -188,7 +188,7 @@ class YoutubeChannel extends Model {
         if (!empty($nextToken)) {
             $apiUrl .= "&pageToken={$nextToken}";
         }
-        
+
         $res = self::call_api($apiUrl);
         if (!empty($res['items'])) {
             foreach ($res['items'] as $v) {
@@ -204,16 +204,16 @@ class YoutubeChannel extends Model {
                         'image' => $snippet['thumbnails']['high']['url']
                     ];
                 }
-                
+
             }
             if (!empty($res['nextPageToken'])) {
                 $data = self::get_channel_videos($channel, $data, $res['nextPageToken']);
             }
         }
-        
+
         return $data;
     }
-        
+
     /*
      * Call Api
      */

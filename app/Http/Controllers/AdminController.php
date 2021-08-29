@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\YoutubeChannelVideo;
 use App\Models\MasterSource;
 use App\Models\Video;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
