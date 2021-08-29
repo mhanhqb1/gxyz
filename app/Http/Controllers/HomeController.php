@@ -24,7 +24,7 @@ class HomeController extends Controller {
         ]);
         $limit = 16;
         $offset = 0;
-        $videos = Video::where('status', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
+        $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         return view('home.new_index', ['idols' => $images, 'videos' => $videos]);
     }
 
@@ -37,36 +37,38 @@ class HomeController extends Controller {
             'status' => 'OK',
             'data' => ''
         );
-        $videoExpired = time() + 5*60*60;//fix tam
+        $videoExpired = 5*60*60;//fix tam
         $apiGetStream = "https://floating-everglades-87112.herokuapp.com/";
         $params = $request->all();
         $videoId = !empty($request->video_id) ? $request->video_id : '';
-        $video = Video::find($videoId);
+        $video = Post::find($videoId);
         if (!empty($video)) {
-            if (!empty($video->stream_url) && ($video->crawl_at + $videoExpired) > time()) {
+            if ($video->source_type == 'twitter') {
+                $result['data'] = $video->stream_url;
+            } elseif (!empty($video->stream_url) && (strtotime($video->crawl_at) + $videoExpired) > time()) {
                 $result['data'] = $video->stream_url;
             } else {
-                $apiGetStream = $apiGetStream . $video->source_id . '/';
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => $apiGetStream,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET",
-                ));
-                $response = curl_exec($curl);
-                curl_close($curl);
-                if (strpos($response, "googlevideo.com") !== false) {
-                    $result['data'] = $response;
-                    $video->stream_url = $response;
-                    $video->crawl_at = time();
-                    $video->save();
-                } else {
+                // $apiGetStream = $apiGetStream . $video->source_id . '/';
+                // $curl = curl_init();
+                // curl_setopt_array($curl, array(
+                //     CURLOPT_URL => $apiGetStream,
+                //     CURLOPT_RETURNTRANSFER => true,
+                //     CURLOPT_MAXREDIRS => 10,
+                //     CURLOPT_TIMEOUT => 0,
+                //     CURLOPT_FOLLOWLOCATION => true,
+                //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                //     CURLOPT_CUSTOMREQUEST => "GET",
+                // ));
+                // $response = curl_exec($curl);
+                // curl_close($curl);
+                // if (strpos($response, "googlevideo.com") !== false) {
+                //     $result['data'] = $response;
+                //     $video->stream_url = $response;
+                //     $video->crawl_at = time();
+                //     $video->save();
+                // } else {
                     $result['status'] = 'ERROR';
-                }
+                // }
             }
         }
         echo json_encode($result);
@@ -97,7 +99,8 @@ class HomeController extends Controller {
             $params['page'] = 1;
         }
         $limit = 16;
-        $data = Video::inRandomOrder()->where('status', 1)->where('is_18', 0)->paginate($limit);
+        $offset = ($params['page'] - 1)*$limit;
+        $data = Post::where('type', 1)->where('status', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Hot Girl Videos - Page '.$params['page'];
         return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
@@ -171,15 +174,15 @@ class HomeController extends Controller {
      */
     public static function videoDetail($id) {
         $pageTitle = 'Sexy Girl Video ' . $id;
-        $video = Video::find($id);
+        $video = Post::find($id);
         $limit = 16;
         if (empty($video)) {
-            $data = Video::where('status', 1)->limit($limit);
+            $data = Post::inRandomOrder()->where('type', 1)->where('status', 1)->limit($limit);
             return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle]);
         }
         $pageTitle = 'Sexy Girl Video - ' . $video->title;
         $pageImage = $video->image;
-        $related = Video::inRandomOrder()->where('status', 1)->where('is_18', 1)->limit($limit)->get();
+        $related = Post::inRandomOrder()->where('status', 1)->where('type', 1)->limit($limit)->get();
         return view('home.new_video_detail', ['related' => $related,'video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
 

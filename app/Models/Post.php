@@ -101,8 +101,8 @@ class Post extends Model {
                     echo count($data).PHP_EOL;
                     self::addUpdateMulti($data);
                 }
-                // $s->crawl_at = $today;
-                // $s->save();
+                $s->crawl_at = $today;
+                $s->save();
             }
         }
     }
