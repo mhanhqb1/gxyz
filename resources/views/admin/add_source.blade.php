@@ -28,6 +28,15 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
+                    <label for="loop">Loop</label>
+                    <select class="form-control" name="loop">
+                        <option value="">No loop</option>
+                        <?php foreach ($loops as $t): ?>
+                        <option value="{{ $t }}">{{ $t }}</option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" value="">
                 </div>

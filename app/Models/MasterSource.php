@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class MasterSource extends Model {
-    
+
     protected $table = "master_sources";
 
     /**
@@ -18,7 +18,9 @@ class MasterSource extends Model {
         'type',
         'source_type',
         'source_params',
-        'crawl_at'
+        'crawl_at',
+        'status',
+        'loop'
     ];
 
     /**
@@ -33,14 +35,21 @@ class MasterSource extends Model {
         'video' => 'video',
         'movie' => 'movie'
     ];
+    public static $loop = [
+        'daily' => 'daily',
+        'weekly' => 'weekly',
+        'monthly' => 'monthly'
+    ];
     public static $sourceType = [
         'flickr' => 'flickr',
         'instagram' => 'instagram',
         'youtube' => 'youtube',
         'facebook' => 'facebook',
-        'youtube_playlist' => 'youtube_playlist'
+        'youtube_playlist' => 'youtube_playlist',
+        'youtube_video' => 'youtube_video',
+        'twitter' => 'twitter'
     ];
-    
+
     public static function get_list($params){
         # Init
         $limit = !empty($params['limit']) ? $params['limit'] : 1;
@@ -62,6 +71,12 @@ class MasterSource extends Model {
         }
         if (!empty($params['source_type'])) {
             $data = $data->where('source_type', $params['source_type']);
+        }
+        if (!empty($params['loop'])) {
+            $data = $data->where('loop', $params['loop']);
+        }
+        if (isset($params['status'])) {
+            $data = $data->where('status', $params['status']);
         }
 
         # Return data

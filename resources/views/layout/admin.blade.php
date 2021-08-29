@@ -8,6 +8,7 @@ $topImage = 'imgs/1.jpg';
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name='robots' content='noindex, nofollow' />
 
         <title>Cover Template for Bootstrap</title>
 
@@ -31,17 +32,6 @@ $topImage = 'imgs/1.jpg';
 
             <div class="nav-scroller py-1 mb-2">
                 <nav class="nav d-flex justify-content-between">
-                    <a class="p-2 text-muted text-center" href="{{ url('/') }}">Home</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/images') }}">Images</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/videos') }}">Videos</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/movies') }}">Movies</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/18images') }}">18+ Images</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/18movies') }}">18+ Movies</a>
-                </nav>
-            </div>
-            
-            <div class="nav-scroller py-1 mb-2">
-                <nav class="nav d-flex justify-content-between">
                     <a class="p-2 text-muted text-center" href="{{ url('/checkImages') }}">CheckImages</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/checkVideos') }}">checkVideos</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/addSource') }}">addSource</a>
@@ -55,7 +45,7 @@ $topImage = 'imgs/1.jpg';
         <main role="main" class="container">
             @yield('content')
         </main><!-- /.container -->
-        
+
         <script>
             var BASE_URL = "{{ url('') }}";
             var CSRF_TOKEN = "{{ csrf_token() }}";

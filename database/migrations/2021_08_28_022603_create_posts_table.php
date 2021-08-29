@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('description')->nullable();
             $table->string('tags', 255)->nullable();
             $table->boolean('is_hot')->default(0);
+            $table->boolean('is_18')->default(0);
             $table->boolean('type')->default(0);
             $table->boolean('status')->default(0);
             $table->string('source_type', 255)->nullable();

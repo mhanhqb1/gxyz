@@ -40,7 +40,8 @@ class AdminController extends Controller
     {
         $types = MasterSource::$type;
         $sourceTypes = MasterSource::$sourceType;
-        return view('admin.add_source', ['types' => $types, 'sourceTypes' => $sourceTypes]);
+        $loops = MasterSource::$loop;
+        return view('admin.add_source', ['types' => $types, 'sourceTypes' => $sourceTypes, 'loops' => $loops]);
     }
 
     /**

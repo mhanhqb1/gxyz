@@ -540,6 +540,7 @@ class ComposerStaticInitcdfd9a4cf38775c015a0a6e71b3ce948
         'App\\Models\\Idol' => __DIR__ . '/../..' . '/app/Models/Idol.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
         'App\\Models\\MasterSource' => __DIR__ . '/../..' . '/app/Models/MasterSource.php',
+        'App\\Models\\Post' => __DIR__ . '/../..' . '/app/Models/Post.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Video' => __DIR__ . '/../..' . '/app/Models/Video.php',
         'App\\Models\\YoutubeChannel' => __DIR__ . '/../..' . '/app/Models/YoutubeChannel.php',

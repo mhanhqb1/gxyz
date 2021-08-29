@@ -34,6 +34,7 @@ return array(
     'App\\Models\\Idol' => $baseDir . '/app/Models/Idol.php',
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\MasterSource' => $baseDir . '/app/Models/MasterSource.php',
+    'App\\Models\\Post' => $baseDir . '/app/Models/Post.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Video' => $baseDir . '/app/Models/Video.php',
     'App\\Models\\YoutubeChannel' => $baseDir . '/app/Models/YoutubeChannel.php',
