@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.new_layout')
 
 @section('content')
 <style>
@@ -26,24 +26,9 @@
         </h3>
         <div class="row mb-2">
             <div class="col video-stream-player">
-                <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
-                <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-                <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
                 <div id='aaaa'>
                     <video id="my-video-player" class="video-js vjs-default-skin vjs-fluid"></video>
                 </div>
-                <!-- <script>
-                    window["889189xkexov838039qxeung"] = {
-                      zoneId: 1809600,
-                      domain: "//nuevonoelmid.com",
-                      options: {
-                        insteadOfSelectors: ["#my-video-player"],
-                        insteadOfPlayers: ["other"]
-                      }
-                    }
-                  </script>
-                  <script src="https://nuevonoelmid.com/zbs.kek.js"></script> -->
-                <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
             </div>
         </div>
         <div class="row">
@@ -82,16 +67,6 @@
         }).done(function (response) {
             var res = JSON.parse(response);
             if (res.status == "OK") {
-                // var videoPlayer = videojs('my-video-player', {
-                //     autoplay: false,
-                //     controls: true,
-                //     preload: 'auto',
-                //     poster: '{{ $video->image }}',
-                //     sources: [{
-                //         type: "video/mp4",
-                //         src: res.data
-                //     }]
-                // });
                 const playerInstance = jwplayer("my-video-player").setup({
                     playlist: [{
                         title: '{{ $video->title }}',
@@ -116,7 +91,7 @@
                     // }
                 });
             } else {
-                let html = '<iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $video->source_id }}" frameborder="0" allowfullscreen></iframe>';
+                let html = '<iframe src="https://www.youtube.com/embed/{{ $video->source_id }}" frameborder="0" allowfullscreen></iframe>';
                 $('#aaaa').html(html);
             }
         });

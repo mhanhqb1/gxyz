@@ -32,7 +32,7 @@
 </section>
 
 <div class="section-title">
-    <h2>Top Videos</h2>
+    <h2>Hot Videos</h2>
     <a href="{{ route('home.18videos') }}" title="View more">View more</a>
 </div>
 <section class="lastest-posts">
