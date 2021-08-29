@@ -24,7 +24,7 @@
         <nav class="breadcrumb">
             <a href="{{ route('home.index') }}" title="SexyGirls69.xyz">Home page</a>
             <span>></span>
-            <a href="{{ route('home.index') }}" title="SexyGirls69.xyz">Home page</a>
+            <a href="{{ route('home.18videos') }}" title="SexyGirls69.xyz">Sexy girl videos</a>
         </nav>
         <h1 class="post-title">
             {{ $video->title }}
