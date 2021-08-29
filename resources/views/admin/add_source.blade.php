@@ -28,6 +28,13 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
+                    <label for="is_owner">Is Owner</label>
+                    <select class="form-control" name="is_owner">
+                        <option value="">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="loop">Loop</label>
                     <select class="form-control" name="loop">
                         <option value="">No loop</option>
@@ -108,6 +115,9 @@
                     <th>Type</th>
                     <th>Source Type</th>
                     <th>Params</th>
+                    <th>Loop</th>
+                    <th>Crawl At</th>
+                    <th>Owner</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -124,6 +134,9 @@
                         <td>{{ $v->type }}</td>
                         <td>{{ $v->source_type }}</td>
                         <td>{{ $v->source_params }}</td>
+                        <td>{{ $v->loop }}</td>
+                        <td>{{ $v->crawl_at }}</td>
+                        <td>{{ $v->is_owner }}</td>
                         <td>{{ $v->status }}</td>
                     </tr>
                 <?php endforeach; ?>

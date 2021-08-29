@@ -62,12 +62,6 @@ class MasterSource extends Model {
         $data = self::orderBy('id', 'desc');
 
         # Filter
-        if (!empty($params['is_first'])) {
-            $data = $data->where('crawl_at', null);
-        } else {
-//            $data = $data->where('crawl_at', '!=', null);
-            $data = $data->where('crawl_at', '<', date('Y-m-d', time()));
-        }
         if (!empty($params['type'])) {
             $data = $data->where('type', $params['type']);
         }

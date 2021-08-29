@@ -57,17 +57,20 @@ class AdminController extends Controller
         $sourceType = !empty($params['source_type']) ? $params['source_type'] : '';
         $name = !empty($params['name']) ? $params['name'] : '';
         $sourceParams = !empty($params['source_params']) ? $params['source_params'] : '';
+        $loop = !empty($params['loop']) ? $params['loop'] : '';
+        $isOwner = !empty($params['is_owner']) ? $params['is_owner'] : 0;
 
         $masterSource = new MasterSource();
         $masterSource->type = $type;
         $masterSource->source_type = $sourceType;
         $masterSource->source_params = $sourceParams;
         $masterSource->name = $name;
+        $masterSource->loop = $loop;
+        $masterSource->status = 1;
+        $masterSource->is_owner = $isOwner;
         $masterSource->save();
 
-        $types = MasterSource::$type;
-        $sourceTypes = MasterSource::$sourceType;
-        return view('admin.add_source', ['types' => $types, 'sourceTypes' => $sourceTypes]);
+        return redirect('/addSource');
     }
 
     /**
