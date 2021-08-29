@@ -39,7 +39,7 @@ class HomeController extends Controller {
             'data' => ''
         );
         $videoExpired = 5*60*60;//fix tam
-        $apiGetStream = "https://floating-everglades-87112.herokuapp.com/";
+        $apiGetStream = "http://45.76.207.18:5000/stream/";
         $params = $request->all();
         $videoId = !empty($request->video_id) ? $request->video_id : '';
         $video = Post::find($videoId);
@@ -49,27 +49,27 @@ class HomeController extends Controller {
             } elseif (!empty($video->stream_url) && (strtotime($video->crawl_at) + $videoExpired) > time()) {
                 $result['data'] = $video->stream_url;
             } else {
-                // $apiGetStream = $apiGetStream . $video->source_id . '/';
-                // $curl = curl_init();
-                // curl_setopt_array($curl, array(
-                //     CURLOPT_URL => $apiGetStream,
-                //     CURLOPT_RETURNTRANSFER => true,
-                //     CURLOPT_MAXREDIRS => 10,
-                //     CURLOPT_TIMEOUT => 0,
-                //     CURLOPT_FOLLOWLOCATION => true,
-                //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                //     CURLOPT_CUSTOMREQUEST => "GET",
-                // ));
-                // $response = curl_exec($curl);
-                // curl_close($curl);
-                // if (strpos($response, "googlevideo.com") !== false) {
-                //     $result['data'] = $response;
-                //     $video->stream_url = $response;
-                //     $video->crawl_at = time();
-                //     $video->save();
-                // } else {
+                $apiGetStream = $apiGetStream . $video->source_id . '/';
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => $apiGetStream,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                ));
+                $response = curl_exec($curl);
+                curl_close($curl);
+                if (strpos($response, "googlevideo.com") !== false) {
+                    $result['data'] = $response;
+                    $video->stream_url = $response;
+                    $video->crawl_at = time();
+                    $video->save();
+                } else {
                     $result['status'] = 'ERROR';
-                // }
+                }
             }
         }
         echo json_encode($result);
