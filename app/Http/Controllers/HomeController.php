@@ -49,7 +49,7 @@ class HomeController extends Controller {
             } elseif (!empty($video->stream_url) && (strtotime($video->crawl_at) + $videoExpired) > time()) {
                 $result['data'] = $video->stream_url;
             } else {
-                $apiGetStream = $apiGetStream . $video->source_id . '/';
+                $apiGetStream = $apiGetStream . $video->source_id;
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
                     CURLOPT_URL => $apiGetStream,
@@ -64,9 +64,9 @@ class HomeController extends Controller {
                 curl_close($curl);
                 if (strpos($response, "googlevideo.com") !== false) {
                     $result['data'] = $response;
-                    $video->stream_url = $response;
-                    $video->crawl_at = time();
-                    $video->save();
+                    // $video->stream_url = $response;
+                    // $video->crawl_at = date('Y-m-d');
+                    // $video->save();
                 } else {
                     $result['status'] = 'ERROR';
                 }

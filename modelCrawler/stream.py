@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 @app.route('/stream/<id>')
 def hello_name(id):
-    stream = YouTube('https://youtu.be/'+id).streams.first()
-    print(stream.url)
+    yt = YouTube('http://youtube.com/watch?v='+id)
+    stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
     return stream.url
 
 if __name__ == '__main__':
