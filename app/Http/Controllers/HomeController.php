@@ -169,15 +169,17 @@ class HomeController extends Controller {
      * Get video detail
      */
     public static function videoDetail($id) {
-        $pageTitle = 'SBGC - Video ' . $id;
+        $pageTitle = 'Sexy Girl Video ' . $id;
         $video = Video::find($id);
+        $limit = 16;
         if (empty($video)) {
-            $data = Video::inRandomOrder()->where('status', 1)->paginate($limit);
-            return view('home.video', ['data' => $data, 'pageTitle' => $pageTitle]);
+            $data = Video::where('status', 1)->limit($limit);
+            return view('home.new_video', ['data' => $data, 'pageTitle' => $pageTitle]);
         }
-        $pageTitle = 'SBGC - ' . $video->title;
+        $pageTitle = 'Sexy Girl Video - ' . $video->title;
         $pageImage = $video->image;
-        return view('home.video_detail', ['video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
+        $related = Video::where('status', 1)->where('is_18', 1)->limit($limit)->get();
+        return view('home.new_video_detail', ['related' => $related,'video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
 
     /**
