@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use SebastianBergmann\CodeCoverage\Report\PHP;
 
 class Post extends Model {
 
@@ -71,6 +72,7 @@ class Post extends Model {
 
     public static function addUpdateMulti($data) {
         foreach ($data as $v) {
+            echo $v['title'].PHP_EOL;
             Post::updateOrCreate([
                 'source_type' => $v['source_type'],
                 'source_id' => $v['source_id']
@@ -96,10 +98,11 @@ class Post extends Model {
             foreach ($sources as $s) {
                 if ($s->source_type == MasterSource::$sourceType['youtube_key']) {
                     $data = self::getDataBySourceKey($s);
+                    echo count($data).PHP_EOL;
                     self::addUpdateMulti($data);
                 }
-                $s->crawl_at = $today;
-                $s->save();
+                // $s->crawl_at = $today;
+                // $s->save();
             }
         }
     }
@@ -177,7 +180,7 @@ class Post extends Model {
      * @param string $string String for convert
      * @return string
      */
-    public static function convertURL($str)
+    public static function convertURL($str, $delimiter = '-')
     {
         $str = preg_replace("/(\,|-|\.|\'|\+)/", '', $str);
         $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
@@ -198,6 +201,14 @@ class Post extends Model {
         $str = str_replace("/", "-", $str);
         $str = str_replace(" ", "-", $str);
         $str = str_replace("?", "", $str);
+        $str = str_replace("#", "", $str);
+        // replace non letter or digits by divider
+        $str = preg_replace('~[^\pL\d]+~u', $delimiter, $str);
+        // remove unwanted characters
+        $str = preg_replace('~[^-\w]+~', '', $str);
+        // trim
+        $str = trim($str, $delimiter);
+        $str = preg_replace('~-+~', $delimiter, $str);
 
         return strtolower($str);
     }
