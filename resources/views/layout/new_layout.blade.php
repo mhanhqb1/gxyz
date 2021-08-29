@@ -15,8 +15,8 @@ $routeName = \Request::route()->getName();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{{ $_siteDescription }}">
-    <meta name="keywords" content="{{ $_siteKeywords }}">
     <meta name="author" content="{{ $_siteName }}">
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
     <title>{{ $_siteTitle }}</title>
 
@@ -33,6 +33,21 @@ $routeName = \Request::route()->getName();
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('/css/new_style.css').'?'.time() }}" rel="stylesheet">
+
+    <?php if (!empty(config('services.google')['ga_key'])) : ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google')['ga_key'] }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', "<?php echo config('services.google')['ga_key']; ?>");
+        </script>
+    <?php endif; ?>
 </head>
 
 <body>
