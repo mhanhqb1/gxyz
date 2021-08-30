@@ -168,8 +168,8 @@ class Post extends Model {
         $posts = Post::where('type',1)
             ->where('status', 1)
             ->where('source_type', self::$sourceType['youtube'])
-            ->where('crawl_at', null)
-            ->limit(100)
+            // ->where('crawl_at', null)
+            ->limit(500)
             ->get();
         if (!$posts->isEmpty()) {
             foreach ($posts as $post) {
@@ -183,7 +183,7 @@ class Post extends Model {
                     foreach ($res['items'] as $v) {
                         if ($v['kind'] == 'youtube#video') {
                             $snippet = $v['snippet'];
-                            $ageRestricted = !empty($res['contentDetails']['contentRating']['ytRating']) ? 1 : 0;
+                            $ageRestricted = !empty($v['contentDetails']['contentRating']['ytRating']) ? 1 : 0;
                             if (!empty($ageRestricted)) {
                                 $post->status = -1;
                             } else {
