@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use SebastianBergmann\CodeCoverage\Report\PHP;
 
+use App\Models\PostTag;
+
 class Post extends Model {
 
     protected $table = "posts";
@@ -39,6 +41,11 @@ class Post extends Model {
      */
     protected $hidden = [];
     public $timestamps = true;
+
+    public static $sourceType = [
+        'youtube' => 'youtube',
+        'twitter' => 'twitter'
+    ];
 
     public static $youtubeApi = 'https://www.googleapis.com/youtube/v3/';
 
@@ -98,7 +105,7 @@ class Post extends Model {
         if (!$sources->isEmpty()) {
             foreach ($sources as $s) {
                 if ($s->source_type == MasterSource::$sourceType['youtube_key']) {
-                    $data = self::getDataBySourceKey($s);
+                    $data = self::Youtube_getDataBySourceKey($s);
                     echo count($data).PHP_EOL;
                     self::addUpdateMulti($data);
                 }
@@ -109,9 +116,9 @@ class Post extends Model {
     }
 
     /*
-     * Youtube channel crawler
+     * Youtube crawler
      */
-    public static function getDataBySourceKey($source, $data = [], $nextToken = Null, $skip = False) {
+    public static function Youtube_getDataBySourceKey($source, $data = [], $nextToken = Null, $skip = False) {
         # Init
         $keyword = urlencode($source->source_params);
         $sourceId = $source->id;
@@ -139,7 +146,7 @@ class Post extends Model {
                         'image' => $snippet['thumbnails']['high']['url'],
                         'tags' => '',
                         'type' => 1,
-                        'source_type' => 'youtube',
+                        'source_type' => self::$sourceType['youtube'],
                         'source_url' => 'https://www.youtube.com/watch?v='.$youtubeId,
                         'source_id' => $youtubeId,
                         'master_source_id' => $sourceId
@@ -148,11 +155,59 @@ class Post extends Model {
                 }
             }
             if (!empty($res['nextPageToken']) && $skip == False && empty($source->crawl_at)) {
-                $data = self::getDataBySourceKey($source, $data, $res['nextPageToken']);
+                $data = self::Youtube_getDataBySourceKey($source, $data, $res['nextPageToken']);
             }
         }
 
         return $data;
+    }
+
+    public static function Youtube_updateVideoDetail() {
+        $today = date('Y-m-d');
+        $apiKey = config('services.google')['youtube_api_key'];
+        $posts = Post::where('type',1)
+            ->where('status', 1)
+            ->where('source_type', self::$sourceType['youtube'])
+            ->where('crawl_at', null)
+            ->limit(10)
+            ->get();
+        if (!$posts->isEmpty()) {
+            foreach ($posts as $post) {
+                echo $post->id.' - '.$post->title.PHP_EOL;
+                $apiUrl = self::$youtubeApi."videos?part=snippet,contentDetails,statistics&id={$post->source_id}&key={$apiKey}";
+                $res = self::call_api($apiUrl);
+                if (!empty($res['items'])) {
+                    foreach ($res['items'] as $v) {
+                        if ($v['kind'] == 'youtube#video') {
+                            $snippet = $v['snippet'];
+                            $ageRestricted = !empty($snippet['contentDetails']['contentRating']['ytRating']) ? 1 : 0;
+                            if (!empty($ageRestricted)) {
+                                $post->status = -1;
+                            } else {
+                                $tags = !empty($snippet['tags']) ? $snippet['tags'] : '';
+                                if (!empty($tags)) {
+                                    $post->tags = implode(',', $tags);
+                                    foreach ($tags as $t) {
+                                        $_pt = PostTag::where('name', $t)->first();
+                                        if (!empty($_pt)) {
+                                            $_pt->count = $_pt->count + 1;
+                                        } else {
+                                            $_pt = new PostTag();
+                                            $_pt->name = $t;
+                                            $_pt->slug = self::convertURL($t);
+                                            $_pt->status = 1;
+                                        }
+                                        $_pt->save();
+                                    }
+                                }
+                            }
+                            $post->crawl_at = $today;
+                            $post->save();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /*
