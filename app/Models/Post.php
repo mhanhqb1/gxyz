@@ -168,19 +168,22 @@ class Post extends Model {
         $posts = Post::where('type',1)
             ->where('status', 1)
             ->where('source_type', self::$sourceType['youtube'])
-            ->where('crawl_at', null)
-            ->limit(100)
+            // ->where('crawl_at', null)
+            ->limit(500)
             ->get();
         if (!$posts->isEmpty()) {
             foreach ($posts as $post) {
                 echo $post->id.' - '.$post->title.PHP_EOL;
                 $apiUrl = self::$youtubeApi."videos?part=snippet,contentDetails,statistics&id={$post->source_id}&key={$apiKey}";
                 $res = self::call_api($apiUrl);
+                if (!empty($res['error']['code']) && $res['error']['code'] == 403) {
+                    break;
+                }
                 if (!empty($res['items'])) {
                     foreach ($res['items'] as $v) {
                         if ($v['kind'] == 'youtube#video') {
                             $snippet = $v['snippet'];
-                            $ageRestricted = !empty($snippet['contentDetails']['contentRating']['ytRating']) ? 1 : 0;
+                            $ageRestricted = !empty($res['contentDetails']['contentRating']['ytRating']) ? 1 : 0;
                             if (!empty($ageRestricted)) {
                                 $post->status = -1;
                             } else {
@@ -205,6 +208,10 @@ class Post extends Model {
                             $post->save();
                         }
                     }
+                } elseif (isset($res['items'])) {
+                    $post->status = -1;
+                    $post->crawl_at = $today;
+                    $post->save();
                 }
             }
         }
