@@ -534,6 +534,13 @@ class ComposerStaticInitcdfd9a4cf38775c015a0a6e71b3ce948
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
         ),
+        'L' => 
+        array (
+            'Laravelium\\Sitemap' => 
+            array (
+                0 => __DIR__ . '/..' . '/roumen/sitemap/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -2818,6 +2825,9 @@ class ComposerStaticInitcdfd9a4cf38775c015a0a6e71b3ce948
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'Laravelium\\Sitemap\\Model' => __DIR__ . '/..' . '/roumen/sitemap/src/Laravelium/Sitemap/Model.php',
+        'Laravelium\\Sitemap\\Sitemap' => __DIR__ . '/..' . '/roumen/sitemap/src/Laravelium/Sitemap/Sitemap.php',
+        'Laravelium\\Sitemap\\SitemapServiceProvider' => __DIR__ . '/..' . '/roumen/sitemap/src/Laravelium/Sitemap/SitemapServiceProvider.php',
         'League\\CommonMark\\Block\\Element\\AbstractBlock' => __DIR__ . '/..' . '/league/commonmark/src/Block/Element/AbstractBlock.php',
         'League\\CommonMark\\Block\\Element\\AbstractStringContainerBlock' => __DIR__ . '/..' . '/league/commonmark/src/Block/Element/AbstractStringContainerBlock.php',
         'League\\CommonMark\\Block\\Element\\BlockQuote' => __DIR__ . '/..' . '/league/commonmark/src/Block/Element/BlockQuote.php',

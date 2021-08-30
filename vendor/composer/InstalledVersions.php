@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '4ffb6575957e67b87b7905118675d1f713e779d5',
+    'reference' => '7460ac89e29451e318bf940b7c7e1b6956ba5ead',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -532,7 +532,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '4ffb6575957e67b87b7905118675d1f713e779d5',
+      'reference' => '7460ac89e29451e318bf940b7c7e1b6956ba5ead',
     ),
     'laravel/tinker' => 
     array (
@@ -900,6 +900,15 @@ private static $installed = array (
       array (
         0 => '4.1.1',
       ),
+    ),
+    'roumen/sitemap' => 
+    array (
+      'pretty_version' => '8.0.1',
+      'version' => '8.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ae5023139178a8de9b615b21a66368f5025d3a43',
     ),
     'sebastian/cli-parser' => 
     array (
