@@ -30,6 +30,7 @@ class Post extends Model {
         'source_id',
         'stream_url',
         'crawl_at',
+        'stream_crawl'
     ];
     /**
      * The attributes that should be hidden for arrays.

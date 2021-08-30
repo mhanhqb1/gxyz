@@ -38,7 +38,7 @@ class HomeController extends Controller {
             'status' => 'OK',
             'data' => ''
         );
-        $videoExpired = 5*60*60;//fix tam
+        $videoExpired = 2*60*60;//fix tam
         $apiGetStream = "http://45.76.207.18:5000/stream/";
         $params = $request->all();
         $videoId = !empty($request->video_id) ? $request->video_id : '';
@@ -46,8 +46,9 @@ class HomeController extends Controller {
         if (!empty($video)) {
             if ($video->source_type == 'twitter') {
                 $result['data'] = $video->stream_url;
-            } elseif (!empty($video->stream_url) && (strtotime($video->crawl_at) + $videoExpired) > time()) {
+            } elseif (!empty($video->stream_url) && ($video->stream_crawl + $videoExpired) > time()) {
                 $result['data'] = $video->stream_url;
+                $result['aaa'] = 1;
             } else {
                 $apiGetStream = $apiGetStream . $video->source_id;
                 $curl = curl_init();
@@ -64,9 +65,9 @@ class HomeController extends Controller {
                 curl_close($curl);
                 if (strpos($response, "googlevideo.com") !== false) {
                     $result['data'] = $response;
-                    // $video->stream_url = $response;
-                    // $video->crawl_at = date('Y-m-d');
-                    // $video->save();
+                    $video->stream_url = $response;
+                    $video->stream_crawl = time();
+                    $video->save();
                 } else {
                     $result['status'] = 'ERROR';
                 }
