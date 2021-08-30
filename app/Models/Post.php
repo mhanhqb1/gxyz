@@ -168,8 +168,8 @@ class Post extends Model {
         $posts = Post::where('type',1)
             ->where('status', 1)
             ->where('source_type', self::$sourceType['youtube'])
-            // ->where('crawl_at', null)
-            ->limit(500)
+            ->where('crawl_at', null)
+            ->limit(100)
             ->get();
         if (!$posts->isEmpty()) {
             foreach ($posts as $post) {
