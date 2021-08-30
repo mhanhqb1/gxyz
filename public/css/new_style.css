@@ -356,3 +356,24 @@ footer a {
         margin-top: 24px;
     }
 }
+@media (max-width: 450px) {
+    .lastest-posts, .top-posts {
+        padding: 0;
+    }
+    .section-title {
+        padding: 0 12px;
+    }
+    .card {
+        padding: 12px;
+    }
+    .card .card-info span {
+        display: none;
+    }
+    .g-youtube {
+        width: 30px;
+        height: 30px;
+    }
+    .g-youtube:after {
+        background-size: 100%;
+    }
+}
