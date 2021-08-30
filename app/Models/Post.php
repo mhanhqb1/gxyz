@@ -169,7 +169,7 @@ class Post extends Model {
             ->where('status', 1)
             ->where('source_type', self::$sourceType['youtube'])
             ->where('crawl_at', null)
-            ->limit(10)
+            ->limit(100)
             ->get();
         if (!$posts->isEmpty()) {
             foreach ($posts as $post) {
