@@ -218,7 +218,7 @@ class Post extends Model {
     }
 
     public static function autoPublishPosts($limit) {
-        $limit = rand(1, $$limit);
+        $limit = rand(1, $limit);
         echo $limit;
         // Youtube
         $posts = Post::inRandomOrder()
