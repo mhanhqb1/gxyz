@@ -217,6 +217,26 @@ class Post extends Model {
         }
     }
 
+    public static function autoPublishPosts($limit) {
+        $limit = rand(1, $$limit);
+        echo $limit;
+        // Youtube
+        $posts = Post::inRandomOrder()
+            ->where('type',1)
+            ->where('status', 0)
+            ->where('source_type', self::$sourceType['youtube'])
+            ->where('crawl_at', '!=', null)
+            ->limit($limit)
+            ->get();
+        if (!$posts->isEmpty()) {
+            foreach ($posts as $k => $p) {
+                echo $k.' - '.$p->title.PHP_EOL;
+                $p->status = 1;
+                $p->save();
+            }
+        }
+    }
+
     /*
      * Call Api
      */

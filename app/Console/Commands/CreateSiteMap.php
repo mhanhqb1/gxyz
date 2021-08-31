@@ -13,7 +13,7 @@ class CreateSiteMap extends Command
      *
      * @var string
      */
-    protected $signature = 'sitemap:create';
+    protected $signature = 'Sexy:CreateSiteMap';
 
     /**
      * The console command description.
@@ -51,7 +51,7 @@ class CreateSiteMap extends Command
             ->orderBy('created_at', 'desc')
             ->get();
         foreach ($posts as $post) {
-            $sitemap->add(route('home.videoDetail', ['slug' => $post->slug, 'id' => $post->id]), $post->created_at, '0.8', 'daily');
+            $sitemap->add(route('home.videoDetail', ['slug' => $post->slug, 'id' => $post->id]), $post->updated_at, '0.8', 'daily');
         }
         $sitemap->store('xml', 'sitemap');
         if (\File::exists(public_path() . '/sitemap.xml')) {

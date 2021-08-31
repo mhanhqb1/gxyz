@@ -13,7 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\AutoPublishPosts::class,
+        Commands\CreateSiteMap::class,
+        Commands\SourceDailyCrawler::class,
+        Commands\UpdateYoutubeVideoDetail::class
     ];
 
     /**
@@ -24,7 +27,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('Sexy:CreateSiteMap')->daily();
+        $schedule->command('Sexy:SourceDailyCrawler')->hourly();
+        $schedule->command('Sexy:UpdateYoutubeVideoDetail')->hourlyAt(15);
+        $schedule->command('Sexy:AutoPublishPosts')->hourlyAt(45);
     }
 
     /**

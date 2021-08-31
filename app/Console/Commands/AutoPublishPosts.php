@@ -3,17 +3,16 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
 use App\Models\Post;
 
-class SourceDailyCrawler extends Command
+class AutoPublishPosts extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'Sexy:SourceDailyCrawler';
+    protected $signature = 'Sexy:AutoPublishPosts';
 
     /**
      * The console command description.
@@ -39,6 +38,6 @@ class SourceDailyCrawler extends Command
      */
     public function handle()
     {
-        Post::dailyCrawler();
+        Post::autoPublishPosts(7);
     }
 }
