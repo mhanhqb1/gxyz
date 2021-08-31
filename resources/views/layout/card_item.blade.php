@@ -2,6 +2,7 @@
 $url = route('home.imageDetail', ['id' => $item->id]);
 $image = $item->url;
 $title = !empty($item->name) ? $item->name : 'Sexy Girl '.$item->id;
+$is_video = !empty($item->type) && $item->type == 1 ? 1 : 0;
 if (!empty($is_video)) {
     $image = $item->image;
     $title = !empty($item->title) ? $item->title : 'Sexy Girl Video '.$item->id;

@@ -17,14 +17,14 @@ class HomeController extends Controller {
      * Homepage
      */
     public static function index() {
+        $limit = 8;
         $images = Image::get_list([
             'status' => 1,
             'is_18' => 1,
-            'limit' => 16,
+            'limit' => $limit,
         ]);
-        $limit = 8;
         $offset = 0;
-        $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
+        $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit*2)->offset($offset)->get();
         $video18 = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         return view('home.new_index', ['idols' => $images, 'videos' => $videos, 'video18' => $video18]);
     }
