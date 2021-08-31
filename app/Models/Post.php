@@ -166,7 +166,7 @@ class Post extends Model {
         $today = date('Y-m-d');
         $apiKey = config('services.google')['youtube_api_key'];
         $posts = Post::where('type',1)
-            ->where('status', 1)
+            // ->where('status', 1)
             ->where('source_type', self::$sourceType['youtube'])
             ->where('crawl_at', null)
             ->limit(100)
