@@ -3,16 +3,17 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Models\Post;
 
-class AutoPublishPosts extends Command
+class AutoTranslatePosts extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'Sexy:AutoPublishPosts';
+    protected $signature = 'Sexy:AutoTranslatePosts';
 
     /**
      * The console command description.
@@ -38,6 +39,14 @@ class AutoPublishPosts extends Command
      */
     public function handle()
     {
-        Post::autoPublishPosts(7);
+        $tr = new GoogleTranslate();
+        $data = Post::where('status', -2)->where('source_type', 'imgccc')->get();
+        foreach ($data as $k => $v) {
+            $v->title = $tr->translate($v->title);
+            $v->slug = Post::convertURL($v->title);
+            $v->status = -3;
+            $v->save();
+            echo $k.' - '.$v->title.PHP_EOL;
+        }
     }
 }
