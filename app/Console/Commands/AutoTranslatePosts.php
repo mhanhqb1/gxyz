@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Models\Post;
+use Exception;
 
 class AutoTranslatePosts extends Command
 {
@@ -42,11 +43,15 @@ class AutoTranslatePosts extends Command
         $tr = new GoogleTranslate();
         $data = Post::where('status', -2)->where('source_type', 'imgccc')->get();
         foreach ($data as $k => $v) {
-            $v->title = $tr->translate($v->title);
-            $v->slug = Post::convertURL($v->title);
-            $v->status = -3;
-            $v->save();
-            echo $k.' - '.$v->title.PHP_EOL;
+            try {
+                $v->title = $tr->translate($v->title);
+                $v->slug = Post::convertURL($v->title);
+                $v->status = -3;
+                $v->save();
+                echo $k.' - '.$v->title.PHP_EOL;
+            } catch (Exception $e) {
+                print_r($e);
+            }
         }
     }
 }
