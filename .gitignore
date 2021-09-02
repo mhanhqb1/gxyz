@@ -12,3 +12,6 @@ npm-debug.log
 yarn-error.log
 /nbproject/
 /modelCrawler/__pycache__
+public/imgs/posts/video/*.jpg
+public/imgs/posts/video/*.pyc
+public/imgs/posts/video/__pycache__

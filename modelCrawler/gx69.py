@@ -5,7 +5,7 @@ from database import MySQLRepository
 from bs4 import BeautifulSoup
 from googletrans import Translator, constants
 
-#mysql = MySQLRepository('sbgc')
+mysql = MySQLRepository('sgbc')
 
 def get_detail():
 	today = datetime.today().strftime('%Y-%m-%d')
@@ -131,33 +131,80 @@ def main():
 			except Exception as e:
 				print(e)
 
-def convertTitle():
-    # Init
-    totalPages = 2#377
-    count = 1
-    url = "http://www.xiuren.org/page-1.html"
+def get18Video(url = False):
+    baseUrl = "https://v.imgccc.com"
     payload={}
     headers = {
         'Accept': '*/*',
         #'Accept-Encoding': 'gzip, deflate, br',
         'User-Agent': 'PostmanRuntime/7.26.8'
     }
+    if (url == False):
+        url = baseUrl
+    else:
+        url = baseUrl + url
+        print(url)
+    response = requests.request("GET", url, headers=headers, data=payload)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    rows = soup.select('td.fb-n a')
     translator = Translator()
-    for i in range(totalPages):
-        i += 1
-        url = "http://www.xiuren.org/page-"+str(i)+".html"
-        response = requests.request("GET", url, headers=headers, data=payload)
-        # response.encoding = 'gbk'
-        soup = BeautifulSoup(response.text, 'html.parser')
-        rows = soup.select('div#main .loop .content')
-        if (rows != []):
-            for r in rows:
-                url = r.select('a')
-                name = url[0].attrs['title']
-                translation = translator.translate('骨感高挑妖艳外围女郎姗姗就打奥特曼宾馆激情全裸人体艺术大尺度美图 25P')
-                print(translation.text)
+    count = 0
+    for r in rows:
+        newUrl = r.attrs['href']
+        if ('.mp4' in newUrl):
+            try:
+                count += 1
+                translation = translator.translate(r.text.replace('.mp4', ''))
+                title = translation.text
+                print(count, title)
+                sourceId = r.text
+                sourceUrl = newUrl
+                streamUrl = newUrl
+                data = [(
+                    title,
+                    -2,
+                    'imgccc',
+                    sourceUrl,
+                    sourceId,
+                    baseUrl + streamUrl
+                )]
+                sql = ("""
+                    INSERT INTO
+                        posts(
+                            title,
+                            status,
+                            source_type,
+                            source_url,
+                            source_id,
+                            stream_url
+                        )
+                    VALUES (
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s
+                    )
+                    ON
+                        DUPLICATE KEY
+                    UPDATE
+                        title = VALUES(title),
+                        status = VALUES(status),
+                        source_url = VALUES(source_url),
+                        stream_url = VALUES(stream_url)
+                """)
+                try:
+                    mysql.executemany(sql, data)
+                except Exception as e:
+                    print(e)
+            except Exception:
+                print('Error: ' + r.text)
+        elif ('..' not in newUrl):
+            get18Video(newUrl)
+    return True
 
 if __name__ == "__main__":
 	#main()
 	#get_detail()
-    convertTitle()
+    get18Video()
