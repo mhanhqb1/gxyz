@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '7460ac89e29451e318bf940b7c7e1b6956ba5ead',
+    'reference' => '1cc55da177c9960a38dfbc2bddba08442550f98a',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -532,7 +532,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '7460ac89e29451e318bf940b7c7e1b6956ba5ead',
+      'reference' => '1cc55da177c9960a38dfbc2bddba08442550f98a',
     ),
     'laravel/tinker' => 
     array (
@@ -1053,6 +1053,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
+    ),
+    'stichoza/google-translate-php' => 
+    array (
+      'pretty_version' => 'v4.1.5',
+      'version' => '4.1.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '85039e0af473e58cc9f42d58e36d9d534a6a6431',
     ),
     'swiftmailer/swiftmailer' => 
     array (

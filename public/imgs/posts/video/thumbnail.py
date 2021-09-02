@@ -3,7 +3,7 @@ import ffmpeg
 import sys
 from database import MySQLRepository
 
-mysql = MySQLRepository('sgbc')
+mysql = MySQLRepository('gxyz')
 
 def generate_thumbnail(in_filename, out_filename):
     probe = ffmpeg.probe(in_filename)

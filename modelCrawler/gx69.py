@@ -3,9 +3,9 @@ import time
 from datetime import datetime
 from database import MySQLRepository
 from bs4 import BeautifulSoup
-from googletrans import Translator, constants
+from google_trans_new import google_translator
 
-mysql = MySQLRepository('sgbc')
+mysql = MySQLRepository('gxyz')
 
 def get_detail():
 	today = datetime.today().strftime('%Y-%m-%d')
@@ -147,15 +147,14 @@ def get18Video(url = False):
     response = requests.request("GET", url, headers=headers, data=payload)
     soup = BeautifulSoup(response.text, 'html.parser')
     rows = soup.select('td.fb-n a')
-    translator = Translator()
+    translator = google_translator()
     count = 0
     for r in rows:
         newUrl = r.attrs['href']
         if ('.mp4' in newUrl):
             try:
                 count += 1
-                translation = translator.translate(r.text.replace('.mp4', ''))
-                title = translation.text
+                title = r.text.replace('.mp4', '')#translator.translate(r.text.replace('.mp4', ''), lang_tgt='en')
                 print(count, title)
                 sourceId = r.text
                 sourceUrl = newUrl
@@ -198,8 +197,8 @@ def get18Video(url = False):
                     mysql.executemany(sql, data)
                 except Exception as e:
                     print(e)
-            except Exception:
-                print('Error: ' + r.text)
+            except Exception as e:
+                print(e)
         elif ('..' not in newUrl):
             get18Video(newUrl)
     return True

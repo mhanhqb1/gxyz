@@ -4,8 +4,8 @@ class MySQLRepository(object):
       import os
       host = host or os.environ.get('MYSQL_HOST') or "127.0.0.1"
       port = port or os.environ.get('MYSQL_PORT') or "3306"
-      user = user or os.environ.get('MYSQL_USER') or "root"
-      password = password or os.environ.get('MYSQL_PASS') or ""
+      user = user or os.environ.get('MYSQL_USER') or "gxyz"
+      password = password or os.environ.get('MYSQL_PASS') or "1@Hoanganh"
       database = database or os.environ.get('MYSQL_DATABASE')
       self._connector = mysql.connector.connect(
           host=host,
