@@ -33,7 +33,7 @@ sql = ("""
         *
     FROM
         posts
-    WHERE crawl_at is NULL and source_type = 'imgccc' and status = -2 limit 5;
+    WHERE source_type = 'imgccc' and status = -3 limit 100;
 """)
 data = mysql.all(sql)
 for v in data:
@@ -48,6 +48,7 @@ for v in data:
                 posts
             SET
                 crawl_at = CURDATE(),
+                status = 1,
                 image = %(image)s
             WHERE
                 id = %(post_id)s

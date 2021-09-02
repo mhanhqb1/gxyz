@@ -50,7 +50,7 @@ class AutoTranslatePosts extends Command
                 $v->save();
                 echo $k.' - '.$v->title.PHP_EOL;
             } catch (Exception $e) {
-                print_r($e);
+                break;
             }
         }
     }
