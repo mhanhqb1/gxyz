@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('Sexy:SourceDailyCrawler')->hourly();
         $schedule->command('Sexy:UpdateYoutubeVideoDetail')->hourlyAt(15);
         $schedule->command('Sexy:AutoPublishPosts')->hourlyAt(45);
-        $schedule->command('Sexy:AutoTranslatePosts')->hourly(10);
+        $schedule->command('Sexy:AutoTranslatePosts')->everyFifteenMinutes();
     }
 
     /**
