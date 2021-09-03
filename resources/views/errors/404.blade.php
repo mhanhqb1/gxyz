@@ -7,8 +7,8 @@ $_siteDescription = 'See the best looking girl pics, sexy girl, hot girls, cute 
 $_siteKeywords = 'sexy girl, hot girl, bikini girl, hot girl sexy video, hot sexy girl, sexy girl xxx';
 $_currentUrl = url()->current();
 $routeName = '404';
-$videos = App\Models\Post::inRandomOrder()->where('type', 1)->limit(4)->get();
-$images = App\Models\Post::inRandomOrder()->where('type', 0)->limit(4)->get();
+$videos = App\Models\Post::inRandomOrder()->where('type', 1)->where('status', 1)->limit(4)->get();
+$images = App\Models\Post::inRandomOrder()->where('type', 0)->where('status', 1)->limit(4)->get();
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
