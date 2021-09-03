@@ -308,6 +308,7 @@ footer a {
 .post-detail_left .section-title {
     padding-left: 0;
     padding-right: 0;
+    clear: both;
 }
 .post-detail_right {
     float: left;
@@ -348,6 +349,21 @@ footer a {
 }
 .post-detail-tags a{
     margin-left: 0;
+}
+ul.related-posts {
+    padding-left: 24px;
+}
+ul.related-posts li {
+    display: block;
+    margin-bottom: 12px;
+}
+ul.related-posts li a {
+    display: flex;
+    align-items: center;
+}
+ul.related-posts li a img {
+    height: 50px;
+    margin-right: 10px;
 }
 
 @media (max-width: 992px) {

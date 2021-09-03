@@ -212,13 +212,21 @@ class HomeController extends Controller {
         }
         $pageTitle = 'Sexy Girl - ' . $post->title;
         $pageImage = $post->image;
-        $related = Post::inRandomOrder()->where('id', '!=', $id)->where('status', 1)->where('type', 0);
+        $lastestPosts = Post::where('id', '!=', $id)->where('status', 1)->limit($limit)->orderBy('updated_at', 'desc')->get();
+        $lastestPostIds = [];
+        foreach($lastestPostIds as $lp) {
+            $lastestPostIds[] = $lp->id;
+        }
+        $related = Post::inRandomOrder()->where('id', '!=', $id)
+            ->whereNotIn('id', $lastestPostIds)
+            ->where('status', 1)
+            ->where('type', 0);
         if (!empty($post->is_18)) {
             $related = $related->where('is_18', 1);
         }
         $related = $related->limit($limit)->get();
         $postImages = PostImage::where('post_id', $id)->pluck('image');
-        return view('home.post_detail', ['postImages' => $postImages, 'related' => $related,'post' => $post, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
+        return view('home.post_detail', ['lastestPosts' => $lastestPosts,'postImages' => $postImages, 'related' => $related,'post' => $post, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
 
     /**
@@ -234,12 +242,20 @@ class HomeController extends Controller {
         }
         $pageTitle = 'Sexy Girl Video - ' . $video->title;
         $pageImage = $video->image;
-        $related = Post::inRandomOrder()->where('status', 1)->where('type', 1);
+        $lastestPosts = Post::where('id', '!=', $id)->where('status', 1)->limit($limit)->orderBy('updated_at', 'desc')->get();
+        $lastestPostIds = [];
+        foreach($lastestPosts as $lp) {
+            $lastestPostIds[] = $lp->id;
+        }
+        $related = Post::inRandomOrder()->where('id', '!=', $id)
+            ->whereNotIn('id', $lastestPostIds)
+            ->where('status', 1)
+            ->where('type', 1);
         if (!empty($video->is_18)) {
             $related = $related->where('is_18', 1);
         }
         $related = $related->limit($limit)->get();
-        return view('home.new_video_detail', ['related' => $related,'video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
+        return view('home.new_video_detail', ['lastestPosts' => $lastestPosts, 'related' => $related,'video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
 
     /**

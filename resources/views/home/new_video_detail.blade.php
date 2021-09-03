@@ -41,6 +41,14 @@ if (strpos($_SERVER['HTTP_HOST'], 'www') !== false) {
         <h1 class="post-title">
             {{ $video->title }}
         </h1>
+        @if (!empty($related))
+        <ul class="related-posts">
+            @foreach ($related as $k => $p)
+                <?php if ($k > 3){ break; } ?>
+                @include('layout.related_item', ['item' => $p])
+            @endforeach
+        </ul>
+        @endif
         <div class="video-stream-player">
             <div id='aaaa'>
                 <video id="my-video-player" class="video-js vjs-default-skin vjs-fluid"></video>
@@ -65,8 +73,21 @@ if (strpos($_SERVER['HTTP_HOST'], 'www') !== false) {
             <h2>You might like</h2>
         </div>
         <div class="lastest-posts">
-            <?php foreach ($related as $k => $v) : ?>
-                @include('layout.card_item', ['item' => $v, 'is_video' => 1])
+            <?php foreach ($related as $k => $v):
+                if ($k <= 3) {
+                    continue;
+                }
+            ?>
+                @include('layout.card_item', ['item' => $v])
+            <?php endforeach; ?>
+        </div>
+
+        <div class="section-title">
+            <h2>Lastest Posts</h2>
+        </div>
+        <div class="lastest-posts">
+            <?php foreach ($lastestPosts as $k => $v) : ?>
+                @include('layout.card_item', ['item' => $v])
             <?php endforeach; ?>
         </div>
     </div>
