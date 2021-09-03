@@ -1,8 +1,8 @@
 <?php
-$streamUrl = "https://sexygirls69.xyz/getVideoStream";
+$streamUrl = "http://sexygirls69.xyz/getVideoStream";
 // $streamUrl = 'http://127.0.0.1:8000/getVideoStream';
 if (strpos($_SERVER['HTTP_HOST'], 'www') !== false) {
-    $streamUrl = "https://www.sexygirls69.xyz/getVideoStream";
+    $streamUrl = "http://www.sexygirls69.xyz/getVideoStream";
 }
 ?>
 

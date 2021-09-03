@@ -5,16 +5,24 @@ from database import MySQLRepository
 from bs4 import BeautifulSoup
 # from google_trans_new import google_translator
 
-mysql = MySQLRepository('gxyz')
+mysql = MySQLRepository('sgbc')
 
 def get_detail():
+	payload={}
+	headers = {
+        'Accept': '*/*',
+        #'Accept-Encoding': 'gzip, deflate, br',
+        'User-Agent': 'PostmanRuntime/7.26.8',
+        'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+        'Accept-Encoding':'gzip, deflate'
+    }
 	today = datetime.today().strftime('%Y-%m-%d')
 	sql = ("""
 	    SELECT
 		    *
 		FROM
-		    models
-		WHERE crawl_at is NULL;
+		    posts
+		WHERE crawl_at is NULL and source_type = 'xiuren' limit 1;
 	""")
 	data = mysql.all(sql)
 	for v in data:
@@ -26,9 +34,17 @@ def get_detail():
 			'1',
 			v['image']
 		)]
-		response = requests.request("GET", v['source_url'])
-		response.encoding = 'gbk'
+		response = requests.request("GET", v['source_url'], headers=headers, data=payload)
+		response.encoding = 'zh-cn'
 		soup = BeautifulSoup(response.text, 'html.parser')
+		tags = soup.select('div#main #post #title .date > a')
+		k = 0
+		postTags = []
+		for t in tags:
+		    k += 1
+		    if (k == 1):
+		        continue
+		    postTags.append(t.text)
 		rows = soup.select('div#main #post .post .photoThum')
 		for r in rows:
 			url = r.select('a')
@@ -39,44 +55,47 @@ def get_detail():
 				'1',
 				url[0].attrs['href']
 			))
-		sql = ("""
-			INSERT INTO
-				images(
-					url,
-					model_id,
-					is_hot,
-					status,
-					source_id
-				)
-			VALUES (
-				%s,
-				%s,
-				%s,
-				%s,
-				%s
-			)
-			ON
-				DUPLICATE KEY
-			UPDATE
-				model_id = VALUES(model_id),
-				is_hot = VALUES(is_hot),
-				status = VALUES(status)
-		""")
-		try:
-			mysql.executemany(sql, imgs)
-		except Exception as e:
-			print(e)
+		# sql = ("""
+		# 	INSERT INTO
+		# 		images(
+		# 			url,
+		# 			model_id,
+		# 			is_hot,
+		# 			status,
+		# 			source_id
+		# 		)
+		# 	VALUES (
+		# 		%s,
+		# 		%s,
+		# 		%s,
+		# 		%s,
+		# 		%s
+		# 	)
+		# 	ON
+		# 		DUPLICATE KEY
+		# 	UPDATE
+		# 		model_id = VALUES(model_id),
+		# 		is_hot = VALUES(is_hot),
+		# 		status = VALUES(status)
+		# """)
+		# try:
+		# 	mysql.executemany(sql, imgs)
+		# except Exception as e:
+		# 	print(e)
 
 		sql = ("""
 			UPDATE
-				models
+				posts
 			SET
-				crawl_at = CURDATE()
+				crawl_at = CURDATE(),
+                tags = %(post_tags)s
 			WHERE
 				id = %(model_id)s
 		""")
 		try:
+			print(postTags)
 			mysql.execute(sql, {
+                'post_tags': ','.join([str(elem) for elem in postTags]),
 				'model_id': v['id']
 			})
 		except Exception as e:
@@ -112,27 +131,37 @@ def main():
 				print(count, name)
 				count += 1
 				data.append((
+                    name,
+                    cover[0].attrs['src'].replace(xiurenCover, ""),
+                    -2,
+                    'xiuren',
 					url[0].attrs['href'],
-					name,
-					cover[0].attrs['src'].replace(xiurenCover, "")
+					url[0].attrs['href']
 				))
 			sql = ("""
 				INSERT INTO
-					models(
-						source_url,
-						name,
-						image
+					posts(
+						title,
+						image,
+						status,
+                        source_type,
+                        source_url,
+                        source_id
 					)
 				VALUES (
 					%s,
 					%s,
-					%s
+					%s,
+                    %s,
+                    %s,
+                    %s
 				)
 				ON
 					DUPLICATE KEY
 				UPDATE
-					name = VALUES(name),
-					image = VALUES(image)
+					title = VALUES(title),
+					image = VALUES(image),
+                    source_url = VALUES(source_url)
 			""")
 			try:
 				mysql.executemany(sql, data)
@@ -217,6 +246,6 @@ def test():
     print(a)
 
 if __name__ == "__main__":
-	main()
-	#get_detail()
+	# main()
+	get_detail()
     # test()
