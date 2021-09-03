@@ -5,7 +5,7 @@ from database import MySQLRepository
 from bs4 import BeautifulSoup
 # from google_trans_new import google_translator
 
-mysql = MySQLRepository('sgbc')
+mysql = MySQLRepository('gxyz')
 
 def get_detail():
 	payload={}
@@ -22,18 +22,12 @@ def get_detail():
 		    *
 		FROM
 		    posts
-		WHERE crawl_at is NULL and source_type = 'xiuren' limit 1;
+		WHERE crawl_at is NULL and source_type = 'xiuren';
 	""")
 	data = mysql.all(sql)
 	for v in data:
 		print(v['id'])
-		imgs = [(
-			v['image'],
-			v['id'],
-			'1',
-			'1',
-			v['image']
-		)]
+		imgs = []
 		response = requests.request("GET", v['source_url'], headers=headers, data=payload)
 		response.encoding = 'zh-cn'
 		soup = BeautifulSoup(response.text, 'html.parser')
@@ -51,37 +45,30 @@ def get_detail():
 			imgs.append((
 				url[0].attrs['href'],
 				v['id'],
-				'0',
-				'1',
-				url[0].attrs['href']
+				'1'
 			))
-		# sql = ("""
-		# 	INSERT INTO
-		# 		images(
-		# 			url,
-		# 			model_id,
-		# 			is_hot,
-		# 			status,
-		# 			source_id
-		# 		)
-		# 	VALUES (
-		# 		%s,
-		# 		%s,
-		# 		%s,
-		# 		%s,
-		# 		%s
-		# 	)
-		# 	ON
-		# 		DUPLICATE KEY
-		# 	UPDATE
-		# 		model_id = VALUES(model_id),
-		# 		is_hot = VALUES(is_hot),
-		# 		status = VALUES(status)
-		# """)
-		# try:
-		# 	mysql.executemany(sql, imgs)
-		# except Exception as e:
-		# 	print(e)
+		sql = ("""
+			INSERT INTO
+				post_images(
+					image,
+					post_id,
+					status
+				)
+			VALUES (
+				%s,
+				%s,
+				%s
+			)
+			ON
+				DUPLICATE KEY
+			UPDATE
+				post_id = VALUES(post_id),
+				image = VALUES(image)
+		""")
+		try:
+			mysql.executemany(sql, imgs)
+		except Exception as e:
+			print(e)
 
 		sql = ("""
 			UPDATE
@@ -240,12 +227,164 @@ def get18Video(url = False):
             get18Video(newUrl)
     return True
 
-def test():
-    import m3u8_to_mp4
-    a = m3u8_to_mp4.download('https://ccn.killcovid2021.com//m3u8/517116/517116.m3u8?st=uAYkkh_WiG-wZI8ZWtoUUA&e=1630640189')
-    print(a)
+def xsnvshen():
+	totalPages = 2
+	totalCount = 0
+	baseUrl = 'https://www.xsnvshen.com'
+	for i in range(totalPages):
+		i += 1
+		# url = "http://www.xiuren.org/page-"+str(i)+".html"
+		url = "https://www.xsnvshen.com/album/?p="+str(i)
+		sourceType = 'xsnvshen'
+		payload={}
+		headers = {
+			'Accept': '*/*',
+			#'Accept-Encoding': 'gzip, deflate, br',
+			'User-Agent': 'PostmanRuntime/7.26.8',
+			'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+			'Accept-Encoding':'gzip, deflate'
+		}
+		response = requests.request("GET", url, headers=headers, data=payload, verify=False)
+		soup = BeautifulSoup(response.text, 'html.parser')
+		rows = soup.select('ul.picpos_6_1 li a')
+		count = 0
+		data = []
+		for r in rows:
+			sourceUrl = baseUrl + r.attrs['href']
+			title = r.attrs['title']
+			imgs = r.select('img')
+			if (imgs == []):
+				continue
+			count += 1
+			totalCount += 1
+			image = imgs[0].attrs['src']
+			print(i, totalCount, count, sourceUrl, image)
+			data.append((
+				title,
+				image,
+				-2,
+				sourceType,
+				sourceUrl,
+				r.attrs['href']
+			))
+		sql = ("""
+			INSERT INTO
+				posts(
+					title,
+					image,
+					status,
+					source_type,
+					source_url,
+					source_id
+				)
+			VALUES (
+				%s,
+				%s,
+				%s,
+				%s,
+				%s,
+				%s
+			)
+			ON
+				DUPLICATE KEY
+			UPDATE
+				title = VALUES(title),
+				image = VALUES(image),
+				source_url = VALUES(source_url)
+		""")
+		try:
+			mysql.executemany(sql, data)
+		except Exception as e:
+			print(e)
+
+def xsnvshen_detail():
+	payload={}
+	headers = {
+        'Accept': '*/*',
+        #'Accept-Encoding': 'gzip, deflate, br',
+        'User-Agent': 'PostmanRuntime/7.26.8',
+        'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+        'Accept-Encoding':'gzip, deflate'
+    }
+	today = datetime.today().strftime('%Y-%m-%d')
+	sql = ("""
+	    SELECT
+		    *
+		FROM
+		    posts
+		WHERE crawl_at is NULL and source_type = 'xsnvshen' LIMIT 1;
+	""")
+	data = mysql.all(sql)
+	for v in data:
+		print(v['id'])
+		imgs = []
+		response = requests.request("GET", v['source_url'], headers=headers, data=payload, verify=False)
+		soup = BeautifulSoup(response.text, 'html.parser')
+		imgs = soup.select('.swl-item swi-hd img')
+		for img in imgs:
+			image = img.attrs['data=original']
+		print(response.text)
+		return True
+		tags = soup.select('div#main #post #title .date > a')
+		k = 0
+		postTags = []
+		for t in tags:
+		    k += 1
+		    if (k == 1):
+		        continue
+		    postTags.append(t.text)
+		rows = soup.select('div#main #post .post .photoThum')
+		for r in rows:
+			url = r.select('a')
+			imgs.append((
+				url[0].attrs['href'],
+				v['id'],
+				'1'
+			))
+		sql = ("""
+			INSERT INTO
+				post_images(
+					image,
+					post_id,
+					status
+				)
+			VALUES (
+				%s,
+				%s,
+				%s
+			)
+			ON
+				DUPLICATE KEY
+			UPDATE
+				post_id = VALUES(post_id),
+				image = VALUES(image)
+		""")
+		try:
+			mysql.executemany(sql, imgs)
+		except Exception as e:
+			print(e)
+
+		sql = ("""
+			UPDATE
+				posts
+			SET
+				crawl_at = CURDATE(),
+                tags = %(post_tags)s
+			WHERE
+				id = %(model_id)s
+		""")
+		try:
+			print(postTags)
+			mysql.execute(sql, {
+                'post_tags': ','.join([str(elem) for elem in postTags]),
+				'model_id': v['id']
+			})
+		except Exception as e:
+			print(e)
 
 if __name__ == "__main__":
-	# main()
+	main()
 	get_detail()
     # test()
+    # xsnvshen()
+	# xsnvshen_detail()

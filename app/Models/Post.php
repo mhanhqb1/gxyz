@@ -44,7 +44,8 @@ class Post extends Model {
 
     public static $sourceType = [
         'youtube' => 'youtube',
-        'twitter' => 'twitter'
+        'twitter' => 'twitter',
+        'xiuren' => 'xiuren'
     ];
 
     public static $youtubeApi = 'https://www.googleapis.com/youtube/v3/';
@@ -231,6 +232,35 @@ class Post extends Model {
         if (!$posts->isEmpty()) {
             foreach ($posts as $k => $p) {
                 echo $k.' - '.$p->title.PHP_EOL;
+                $p->status = 1;
+                $p->save();
+            }
+        }
+
+        // Xiuren
+        $posts = Post::inRandomOrder()
+            ->where('type', 0)
+            ->where('status', -3)
+            ->where('source_type', self::$sourceType['xiuren'])
+            ->where('crawl_at', '!=', null)
+            ->limit($limit)
+            ->get();
+        if (!$posts->isEmpty()) {
+            foreach ($posts as $k => $p) {
+                echo $k.' - '.$p->title.PHP_EOL;
+                $tags = explode(',', $p->tags);
+                foreach ($tags as $t) {
+                    $_pt = PostTag::where('name', trim($t))->first();
+                    if (!empty($_pt)) {
+                        $_pt->count = $_pt->count + 1;
+                    } else {
+                        $_pt = new PostTag();
+                        $_pt->name = trim($t);
+                        $_pt->slug = self::convertURL(trim($t));
+                        $_pt->status = 1;
+                    }
+                    $_pt->save();
+                }
                 $p->status = 1;
                 $p->save();
             }

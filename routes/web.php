@@ -19,6 +19,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/hot-girl-images', [HomeController::class, 'images'])->name('home.images');
 Route::get('/sexy-girl-image/{id}', [HomeController::class, 'imageDetail'])->name('home.imageDetail');
 Route::get('/idol/{id}', [HomeController::class, 'idolDetail'])->name('home.idolDetail');
+Route::get('/post/{slug}/{id}', [HomeController::class, 'postDetail'])->name('home.postDetail');
+Route::get('/image', [HomeController::class, 'imageView'])->name('home.imageView');
 Route::get('/hot-girl-videos', [HomeController::class, 'videos'])->name('home.videos');
 Route::get('/video/{slug}/{id}', [HomeController::class, 'videoDetail'])->name('home.videoDetail');
 Route::get('/movies', [HomeController::class, 'index'])->name('home.movies');

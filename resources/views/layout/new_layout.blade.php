@@ -16,7 +16,7 @@ $routeName = \Request::route()->getName();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{{ $_siteDescription }}">
     <meta name="author" content="{{ $_siteName }}">
-    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+    <meta name='robots' content='index, follow' />
 
     <title>{{ $_siteTitle }}</title>
 
@@ -68,17 +68,17 @@ $routeName = \Request::route()->getName();
                             <span class="nav-list_icon">
                                 <ion-icon name="flame-outline"></ion-icon>
                             </span>
-                            <span class="nav-list_title">Hot Images</span>
+                            <span class="nav-list_title">Sexy Images</span>
                         </a>
                     </li>
-                    <li class="nav-list {{ in_array($routeName, ['home.images18']) ? 'active' : '' }}">
+                    <!-- <li class="nav-list {{ in_array($routeName, ['home.images18']) ? 'active' : '' }}">
                         <a href="{{ route('home.images18') }}" title="Sexy Girl Images">
                             <span class="nav-list_icon">
                                 <ion-icon name="image-outline"></ion-icon>
                             </span>
                             <span class="nav-list_title">Sexy Images</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-list {{ in_array($routeName, ['home.videos']) ? 'active' : '' }}">
                         <a href="{{ route('home.videos') }}" title="Hot Girl Video">
                             <span class="nav-list_icon">

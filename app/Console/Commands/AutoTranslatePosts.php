@@ -41,10 +41,11 @@ class AutoTranslatePosts extends Command
     public function handle()
     {
         $tr = new GoogleTranslate();
-        $data = Post::where('status', -2)->where('source_type', 'imgccc')->get();
+        $data = Post::where('status', -2)->where('source_type', 'xiuren')->orderBy('id', 'desc')->get();
         foreach ($data as $k => $v) {
             try {
                 $v->title = $tr->translate($v->title);
+                $v->tags = $tr->translate($v->tags);
                 $v->slug = Post::convertURL($v->title);
                 $v->status = -3;
                 $v->save();

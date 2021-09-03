@@ -18,6 +18,7 @@ return array(
     'Abraham\\TwitterOAuth\\Util' => $vendorDir . '/abraham/twitteroauth/src/Util.php',
     'Abraham\\TwitterOAuth\\Util\\JsonDecoder' => $vendorDir . '/abraham/twitteroauth/src/Util/JsonDecoder.php',
     'App\\Console\\Commands\\AutoPublishPosts' => $baseDir . '/app/Console/Commands/AutoPublishPosts.php',
+    'App\\Console\\Commands\\AutoTranslatePosts' => $baseDir . '/app/Console/Commands/AutoTranslatePosts.php',
     'App\\Console\\Commands\\CreateSiteMap' => $baseDir . '/app/Console/Commands/CreateSiteMap.php',
     'App\\Console\\Commands\\SourceDailyCrawler' => $baseDir . '/app/Console/Commands/SourceDailyCrawler.php',
     'App\\Console\\Commands\\UpdateYoutubeVideoDetail' => $baseDir . '/app/Console/Commands/UpdateYoutubeVideoDetail.php',

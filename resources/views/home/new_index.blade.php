@@ -21,6 +21,16 @@
 </section>
 
 <div class="section-title">
+    <h2>Sexy Images</h2>
+    <a href="{{ route('home.images') }}" title="View more">View more</a>
+</div>
+<section class="lastest-posts">
+    <?php foreach ($idols as $k => $v) : ?>
+        @include('layout.card_item', ['item' => $v])
+    <?php endforeach; ?>
+</section>
+
+<div class="section-title">
     <h2>Hot Videos</h2>
     <a href="{{ route('home.videos') }}" title="View more">View more</a>
 </div>
@@ -37,16 +47,6 @@
 </div>
 <section class="lastest-posts">
     <?php foreach ($video18 as $k => $v) : ?>
-        @include('layout.card_item', ['item' => $v])
-    <?php endforeach; ?>
-</section>
-
-<div class="section-title">
-    <h2>Sexy Images</h2>
-    <a href="{{ route('home.images18') }}" title="View more">View more</a>
-</div>
-<section class="lastest-posts">
-    <?php foreach ($idols as $k => $v) : ?>
         @include('layout.card_item', ['item' => $v])
     <?php endforeach; ?>
 </section>

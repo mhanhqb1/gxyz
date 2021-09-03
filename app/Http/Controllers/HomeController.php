@@ -10,6 +10,8 @@ use App\Models\YoutubeChannel;
 use App\Models\YoutubeChannelVideo;
 use App\Models\Video;
 use App\Models\Post;
+use App\Models\PostImage;
+use PhpParser\Node\Expr\PostInc;
 
 class HomeController extends Controller {
 
@@ -18,12 +20,8 @@ class HomeController extends Controller {
      */
     public static function index() {
         $limit = 8;
-        $images = Image::get_list([
-            'status' => 1,
-            'is_18' => 1,
-            'limit' => $limit,
-        ]);
         $offset = 0;
+        $images = Post::where('status', 1)->where('type', 0)->orderBy('id', 'desc')->limit($limit*2)->offset($offset)->get();
         $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit*2)->offset($offset)->get();
         $video18 = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
         return view('home.new_index', ['idols' => $images, 'videos' => $videos, 'video18' => $video18]);
@@ -90,7 +88,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $images = Image::limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
+        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
         $pageTitle = 'Hot Girl Images - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
@@ -174,6 +172,34 @@ class HomeController extends Controller {
             'related' => $related,
             'relatedIdols' => $relatedIdols
         ]);
+    }
+
+    public static function imageView(Request $request) {
+        $img = !empty($request->img) ? $request->img : '';
+        if (empty($img)) {
+            return redirect(route('home.index'));
+        }
+        return view('home.image_view', ['img' => $img]);
+    }
+
+    /**
+     * Get video detail
+     */
+    public static function postDetail($slug, $id) {
+        $post = Post::find($id);
+        $limit = 16;
+        if (empty($post)) {
+            return redirect(route('home.index'));
+        }
+        $pageTitle = 'Sexy Girl - ' . $post->title;
+        $pageImage = $post->image;
+        $related = Post::inRandomOrder()->where('id', '!=', $id)->where('status', 1)->where('type', 0);
+        if (!empty($post->is_18)) {
+            $related = $related->where('is_18', 1);
+        }
+        $related = $related->limit($limit)->get();
+        $postImages = PostImage::where('post_id', $id)->pluck('image');
+        return view('home.post_detail', ['postImages' => $postImages, 'related' => $related,'post' => $post, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
 
     /**

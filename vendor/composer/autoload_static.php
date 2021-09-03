@@ -561,6 +561,7 @@ class ComposerStaticInitcdfd9a4cf38775c015a0a6e71b3ce948
         'Abraham\\TwitterOAuth\\Util' => __DIR__ . '/..' . '/abraham/twitteroauth/src/Util.php',
         'Abraham\\TwitterOAuth\\Util\\JsonDecoder' => __DIR__ . '/..' . '/abraham/twitteroauth/src/Util/JsonDecoder.php',
         'App\\Console\\Commands\\AutoPublishPosts' => __DIR__ . '/../..' . '/app/Console/Commands/AutoPublishPosts.php',
+        'App\\Console\\Commands\\AutoTranslatePosts' => __DIR__ . '/../..' . '/app/Console/Commands/AutoTranslatePosts.php',
         'App\\Console\\Commands\\CreateSiteMap' => __DIR__ . '/../..' . '/app/Console/Commands/CreateSiteMap.php',
         'App\\Console\\Commands\\SourceDailyCrawler' => __DIR__ . '/../..' . '/app/Console/Commands/SourceDailyCrawler.php',
         'App\\Console\\Commands\\UpdateYoutubeVideoDetail' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateYoutubeVideoDetail.php',

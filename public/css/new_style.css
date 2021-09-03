@@ -322,6 +322,14 @@ footer a {
 .post-description {
     padding: 24px 0;
 }
+.post-image-detail img {
+    max-width: 100%;
+}
+.post-thumb-images img {
+    display: inline-block;
+    max-width: calc(50% - 24px);
+    margin: 0 10px 12px;
+}
 
 @media (max-width: 992px) {
     .nav {
