@@ -16,10 +16,10 @@ if (!empty($is_video)) {
         <img src="{{ $image }}" alt="{{ $item->name }}" title="{{ $item->name }}"/>
         <div class="card-info">
             <h3>{{ $title }}</h3>
-            <span>
+            <!-- <span>
                 <ion-icon name="flame-outline"></ion-icon>
                 Sexy Girl
-            </span>
+            </span> -->
             <!-- <span>
                 <ion-icon name="flame-outline"></ion-icon>
                 {{ date('Y-m-d', strtotime($item->updated_at)) }}
