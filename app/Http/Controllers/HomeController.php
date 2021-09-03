@@ -44,8 +44,11 @@ class HomeController extends Controller {
         $videoId = !empty($request->video_id) ? $request->video_id : '';
         $video = Post::find($videoId);
         if (!empty($video)) {
-            if ($video->source_type == 'twitter') {
+            if (in_array($video->source_type, array('twitter', 'imgccc'))) {
                 $result['data'] = $video->stream_url;
+                if ($video->source_type == 'imgccc') {
+                    $result['source'] = 'iframe';
+                }
             } elseif (!empty($video->stream_url) && ($video->stream_crawl + $videoExpired) > time()) {
                 $result['data'] = $video->stream_url;
                 $result['aaa'] = 1;
@@ -186,7 +189,11 @@ class HomeController extends Controller {
         }
         $pageTitle = 'Sexy Girl Video - ' . $video->title;
         $pageImage = $video->image;
-        $related = Post::inRandomOrder()->where('status', 1)->where('type', 1)->limit($limit)->get();
+        $related = Post::inRandomOrder()->where('status', 1)->where('type', 1);
+        if (!empty($video->is_18)) {
+            $related = $related->where('is_18', 1);
+        }
+        $related = $related->limit($limit)->get();
         return view('home.new_video_detail', ['related' => $related,'video' => $video, 'pageTitle' => $pageTitle, 'id' => $id, 'pageImage' => $pageImage]);
     }
 

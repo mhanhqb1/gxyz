@@ -1,3 +1,11 @@
+<?php
+$streamUrl = "https://sexygirls69.xyz/getVideoStream";
+// $streamUrl = 'http://127.0.0.1:8000/getVideoStream';
+if (strpos($_SERVER['HTTP_HOST'], 'www') !== false) {
+    $streamUrl = "https://www.sexygirls69.xyz/getVideoStream";
+}
+?>
+
 @extends('layout.new_layout')
 
 @section('content')
@@ -37,6 +45,7 @@
             <div id='aaaa'>
                 <video id="my-video-player" class="video-js vjs-default-skin vjs-fluid"></video>
             </div>
+            <div id='bbb' style="margin-top: 20px;"></div>
         </div>
         <!-- <div class="post-description">
             {{ $video->description }}
@@ -60,7 +69,7 @@
     $(document).ready(function(){
         var videoId = "{{ $video->source_id }}";
         $.ajax({
-            url: "{{ route('home.getVideoStream') }}",
+            url: "{{ $streamUrl }}",
             method: 'POST',
             data: {
                 video_id: {{ $video->id }},
@@ -69,6 +78,16 @@
         }).done(function (response) {
             var res = JSON.parse(response);
             if (res.status == "OK") {
+                if (typeof res.source != 'undefined') {
+                    var bb = "<a href='"+res.data+"' target='_blank'>Server Video 2</a>";
+                    $('#bbb').html(bb);
+                    let html = '<iframe src="'+res.data.replace('https:', '').replace('http:', '')+'" frameborder="0" allowfullscreen></iframe>';
+                    $('#bbb').html(html);
+                    // newwindow = window.open('https://v.imgccc.com','popup','width=800,height=600');
+                    // newwindow.location.href = res.data;
+                    // console.log(1);
+                    // newwindow.location.reload();
+                }
                 const playerInstance = jwplayer("my-video-player").setup({
                     playlist: [{
                         title: '{{ $video->title }}',

@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         Commands\AutoPublishPosts::class,
         Commands\CreateSiteMap::class,
         Commands\SourceDailyCrawler::class,
-        Commands\UpdateYoutubeVideoDetail::class
+        Commands\UpdateYoutubeVideoDetail::class,
+        Commands\AutoTranslatePosts::class,
     ];
 
     /**
@@ -31,6 +32,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('Sexy:SourceDailyCrawler')->hourly();
         $schedule->command('Sexy:UpdateYoutubeVideoDetail')->hourlyAt(15);
         $schedule->command('Sexy:AutoPublishPosts')->hourlyAt(45);
+        $schedule->command('Sexy:AutoTranslatePosts')->hourly(10);
     }
 
     /**

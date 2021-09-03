@@ -38,7 +38,7 @@ sql = ("""
 data = mysql.all(sql)
 for v in data:
     in_filename = v['stream_url']
-    out_filename = v['title'] + '-' + str(v['id']) + '.jpg'
+    out_filename = v['slug'] + '-' + str(v['id']) + '.jpg'
     print(out_filename)
     a = generate_thumbnail(in_filename, out_filename)
     print(a)
@@ -49,6 +49,8 @@ for v in data:
             SET
                 crawl_at = CURDATE(),
                 status = 1,
+                is_18 = 1,
+                type = 1,
                 image = %(image)s
             WHERE
                 id = %(post_id)s

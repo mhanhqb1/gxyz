@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 from database import MySQLRepository
 from bs4 import BeautifulSoup
-from google_trans_new import google_translator
+# from google_trans_new import google_translator
 
 mysql = MySQLRepository('gxyz')
 
@@ -86,13 +86,21 @@ def main():
 	# Init
 	totalPages = 377
 	count = 1
+	payload={}
+	headers = {
+        'Accept': '*/*',
+        #'Accept-Encoding': 'gzip, deflate, br',
+        'User-Agent': 'PostmanRuntime/7.26.8',
+        'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+        'Accept-Encoding':'gzip, deflate'
+    }
 
 	for i in range(totalPages):
 		i += 1
 		url = "http://www.xiuren.org/page-"+str(i)+".html"
 		xiurenCover = "http://www.xiuren.org/cover.php?src="
-		response = requests.request("GET", url)
-		response.encoding = 'gbk'
+		response = requests.request("GET", url, headers=headers, data=payload)
+		response.encoding = 'zh-cn'
 		soup = BeautifulSoup(response.text, 'html.parser')
 		rows = soup.select('div#main .loop .content')
 		if (rows != []):
@@ -203,7 +211,12 @@ def get18Video(url = False):
             get18Video(newUrl)
     return True
 
+def test():
+    import m3u8_to_mp4
+    a = m3u8_to_mp4.download('https://ccn.killcovid2021.com//m3u8/517116/517116.m3u8?st=uAYkkh_WiG-wZI8ZWtoUUA&e=1630640189')
+    print(a)
+
 if __name__ == "__main__":
-	#main()
+	main()
 	#get_detail()
-    get18Video()
+    # test()
