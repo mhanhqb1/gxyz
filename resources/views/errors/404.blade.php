@@ -70,17 +70,17 @@ $images = App\Models\Post::inRandomOrder()->where('type', 0)->where('status', 1)
                             <span class="nav-list_icon">
                                 <ion-icon name="flame-outline"></ion-icon>
                             </span>
-                            <span class="nav-list_title">Hot Images</span>
+                            <span class="nav-list_title">Sexy Images</span>
                         </a>
                     </li>
-                    <li class="nav-list {{ in_array($routeName, ['home.images18']) ? 'active' : '' }}">
+                    <!-- <li class="nav-list {{ in_array($routeName, ['home.images18']) ? 'active' : '' }}">
                         <a href="{{ route('home.images18') }}" title="Sexy Girl Images">
                             <span class="nav-list_icon">
                                 <ion-icon name="image-outline"></ion-icon>
                             </span>
                             <span class="nav-list_title">Sexy Images</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-list {{ in_array($routeName, ['home.videos']) ? 'active' : '' }}">
                         <a href="{{ route('home.videos') }}" title="Hot Girl Video">
                             <span class="nav-list_icon">
