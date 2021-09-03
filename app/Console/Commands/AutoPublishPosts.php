@@ -38,6 +38,7 @@ class AutoPublishPosts extends Command
      */
     public function handle()
     {
+        \Log::info ("Auto publish posts: ".date('Y-m-d H:i:s'));
         Post::autoPublishPosts(7);
     }
 }

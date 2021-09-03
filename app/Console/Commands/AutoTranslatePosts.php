@@ -40,6 +40,7 @@ class AutoTranslatePosts extends Command
      */
     public function handle()
     {
+        \Log::info ("Auto translate posts: ".date('Y-m-d H:i:s'));
         $tr = new GoogleTranslate();
         $data = Post::where('status', -2)->where('source_type', 'xiuren')->orderBy('id', 'desc')->get();
         foreach ($data as $k => $v) {

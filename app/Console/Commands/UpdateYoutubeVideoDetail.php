@@ -38,6 +38,7 @@ class UpdateYoutubeVideoDetail extends Command
      */
     public function handle()
     {
+        \Log::info ("Auto update video detail: ".date('Y-m-d H:i:s'));
         Post::Youtube_updateVideoDetail();
     }
 }

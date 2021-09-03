@@ -39,6 +39,7 @@ class SourceDailyCrawler extends Command
      */
     public function handle()
     {
+        \Log::info ("Auto crawler posts: ".date('Y-m-d H:i:s'));
         Post::dailyCrawler();
     }
 }

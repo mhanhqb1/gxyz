@@ -39,6 +39,7 @@ class CreateSiteMap extends Command
      */
     public function handle()
     {
+        \Log::info ("Create sitemap: ".date('Y-m-d H:i:s'));
         $sitemap = \App::make('sitemap');
         $sitemap->add(url('/'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('home.videos'), Carbon::now(), '1.0', 'daily');
