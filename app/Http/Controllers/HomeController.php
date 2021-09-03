@@ -11,6 +11,7 @@ use App\Models\YoutubeChannelVideo;
 use App\Models\Video;
 use App\Models\Post;
 use App\Models\PostImage;
+use App\Models\PostTag;
 use PhpParser\Node\Expr\PostInc;
 
 class HomeController extends Controller {
@@ -91,6 +92,24 @@ class HomeController extends Controller {
         $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
         $pageTitle = 'Hot Girl Images - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
+    }
+
+    public static function postTags(Request $request, $tag) {
+        $params = $request->all();
+        if (empty($params['page'])) {
+            $params['page'] = 1;
+        }
+        $limit = 16;
+        $offset = ($params['page'] - 1)*$limit;
+        $tag = urldecode($tag);
+        $posts = Post::where('tags', 'like', "%{$tag}%")
+            ->where('status', 1)
+            ->limit($limit)
+            ->offset($offset)
+            ->orderBy('id', 'desc')
+            ->get();
+        $pageTitle = 'Sexy Girl - Tag: '.$tag. ' - Page '.$params['page'];
+        return view('home.post_tags', ['posts' => $posts, 'pageTitle' => $pageTitle, 'params' => $params, 'tag' => $tag]);
     }
 
     /**

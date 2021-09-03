@@ -32,6 +32,7 @@ Route::get('/flickrCrawler', [HomeController::class, 'flickrCrawler'])->name('ho
 Route::get('/flickrDailyCrawler', [HomeController::class, 'flickrDailyCrawler'])->name('home.flickrDailyCrawler');
 Route::get('/youtubeCrawler', [HomeController::class, 'youtubeCrawler'])->name('home.youtubeCrawler');
 Route::get('/twitterCrawler', [HomeController::class, 'twitterCrawler'])->name('home.twitterCrawler');
+Route::get('/tags/{tag}', [HomeController::class, 'postTags'])->name('home.postTags');
 
 
 Route::get('/checkImages', [AdminController::class, 'checkImages'])->name('admin.checkImages');

@@ -30,7 +30,7 @@
         </div>
         @endif
         <div class="section-title">
-            <h2>Related Images</h2>
+            <h2>You might like</h2>
         </div>
         <div class="lastest-posts">
             <?php foreach ($related as $k => $v) : ?>
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="post-detail_right">
-
+        @include('layout.right_column')
     </div>
 </section>
 @endsection

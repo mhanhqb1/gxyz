@@ -51,7 +51,7 @@ if (strpos($_SERVER['HTTP_HOST'], 'www') !== false) {
             {{ $video->description }}
         </div> -->
         <div class="section-title">
-            <h2>Related Videos</h2>
+            <h2>You might like</h2>
         </div>
         <div class="lastest-posts">
             <?php foreach ($related as $k => $v) : ?>
@@ -60,7 +60,7 @@ if (strpos($_SERVER['HTTP_HOST'], 'www') !== false) {
         </div>
     </div>
     <div class="post-detail_right">
-
+        @include('layout.right_column')
     </div>
 
 </section>
