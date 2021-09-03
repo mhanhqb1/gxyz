@@ -268,8 +268,8 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $images = Image::where('is_18', 1)->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
-        $pageTitle = 'Sexy Girl Videos - Page ' . $params['page'];
+        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
+        $pageTitle = 'Sexy Girl Images - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
 
