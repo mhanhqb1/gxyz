@@ -44,14 +44,14 @@ class CreateSiteMap extends Command
         $sitemap->add(route('home.videos'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('home.18videos'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('home.images'), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('home.images18'), Carbon::now(), '1.0', 'daily');
+        // $sitemap->add(route('home.images18'), Carbon::now(), '1.0', 'daily');
         $posts = DB::table('posts')
             ->where('status', 1)
-            ->where('type', 1)
-            ->orderBy('created_at', 'desc')
+            // ->where('type', 1)
+            ->orderBy('updated_at', 'desc')
             ->get();
         foreach ($posts as $post) {
-            $sitemap->add(route('home.videoDetail', ['slug' => $post->slug, 'id' => $post->id]), $post->updated_at, '0.8', 'daily');
+            $sitemap->add(route(!empty($post->type) ? 'home.videoDetail' : 'home.postDetail', ['slug' => $post->slug, 'id' => $post->id]), $post->updated_at, '0.8', 'daily');
         }
         $sitemap->store('xml', 'sitemap');
         if (\File::exists(public_path() . '/sitemap.xml')) {
