@@ -22,9 +22,9 @@ class HomeController extends Controller {
     public static function index() {
         $limit = 8;
         $offset = 0;
-        $images = Post::where('status', 1)->where('type', 0)->orderBy('id', 'desc')->limit($limit*2)->offset($offset)->get();
-        $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit*2)->offset($offset)->get();
-        $video18 = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
+        $images = Post::where('status', 1)->where('type', 0)->orderBy('updated_at', 'desc')->limit($limit*2)->offset($offset)->get();
+        $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('updated_at', 'desc')->limit($limit*2)->offset($offset)->get();
+        $video18 = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('updated_at', 'desc')->limit($limit)->offset($offset)->get();
         return view('home.new_index', ['idols' => $images, 'videos' => $videos, 'video18' => $video18]);
     }
 
