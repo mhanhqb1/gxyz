@@ -20,8 +20,21 @@
                 <img src="{{ $post->image }}" alt="{{ $post->title }}"/>
             </a>
         </div>
+        @if (!empty($post->tags))
+        <div class="post-description">
+            {{ $post->tags }}
+        </div>
+        <div class="post-tags post-detail-tags">
+            <?php $tags = explode(',', $post->tags); ?>
+            @foreach($tags as $t)
+            <a href="{{ route('home.postTags', ['tag' => urlencode(trim($t))]) }}" title="Sexy girl - {{ trim($t) }}">
+                {{ trim($t) }}
+            </a>
+            @endforeach
+        </div>
+        @endif
         @if (!empty($postImages))
-        <div class="post-thumb-images">
+        <div class="post-thumb-images" style="margin-top: 24px;">
             @foreach ($postImages as $v)
             <a href="{{ route('home.imageView', ['img' => $v]) }}" title="{{ $post->title }}" target="_blank">
                 <img src="{{ $v }}" alt="{{ $post->title }}"/>

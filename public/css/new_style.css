@@ -346,6 +346,9 @@ footer a {
     border-radius: 5px;
     font-weight: 500;
 }
+.post-detail-tags a{
+    margin-left: 0;
+}
 
 @media (max-width: 992px) {
     .nav {

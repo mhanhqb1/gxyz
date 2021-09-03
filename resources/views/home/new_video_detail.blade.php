@@ -47,9 +47,20 @@ if (strpos($_SERVER['HTTP_HOST'], 'www') !== false) {
             </div>
             <div id='bbb' style="margin-top: 20px;"></div>
         </div>
-        <!-- <div class="post-description">
-            {{ $video->description }}
-        </div> -->
+        @if (!empty($video->tags))
+        <div class="post-description">
+            {{ $video->tags }}
+        </div>
+        <div class="post-tags post-detail-tags">
+            <?php $tags = explode(',', $video->tags); ?>
+            @foreach($tags as $t)
+            <a href="{{ route('home.postTags', ['tag' => urlencode(trim($t))]) }}" title="Sexy girl - {{ trim($t) }}">
+                {{ trim($t) }}
+            </a>
+            @endforeach
+        </div>
+        @endif
+
         <div class="section-title">
             <h2>You might like</h2>
         </div>
