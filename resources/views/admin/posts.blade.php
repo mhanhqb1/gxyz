@@ -46,11 +46,11 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="master_source">Master Sources</label>
-                    <select class="form-control" name="master_source">
+                    <label for="master_source_id">Master Sources</label>
+                    <select class="form-control" name="master_source_id">
                         <option value="">-</option>
                         <?php foreach ($masterSources as $t): ?>
-                        <option value="{{ $t->id }}" {{ !empty($params['master_source']) && $params['master_source'] == $t ? "selected='selected'" : "" }}>{{ $t->name }}</option>
+                        <option value="{{ $t->id }}" {{ !empty($params['master_source_id']) && $params['master_source_id'] == $t ? "selected='selected'" : "" }}>{{ $t->name }}</option>
                         <?php endforeach; ?>
                     </select>
                 </div>
