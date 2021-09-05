@@ -114,6 +114,10 @@ class Post extends Model {
                     $data = YoutubeCrawlerServiceProvider::getDataByPlaylist($s);
                     echo count($data).PHP_EOL;
                     self::addUpdateMulti($data);
+                } elseif ($s->source_type == MasterSource::$sourceType['youtube']) {
+                    $data = YoutubeCrawlerServiceProvider::getDataByChannel($s);
+                    echo count($data).PHP_EOL;
+                    self::addUpdateMulti($data);
                 }
                 $s->crawl_at = $today;
                 $s->save();

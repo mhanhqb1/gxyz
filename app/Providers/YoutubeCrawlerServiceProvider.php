@@ -98,8 +98,40 @@ class YoutubeCrawlerServiceProvider extends ServiceProvider
         return $data;
     }
 
+    /*
+     * Get data by channel
+     */
+    public static function getDataByChannel($source, $data = [], $nextToken = Null, $skip = False) {
+        # Init
+        $channelId = urlencode($source->source_params);
+        $sourceId = $source->id;
+        $sortType = 'date';
+        if (empty($source->crawl_at)) {
+            $sortType = 'viewCount';
+        }
+        $apiKey = self::getApiKey();
+        $apiUrl = self::$youtubeApi."search?part=snippet,id&channelId={$channelId}&key={$apiKey}&order={$sortType}&maxResults=50";
+        if (!empty($nextToken)) {
+            $apiUrl .= "&pageToken={$nextToken}";
+        }
+
+        $res = CommonServiceProvider::call_api($apiUrl);
+        if (!empty($res['items'])) {
+            foreach ($res['items'] as $v) {
+                if ($v['id']['kind'] == 'youtube#video') {
+                    $data[] = self::getVideoItem($v, $sourceId);
+                }
+            }
+            if (!empty($res['nextPageToken']) && $skip == False && empty($source->crawl_at)) {
+                $data = self::getDataBySourceKey($source, $data, $res['nextPageToken']);
+            }
+        }
+
+        return $data;
+    }
+
     // Get Video Item
-    public static function getVideoItem($item, $sourceId, $isPlaylist) {
+    public static function getVideoItem($item, $sourceId, $isPlaylist = false) {
         $snippet = $item['snippet'];
         if (!empty($isPlaylist)) {
             $youtubeId = $snippet['resourceId']['videoId'];
