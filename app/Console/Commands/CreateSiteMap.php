@@ -49,7 +49,7 @@ class CreateSiteMap extends Command
         $posts = DB::table('posts')
             ->where('status', 1)
             // ->where('type', 1)
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
         foreach ($posts as $post) {
             $sitemap->add(route(!empty($post->type) ? 'home.videoDetail' : 'home.postDetail', ['slug' => $post->slug, 'id' => $post->id]), $post->updated_at, '0.8', 'daily');

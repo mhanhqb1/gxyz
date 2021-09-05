@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Stichoza\GoogleTranslate\GoogleTranslate;
+use App\Providers\CommonServiceProvider;
 use App\Models\Post;
 use Exception;
 
@@ -47,7 +48,7 @@ class AutoTranslatePosts extends Command
             try {
                 $v->title = $tr->translate($v->title);
                 $v->tags = $tr->translate($v->tags);
-                $v->slug = Post::convertURL($v->title);
+                $v->slug = CommonServiceProvider::convertURL($v->title);
                 $v->status = -3;
                 $v->save();
                 echo $k.' - '.$v->title.PHP_EOL;
