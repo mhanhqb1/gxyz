@@ -27,6 +27,12 @@
                 </div>
             </div>
             <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="custom_tags">Custom Tags</label>
+                    <input type="text" class="form-control" name="custom_tags" value="">
+                </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group">
                     <label for="is_owner">Is Owner</label>
                     <select class="form-control" name="is_owner">
@@ -115,6 +121,7 @@
                     <th>Type</th>
                     <th>Source Type</th>
                     <th>Params</th>
+                    <th>Tags</th>
                     <th>Loop</th>
                     <th>Crawl At</th>
                     <th>Owner</th>
@@ -134,6 +141,7 @@
                         <td>{{ $v->type }}</td>
                         <td>{{ $v->source_type }}</td>
                         <td>{{ $v->source_params }}</td>
+                        <td>{{ $v->custom_tags }}</td>
                         <td>{{ $v->loop }}</td>
                         <td>{{ $v->crawl_at }}</td>
                         <td>{{ $v->is_owner }}</td>

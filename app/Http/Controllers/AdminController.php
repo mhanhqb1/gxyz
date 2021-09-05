@@ -60,6 +60,7 @@ class AdminController extends Controller
         $sourceParams = !empty($params['source_params']) ? $params['source_params'] : '';
         $loop = !empty($params['loop']) ? $params['loop'] : '';
         $isOwner = !empty($params['is_owner']) ? $params['is_owner'] : 0;
+        $customTags = !empty($params['custom_tags']) ? $params['custom_tags'] : '';
 
         $masterSource = new MasterSource();
         $masterSource->type = $type;
@@ -69,6 +70,7 @@ class AdminController extends Controller
         $masterSource->loop = $loop;
         $masterSource->status = 1;
         $masterSource->is_owner = $isOwner;
+        $masterSource->custom_tags = $customTags;
         $masterSource->save();
 
         return redirect('/addSource');

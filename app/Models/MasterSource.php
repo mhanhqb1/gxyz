@@ -21,7 +21,8 @@ class MasterSource extends Model {
         'crawl_at',
         'status',
         'loop',
-        'is_owner'
+        'is_owner',
+        'custom_tags'
     ];
 
     /**
