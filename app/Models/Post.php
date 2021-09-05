@@ -7,6 +7,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use SebastianBergmann\CodeCoverage\Report\PHP;
 
 use App\Providers\YoutubeCrawlerServiceProvider;
+use App\Providers\TwitterServiceProvider;
 use App\Providers\CommonServiceProvider;
 
 use App\Models\PostTag;
@@ -35,7 +36,8 @@ class Post extends Model {
         'source_id',
         'stream_url',
         'crawl_at',
-        'stream_crawl'
+        'stream_crawl',
+        'master_source_id'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -118,6 +120,8 @@ class Post extends Model {
                     $data = YoutubeCrawlerServiceProvider::getDataByChannel($s);
                     echo count($data).PHP_EOL;
                     self::addUpdateMulti($data);
+                } elseif ($s->source_type == MasterSource::$sourceType['twitter']) {
+                    TwitterServiceProvider::getUserTimeline($s);
                 }
                 $s->crawl_at = $today;
                 $s->save();
