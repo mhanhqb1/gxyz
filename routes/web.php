@@ -39,6 +39,8 @@ Route::get('/checkImages', [AdminController::class, 'checkImages'])->name('admin
 Route::post('/ajaxUpdateImages', [AdminController::class, 'ajaxUpdateImages'])->name('admin.ajaxUpdateImages');
 Route::get('/checkVideos', [AdminController::class, 'checkVideos'])->name('admin.checkVideos');
 Route::post('/ajaxUpdateVideos', [AdminController::class, 'ajaxUpdateVideos'])->name('admin.ajaxUpdateVideos');
+Route::get('/checkPosts', [AdminController::class, 'checkPosts'])->name('admin.checkPosts');
+Route::post('/ajaxUpdatePosts', [AdminController::class, 'ajaxUpdatePosts'])->name('admin.ajaxUpdatePosts');
 Route::get('/addSource', [AdminController::class, 'addSource'])->name('admin.addSource');
 Route::post('/saveSource', [AdminController::class, 'saveSource'])->name('admin.saveSource');
 Route::post('/ajaxUpdateSources', [AdminController::class, 'ajaxUpdateSources'])->name('admin.ajaxUpdateSources');

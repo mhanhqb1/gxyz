@@ -55,7 +55,8 @@ class TwitterServiceProvider extends ServiceProvider
                     'source_type' => Post::$sourceType['twitter'],
                     'source_url' => 'https://twitter.com/SofiaVergara/status/'.$_id,
                     'source_id' => $k.' - '.$_id,
-                    'master_source_id' => $source->id
+                    'master_source_id' => $source->id,
+                    'status' => -2
                 ];
                 if (!empty($media->video_info)) {
                     $data['type'] = 1;

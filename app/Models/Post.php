@@ -76,6 +76,15 @@ class Post extends Model {
         if (isset($params['is_18']) && $params['is_18'] != '') {
             $data = $data->where('is_18', $params['is_18']);
         }
+        if (isset($params['type']) && $params['type'] != '') {
+            $data = $data->where('type', $params['type']);
+        }
+        if (!empty($params['source_type'])) {
+            $data = $data->where('source_type', $params['source_type']);
+        }
+        if (!empty($params['master_source_id'])) {
+            $data = $data->where('master_source_id', $params['master_source_id']);
+        }
 
         # Return data
         $data = $data->offset($offset)->limit($limit)->get();
@@ -190,6 +199,21 @@ class Post extends Model {
                     }
                     $_pt->save();
                 }
+                $p->status = 1;
+                $p->created_at = date('Y-m-d H:i:s');
+                $p->save();
+            }
+        }
+
+        // Twitter
+        $posts = Post::inRandomOrder()
+            ->where('status', 0)
+            ->where('source_type', self::$sourceType['twitter'])
+            ->limit($limit)
+            ->get();
+        if (!$posts->isEmpty()) {
+            foreach ($posts as $k => $p) {
+                echo $k.' - '.$p->title.PHP_EOL;
                 $p->status = 1;
                 $p->created_at = date('Y-m-d H:i:s');
                 $p->save();

@@ -35,6 +35,19 @@ class AdminController extends Controller
     }
 
     /**
+     * Get list posts
+     */
+    public static function checkPosts(Request $request)
+    {
+        $params = $request->all();
+        $params['limit'] = 100;
+        $posts = Post::get_list($params);
+        $masterSources = MasterSource::get();
+        $sourceTypes = Post::$sourceType;
+        return view('admin.posts', ['posts' => $posts, 'params' => $params, 'masterSources' => $masterSources, 'sourceTypes' => $sourceTypes]);
+    }
+
+    /**
      * Add source
      */
     public static function addSource(Request $request)
@@ -123,6 +136,33 @@ class AdminController extends Controller
                 Video::whereIn('id', $ids)->delete();
             } else {
                 Video::whereIn('id', $ids)->update([ $field => $val ]);
+            }
+        }
+
+        echo json_encode($result);
+        die();
+    }
+
+    /**
+     * Update image
+     */
+    public static function ajaxUpdatePosts(Request $request)
+    {
+        # Init
+        $result = [
+            'status' => 'OK',
+            'message' => ''
+        ];
+        $params = $request->all();
+        $ids = !empty($params['ids']) ? explode(',', $params['ids']) : [];
+        $field = !empty($params['field']) ? $params['field'] : '';
+        $val = !empty($params['val']) ? $params['val'] : 0;
+
+        if (!empty($ids) && !empty($field) && isset($val)) {
+            if ($field == 'status' && $val == '-2') {
+                Post::whereIn('id', $ids)->delete();
+            } else {
+                Post::whereIn('id', $ids)->update([ $field => $val ]);
             }
         }
 
