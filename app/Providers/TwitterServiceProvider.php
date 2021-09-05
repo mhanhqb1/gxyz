@@ -50,7 +50,7 @@ class TwitterServiceProvider extends ServiceProvider
                     'slug' => 'post-'.$_id,
                     'description' => '',
                     'image' => $media->media_url_https,
-                    'tags' => $source->custom_tags,
+                    // 'tags' => $source->custom_tags,
                     'type' => 0,
                     'source_type' => Post::$sourceType['twitter'],
                     'source_url' => 'https://twitter.com/SofiaVergara/status/'.$_id,
@@ -68,6 +68,8 @@ class TwitterServiceProvider extends ServiceProvider
                         }
                     }
                 }
+                $_typeText = !empty($data['type']) ? 'video' : 'image';
+                $data['tags'] = str_replace("{type}", $_typeText, $source->custom_tags);
                 echo $data['title'].PHP_EOL;
                 Post::updateOrCreate([
                     'source_type' => $data['source_type'],
