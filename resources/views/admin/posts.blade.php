@@ -50,7 +50,7 @@
                     <select class="form-control" name="master_source_id">
                         <option value="">-</option>
                         <?php foreach ($masterSources as $t): ?>
-                        <option value="{{ $t->id }}" {{ !empty($params['master_source_id']) && $params['master_source_id'] == $t ? "selected='selected'" : "" }}>{{ $t->name }}</option>
+                        <option value="{{ $t->id }}" {{ !empty($params['master_source_id']) && $params['master_source_id'] == $t->id ? "selected='selected'" : "" }}>{{ $t->name }}</option>
                         <?php endforeach; ?>
                     </select>
                 </div>
