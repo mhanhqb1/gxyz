@@ -184,6 +184,9 @@ class Post extends Model {
                     foreach ($res['items'] as $v) {
                         if ($v['kind'] == 'youtube#video') {
                             $snippet = $v['snippet'];
+                            if (!empty($snippet['liveBroadcastContent']) && $snippet['liveBroadcastContent'] != 'none') {
+                                continue;
+                            }
                             $ageRestricted = !empty($v['contentDetails']['contentRating']['ytRating']) ? 1 : 0;
                             if (!empty($ageRestricted)) {
                                 $post->status = -1;
@@ -233,6 +236,7 @@ class Post extends Model {
             foreach ($posts as $k => $p) {
                 echo $k.' - '.$p->title.PHP_EOL;
                 $p->status = 1;
+                $p->created_at = date('Y-m-d H:i:s');
                 $p->save();
             }
         }
@@ -262,6 +266,7 @@ class Post extends Model {
                     $_pt->save();
                 }
                 $p->status = 1;
+                $p->created_at = date('Y-m-d H:i:s');
                 $p->save();
             }
         }

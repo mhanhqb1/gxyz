@@ -22,9 +22,9 @@ class HomeController extends Controller {
     public static function index() {
         $limit = 8;
         $offset = 0;
-        $images = Post::where('status', 1)->where('type', 0)->orderBy('updated_at', 'desc')->limit($limit*2)->offset($offset)->get();
-        $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('updated_at', 'desc')->limit($limit*2)->offset($offset)->get();
-        $video18 = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('updated_at', 'desc')->limit($limit)->offset($offset)->get();
+        $images = Post::where('status', 1)->where('type', 0)->orderBy('created_at', 'desc')->limit($limit*2)->offset($offset)->get();
+        $videos = Post::where('status', 1)->where('type', 1)->where('is_18', 0)->orderBy('created_at', 'desc')->limit($limit*2)->offset($offset)->get();
+        $video18 = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('created_at', 'desc')->limit($limit)->offset($offset)->get();
         return view('home.new_index', ['idols' => $images, 'videos' => $videos, 'video18' => $video18]);
     }
 
@@ -89,7 +89,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
+        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('created_at', 'desc')->get();
         $pageTitle = 'Hot Girl Images - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
@@ -122,7 +122,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $data = Post::where('type', 1)->where('status', 1)->where('is_18', 0)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
+        $data = Post::where('type', 1)->where('status', 1)->where('is_18', 0)->orderBy('created_at', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Hot Girl Videos - Page '.$params['page'];
         $route = 'home.videos';
         return view('home.new_video', ['route' => $route, 'data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
@@ -138,7 +138,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $data = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('id', 'desc')->limit($limit)->offset($offset)->get();
+        $data = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('created_at', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Sexy Girl Videos - Page '.$params['page'];
         $route = 'home.18videos';
         return view('home.new_video', ['route' => $route, 'data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
@@ -212,7 +212,7 @@ class HomeController extends Controller {
         }
         $pageTitle = 'Sexy Girl - ' . $post->title;
         $pageImage = $post->image;
-        $lastestPosts = Post::where('id', '!=', $id)->where('status', 1)->limit($limit)->orderBy('updated_at', 'desc')->get();
+        $lastestPosts = Post::where('id', '!=', $id)->where('status', 1)->limit($limit)->orderBy('created_at', 'desc')->get();
         $lastestPostIds = [];
         foreach($lastestPostIds as $lp) {
             $lastestPostIds[] = $lp->id;
@@ -242,7 +242,7 @@ class HomeController extends Controller {
         }
         $pageTitle = 'Sexy Girl Video - ' . $video->title;
         $pageImage = $video->image;
-        $lastestPosts = Post::where('id', '!=', $id)->where('status', 1)->limit($limit)->orderBy('updated_at', 'desc')->get();
+        $lastestPosts = Post::where('id', '!=', $id)->where('status', 1)->limit($limit)->orderBy('created_at', 'desc')->get();
         $lastestPostIds = [];
         foreach($lastestPosts as $lp) {
             $lastestPostIds[] = $lp->id;
@@ -268,7 +268,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('id', 'desc')->get();
+        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('created_at', 'desc')->get();
         $pageTitle = 'Sexy Girl Images - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }
