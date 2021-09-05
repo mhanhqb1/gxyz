@@ -32,8 +32,9 @@ $topImage = 'imgs/1.jpg';
 
             <div class="nav-scroller py-1 mb-2">
                 <nav class="nav d-flex justify-content-between">
-                    <a class="p-2 text-muted text-center" href="{{ url('/checkImages') }}">CheckImages</a>
-                    <a class="p-2 text-muted text-center" href="{{ url('/checkVideos') }}">checkVideos</a>
+                    <!-- <a class="p-2 text-muted text-center" href="{{ url('/checkImages') }}">CheckImages</a>
+                    <a class="p-2 text-muted text-center" href="{{ url('/checkVideos') }}">checkVideos</a> -->
+                    <a class="p-2 text-muted text-center" href="{{ url('/checkPosts') }}">checkPosts</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/addSource') }}">addSource</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/s-migrate') }}">Migrate</a>
                     <a class="p-2 text-muted text-center" href="{{ url('/s-config-cache') }}">Clear cache</a>
