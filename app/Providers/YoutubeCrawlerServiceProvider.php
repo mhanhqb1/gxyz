@@ -88,9 +88,7 @@ class YoutubeCrawlerServiceProvider extends ServiceProvider
         $res = CommonServiceProvider::call_api($apiUrl);
         if (!empty($res['items'])) {
             foreach ($res['items'] as $v) {
-                if ($v['id']['kind'] == 'youtube#video') {
-                    $data[] = self::getVideoItem($v, $sourceId);
-                }
+                $data[] = self::getVideoItem($v, $sourceId, true);
             }
             if (!empty($res['nextPageToken']) && $skip == False && empty($source->crawl_at)) {
                 $data = self::getDataBySourceKey($source, $data, $res['nextPageToken']);
@@ -101,9 +99,13 @@ class YoutubeCrawlerServiceProvider extends ServiceProvider
     }
 
     // Get Video Item
-    public static function getVideoItem($item, $sourceId) {
+    public static function getVideoItem($item, $sourceId, $isPlaylist) {
         $snippet = $item['snippet'];
-        $youtubeId = $item['id']['videoId'];
+        if (!empty($isPlaylist)) {
+            $youtubeId = $snippet['resourceId']['videoId'];
+        } else {
+            $youtubeId = $item['id']['videoId'];
+        }
         return [
             'title' => $snippet['title'],
             'slug' => CommonServiceProvider::convertURL($snippet['title']),
