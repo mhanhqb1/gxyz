@@ -1,2 +1,8 @@
+User-agent: Googlebot
+Disallow: /nogooglebot/
+
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: http://sexygirls69.xyz/sitemap.xml
+Sitemap: http://www.sexygirls69.xyz/sitemap.xml
