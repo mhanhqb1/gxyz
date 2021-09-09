@@ -1,3 +1,7 @@
+User-agent: Googlebot
+Allow: *.css
+Allow: *.js
+
 User-agent: *
 Allow: /
 
