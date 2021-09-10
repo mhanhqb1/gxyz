@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SitemapXmlController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,8 @@ use App\Http\Controllers\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/sitemap.xml', [SitemapXmlController::class, 'index']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/hot-girl-images', [HomeController::class, 'images'])->name('home.images');

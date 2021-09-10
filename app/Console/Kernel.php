@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('Sexy:CreateSiteMap')->daily();
+        // $schedule->command('Sexy:CreateSiteMap')->daily();
         $schedule->command('Sexy:SourceDailyCrawler')->hourly();
         $schedule->command('Sexy:UpdateYoutubeVideoDetail')->hourlyAt(15);
         $schedule->command('Sexy:AutoPublishPosts')->hourlyAt(45);
