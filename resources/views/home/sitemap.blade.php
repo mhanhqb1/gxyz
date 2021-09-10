@@ -31,7 +31,7 @@
         <url>
             <loc>{{ route(!empty($post->type) ? 'home.videoDetail' : 'home.postDetail', ['slug' => $post->slug, 'id' => $post->id]) }}</loc>
             <lastmod>{{ $post->created_at->tz('UTC')->toAtomString() }}</lastmod>
-            <changefreq>weekly</changefreq>
+            <changefreq>always</changefreq>
             <priority>0.8</priority>
         </url>
     @endforeach
@@ -41,7 +41,7 @@
         <url>
             <loc>{{ route('home.postTags', ['tag' => urlencode(trim($tag->name))]) }}</loc>
             <lastmod>{{ $tag->created_at->tz('UTC')->toAtomString() }}</lastmod>
-            <changefreq>daily</changefreq>
+            <changefreq>always</changefreq>
             <priority>0.8</priority>
         </url>
     @endforeach
