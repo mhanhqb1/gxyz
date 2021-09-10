@@ -8,20 +8,20 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>{{ url('/') }}</loc>
-        <lastmod>{{ route('home.videos') }}</lastmod>
+        <loc>{{ route('home.videos') }}</loc>
+        <lastmod>{{ $dateNow }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>{{ url('/') }}</loc>
-        <lastmod>{{ route('home.18videos') }}</lastmod>
+        <loc>{{ route('home.18videos') }}</loc>
+        <lastmod>{{ $dateNow }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>{{ url('/') }}</loc>
-        <lastmod>{{ route('home.images') }}</lastmod>
+        <loc>{{ route('home.images') }}</loc>
+        <lastmod>{{ $dateNow }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
