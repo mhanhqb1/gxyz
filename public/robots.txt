@@ -6,3 +6,12 @@ User-agent: *
 Allow: /
 
 Sitemap: http://sexygirls69.xyz/sitemap.xml
+Sitemap: http://sexygirls69.xyz/sitemap.xml?page=2
+Sitemap: http://sexygirls69.xyz/sitemap.xml?page=3
+Sitemap: http://sexygirls69.xyz/sitemap.xml?is_tag=1
+Sitemap: http://sexygirls69.xyz/sitemap.xml?is_tag=1&page=2
+Sitemap: http://sexygirls69.xyz/sitemap.xml?is_tag=1&page=3
+Sitemap: http://sexygirls69.xyz/sitemap.xml?is_tag=1&page=4
+Sitemap: http://sexygirls69.xyz/sitemap.xml?is_tag=1&page=5
+Sitemap: http://sexygirls69.xyz/sitemap.xml?is_tag=1&page=6
+Sitemap: http://sexygirls69.xyz/sitemap.xml?is_tag=1&page=7
