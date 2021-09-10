@@ -21,6 +21,8 @@ class SitemapXmlController extends Controller
             $tags = PostTag::where('status', 1)
                 ->where('name', '!=', '')
                 ->whereNotNull('created_at')
+                ->limit($limit)
+                ->offset($offset)
                 ->orderBy('id', 'asc')
                 ->get();
         } else {
