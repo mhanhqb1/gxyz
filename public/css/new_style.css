@@ -256,8 +256,8 @@ footer a {
     transform: translate(-50%, -50%);
     z-index: 3;
     display: block;
-    width: 50px;
-    height: 50px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
 }
 .g-youtube:after {
@@ -266,7 +266,7 @@ footer a {
     height: 100%;
     background-image: url(../imgs/youtube_play.png);
     background-repeat: no-repeat;
-    background-size: 150px;
+    background-size: 50px;
     background-position: center;
     display: block;
 }
