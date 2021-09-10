@@ -67,6 +67,10 @@ class Post extends Model {
         }
 
         # Filter
+        if (!empty($params['post_id'])) {
+            $ids = explode(',', $params['post_id']);
+            $data = $data->whereIn('id', $ids);
+        }
         if (isset($params['status']) && $params['status'] != '') {
             $data = $data->where('status', $params['status']);
         }

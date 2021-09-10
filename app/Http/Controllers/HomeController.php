@@ -106,7 +106,8 @@ class HomeController extends Controller {
             ->where('status', 1)
             ->limit($limit)
             ->offset($offset)
-            ->orderBy('id', 'desc')
+            ->orderBy('is_hot', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
         $pageTitle = 'Sexy Girl - Tag: '.$tag. ' - Page '.$params['page'];
         return view('home.post_tags', ['posts' => $posts, 'pageTitle' => $pageTitle, 'params' => $params, 'tag' => $tag]);
@@ -122,7 +123,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $data = Post::where('type', 1)->where('status', 1)->where('is_18', 0)->orderBy('created_at', 'desc')->limit($limit)->offset($offset)->get();
+        $data = Post::where('type', 1)->where('status', 1)->where('is_18', 0)->orderBy('is_hot', 'desc')->orderBy('created_at', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Hot Girl Videos - Page '.$params['page'];
         $route = 'home.videos';
         return view('home.new_video', ['route' => $route, 'data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
@@ -138,7 +139,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $data = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('created_at', 'desc')->limit($limit)->offset($offset)->get();
+        $data = Post::where('status', 1)->where('type', 1)->where('is_18', 1)->orderBy('is_hot', 'desc')->orderBy('created_at', 'desc')->limit($limit)->offset($offset)->get();
         $pageTitle = 'Sexy Girl Videos - Page '.$params['page'];
         $route = 'home.18videos';
         return view('home.new_video', ['route' => $route, 'data' => $data, 'pageTitle' => $pageTitle, 'params' => $params]);
@@ -268,7 +269,7 @@ class HomeController extends Controller {
         }
         $limit = 16;
         $offset = ($params['page'] - 1)*$limit;
-        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('created_at', 'desc')->get();
+        $images = Post::where('type', 0)->where('status', 1)->limit($limit)->offset($offset)->orderBy('is_hot', 'desc')->orderBy('created_at', 'desc')->get();
         $pageTitle = 'Sexy Girl Images - Page ' . $params['page'];
         return view('home.new_image', ['images' => $images, 'pageTitle' => $pageTitle, 'params' => $params]);
     }

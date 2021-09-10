@@ -9,6 +9,10 @@
         <form action="{{ route('admin.checkPosts') }}" method="GET" class="margin-bot-20">
             <div class="form-row">
                 <div class="form-group col-md-4">
+                    <label for="post_id">Post ID</label>
+                    <input type="number" class="form-control" name="post_id" placeholder="post_id" value="{{ isset($params['post_id']) ? $params['post_id'] : '' }}">
+                </div>
+                <div class="form-group col-md-4">
                     <label for="limit">Limit</label>
                     <input type="number" class="form-control" name="limit" placeholder="Limit" value="{{ isset($params['limit']) ? $params['limit'] : '' }}">
                 </div>
