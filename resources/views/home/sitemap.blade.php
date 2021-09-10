@@ -3,25 +3,25 @@
 @if($page == 1 && empty($tags))
     <url>
         <loc>{{ url('/') }}</loc>
-        <lastmod>{{ $dateNow }}</lastmod>
+        <lastmod>{{ $dateNow->tz('UTC')->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>{{ route('home.videos') }}</loc>
-        <lastmod>{{ $dateNow }}</lastmod>
+        <lastmod>{{ $dateNow->tz('UTC')->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>{{ route('home.18videos') }}</loc>
-        <lastmod>{{ $dateNow }}</lastmod>
+        <lastmod>{{ $dateNow->tz('UTC')->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>{{ route('home.images') }}</loc>
-        <lastmod>{{ $dateNow }}</lastmod>
+        <lastmod>{{ $dateNow->tz('UTC')->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
